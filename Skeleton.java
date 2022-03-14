@@ -1,7 +1,7 @@
 /*
 Project name: Skeleton.java
 
-Contributers:
+Contributers: Lynn Takahashi, 
 
 Purpose:
 */
