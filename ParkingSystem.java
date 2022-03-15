@@ -1,5 +1,5 @@
 /*
-Project name: Skeleton.java
+Project name: ParkingSystem.java
 
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal
 
@@ -10,7 +10,7 @@ A method skeleton is also included.
 import java.io.*;
 import java.util.*;
 
-class Skeleton
+class ParkingSystem
 {
   public class static void main(String[] args)
   {
