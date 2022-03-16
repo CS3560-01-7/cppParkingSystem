@@ -5,7 +5,9 @@ Purpose: The Customer class holds the attributes: broncoID (primary key), passwo
 name, and email address.  The Customer class' method'srecieves and compares user input to the system 
 database's info.
 
-basics done.
+Checklist:
+basics done
+
 
 */
 
