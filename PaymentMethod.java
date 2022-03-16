@@ -1,6 +1,6 @@
 /*
 Class name: PaymentMethod.java
-Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
+Contributers: Lynn Takahashi, Sergey Hambardzumyan
 Purpose: PaymentMethod 
 */
 
@@ -11,11 +11,25 @@ import javax.swing.*;
 class PaymentMethod
 {
   //attributes
-  int creditCard;//pk
-  int debitCard;
-  String billingAddress;  
+  private int creditCard;//pk
+  private int debitCard;
+  private int securityCode;
+  private String billingAddress;  
   
   //constructor
   
   //methods 
+  //accessors
+  /**
+  getCreditCard method returns PaymentMethod object's creditCard
+  @return The value in creditCard
+  */
+  public int getCreditCard()
+  {
+    return creditCard;
+  }
+  
+  //mutators
+  
+  
 }
