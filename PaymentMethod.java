@@ -1,7 +1,8 @@
 /*
 Class name: PaymentMethod.java
-Contributers: Lynn Takahashi, Sergey Hambardzumyan
-Purpose: PaymentMethod 
+Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
+Purpose: Checks and validates the Payment method entered by the user.  Attributes: creditCard,
+debitCard, 
 
 basics completed.
 */
