@@ -9,7 +9,7 @@ import java.util.*;
 
 class Vehicle
 {
-  int licensePlate;//pk
+  String licensePlate;//pk
   String vehicleType;
   String vehicleMake;
   String vehicleModel;
