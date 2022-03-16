@@ -21,7 +21,7 @@ class Rate
   //methods
   //mutators
   /**
-  setStudentRate() method stores a value in the studentRate field
+  setStudentRate method stores a value in the studentRate field
   @param sr The value to store in studentRate
   */
   public void setStudentRate(int sr)
@@ -30,7 +30,7 @@ class Rate
   }
   
   /**
-  setFacultyRate() method stores a value in the facultyRate field
+  setFacultyRate method stores a value in the facultyRate field
   @param fr The value to store in facultyRate
   */
   public void setFacultyRate(int fr)
@@ -39,7 +39,7 @@ class Rate
   }
   
   /**
-  setLongSemester() method stores a value in the longSemester field
+  setLongSemester method stores a value in the longSemester field
   @param ls The value to store in longSemester
   */
   public void setLongSemester(String ls)
@@ -48,7 +48,7 @@ class Rate
   }
   
   /**
-  setShortSemester() method stores a value in the shortSemester field
+  setShortSemester method stores a value in the shortSemester field
   @param ss The value to store in shortSemester
   */
   public void setShortSemester(String ss)
@@ -57,7 +57,7 @@ class Rate
   }
   
     /**
-  getStudentRate() method returns a studentRate
+  getStudentRate method returns a studentRate
   @return The value in the studentRate field
   */
   public int getStudentRate()
@@ -66,7 +66,7 @@ class Rate
   }
   
   /**
-  getFacultyRate() method returns a facultyRate
+  getFacultyRate method returns a facultyRate
   @return The value in the facultyRate field
   */
   public int getFacultyRate()
@@ -75,7 +75,7 @@ class Rate
   }
   
   /**
-  getLongSemester() method returns longSemester
+  getLongSemester method returns longSemester
   @return The value in the longSemester field
   */
   public String getLongSemester()
@@ -84,7 +84,7 @@ class Rate
   }
   
   /**
-   getShortSemester() method returns shortSemester
+   getShortSemester method returns shortSemester
   @return The value in the shortSemester field
   */
   public String getShortSemester()
@@ -93,7 +93,7 @@ class Rate
   }
   
   /**
-  Faculty() method checks status of the user and decides what rate to offer
+  Faculty method checks status of the user and decides what rate to offer
   @return Boolean value
   */
   public boolean Faculty() (String userInput)
