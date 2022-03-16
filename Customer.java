@@ -155,7 +155,7 @@ class Customer
   @return Boolean value
   */
   public boolean addVehicle(String plateNum, String type, String make, String model, int year, String color) {
-    vehicle = new Vehicle(plateNum, type, make, model, color);
+    vehicle = new Vehicle(plateNum, type, make, model, year, color);
     return true;
   }
 }
