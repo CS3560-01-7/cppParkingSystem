@@ -18,44 +18,51 @@ class Vehicle
   
   
   //constructor
-  public Vehicle()
+  public Vehicle(String lPlate, String vType, String vMake, String vModel, String vColor)
   {
+    //set to default values
   }
   
-  //@param lp The value to store in licensePlate
-  //setLicensePlate() method stores a string in the licensePlate field
-    
+  /**
+  setLicensePlate method stores a string in the licensePlate field
+  @param lp The value to store in licensePlate
+  */
   public void setLicensePlate(String lp)
   {
     licensePlate = lp;
   }
   
-  //@param vt The value to store in vehicleType
-  //setVehicleType() method stores a string in the vehicleType field
-  
+  /**
+  setVehicleType method stores a string in the vehicleType field
+  @param vt The value to store in vehicleType 
+  */
   public void setVehicleType(String vt)
   {
     vehicleType = vt;
   }
   
-  //@param vmak Value to store in vehicleMake
-  //setVehicleMake() method stores a string in the vehicleMake field
-  
+  /**
+  setVehicleMake() method stores a string in the vehicleMake field
+  @param vmak Value to store in vehicleMake
+  */
   public void setVehicleMake(String vmak)
   {
     vehicleMake = vmak;
   }
   
-  //@param vmod Value to store in vehicleModel
-  //setVehicleModel() method stores a string in the vehicleModel field
-  
+  /**
+  setVehicleModel method stores a string in the vehicleModel field
+  @param vmod Value to store in vehicleModel
+  */  
   public void setVehicleModel(String vmod)
   {
     vehicleModel = vmod;
   }
   
-  //@param vc Value to store in vehicleColor
-  //setVehicleColor() method stores a string in the vehicleColor field
+  /**
+  setVehicleColor method stores a string in the vehicleColor field
+  @param vc Value to store in vehicleColor
+  */
   
   public void setVehicleColor(String vc)
   {
@@ -64,16 +71,16 @@ class Vehicle
   
   //accessors
   /**
-  getLicensePlate() method returns licensePlate
+  getLicensePlate method returns licensePlate
   @return Value of licensePlate field
   */
   public String getLicensePlate()
   {
-    return licensePlate:
+    return licensePlate;
   }
   
   /**
-  getVehicleType() method returns vehicleType
+  getVehicleType method returns vehicleType
   @return Value of vehicleType field
   */
   public String getVehicleType()
@@ -82,7 +89,7 @@ class Vehicle
   }
   
    /**
-  getVehicleMake() method returns vehicleMake
+  getVehicleMake method returns vehicleMake
   @return Value of vehicleMake field
   */
   public String getVehicleMake()
@@ -91,15 +98,14 @@ class Vehicle
   }
   
    /**
-  getVehicleModel() method returns vehicleModel
+  getVehicleModel method returns vehicleModel
   @return Value of vehicleModel field
   */
   public String getVehicleModel()
   {
     return vehicleModel;
   }
-  
-   /**
+}
   getVehicleColor() method returns vehicleColor
   @return Value of vehicleColor field
   */
