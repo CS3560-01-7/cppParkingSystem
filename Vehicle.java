@@ -105,15 +105,13 @@ class Vehicle
   {
     return vehicleModel;
   }
-}
-  getVehicleColor() method returns vehicleColor
+  
+  /**
+  getVehicleColor method returns vehicleColor
   @return Value of vehicleColor field
   */
   public String getVehicleColor()
   {
     return vehicleColor;
   }
-  
-  
-  
 }
