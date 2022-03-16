@@ -1,6 +1,6 @@
 /*
 Class name: Customer.java
-Contributers: Lynn Takahashi, Sergey Hambardzumyan
+Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 Purpose: The Customer class holds the attributes: broncoID (primary key), password, first name, last 
 name, and email address.  The Customer class' method'srecieves and compares user input to the system 
 database's info.
