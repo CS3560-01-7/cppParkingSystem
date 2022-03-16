@@ -2,6 +2,8 @@
 Class name: PaymentMethod.java
 Contributers: Lynn Takahashi, Sergey Hambardzumyan
 Purpose: PaymentMethod 
+
+basics completed.
 */
 
 import java.io.*;
@@ -19,6 +21,43 @@ class PaymentMethod
   //constructor
   
   //methods 
+  //mutators
+  /**
+  setCreditCard method stores a value into creditCard field
+  @param cc The value to store in creditCard
+  */
+  public void setCreditCard(int cc)
+  {
+    creditCard = cc;
+  }
+  
+  /**
+  setDebitCard method stores a value into debitCard field
+  @param dc The value to store in debitCard
+  */
+  public void setDebitCard(int dc)
+  {
+    debitCard = dc;
+  }
+  
+  /**
+  setSecurityCode method stores a value into securityCode field
+  @param sc The value to store in securityCode
+  */
+  public void setSecurityCode(int sc)
+  {
+    securityCode = sc;
+  }
+  
+  /**
+  setBillingAddress method stores a value into billingAddress field
+  @param ba The value to store in billingAddress
+  */
+  public void setBillingAddress(int ba)
+  {
+    billingAddress = ba;
+  }
+  
   //accessors
   /**
   getCreditCard method returns PaymentMethod object's creditCard
@@ -29,7 +68,33 @@ class PaymentMethod
     return creditCard;
   }
   
-  //mutators
+  /**
+  getDebitCard method returns PaymentMethod object's debitCard
+  @return The value in debitCard
+  */
+  public int getDebitCard()
+  {
+    return debitCard;
+  }
+  
+  /**
+  getSecurityCode method returns PaymentMethod object's securityCode
+  @return The value in securityCode
+  */
+  public int getSecurityCode()
+  {
+    return securityCode;
+  }
+  
+  /**
+  getBillingAddress method returns PaymentMethod object's billingAddress
+  @return The value in billingAddress
+  */
+  public String getBillingAddress()
+  {
+    return billingAddress;
+  }
+  //
   
   
 }
