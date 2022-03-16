@@ -1,7 +1,9 @@
-import java.io.*;
-import java.util.*;
+/*
+Class name: Promotion.java
+Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
+Purpose: 
+*/
 
-class Promotion
 {
   int studentRate;
   int facultyRate;
