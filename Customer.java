@@ -25,58 +25,11 @@ class Customer
   //constructor
   public Customer()
   {
-    
+    //
   }
   
   //methods
-  //accessors
-  /**
-  getBroncoID() method returns a Customer object's broncoID
-  @return The value in the broncoID field
-  */
-  public int getBroncoID()
-  {
-    return broncoID;
-  }
-  
-   /**
-  getPassword() method returns a Customer object's password
-  @return The value in the password field
-  */
-  public String getPassword()
-  {
-    return password;
-  }
-  
-  /**
-  getFirstName() method returns a Customer object's firstName
-  @return The value in the firstName field
-  */
-  public String getFirstName()
-  {
-    return firstName;
-  }
-  
-  /**
-  getLastName() method returns a Customer object's lastName
-  @return The value in the lastName field
-  */
-  public String getLastName()
-  {
-    return lastName;
-  }
-  
-  /**
-  getEmailAddress() method returns a Customer object's emailAddress
-  @return The value in the emailAddress field
-  */
-  public String getEmailAddress()
-  {
-    return emailAddress;
-  }
-  
   //mutators
-  //accessors
   /**
   setBroncoID() method stores a value in the broncoID field
   @param id The value to store in broncoID
@@ -120,6 +73,52 @@ class Customer
   public void setEmailAddress(String ea)
   {
     emailAddress = ea;
+  }
+  
+  //accessors
+  /**
+  getBroncoID() method returns a Customer object's broncoID
+  @return The value in the broncoID field
+  */
+  public int getBroncoID()
+  {
+    return broncoID;
+  }
+  
+  /**
+  getPassword() method returns a Customer object's password
+  @return The value in the password field
+  */
+  public String getPassword()
+  {
+    return password;
+  }
+  
+  /**
+  getFirstName() method returns a Customer object's firstName
+  @return The value in the firstName field
+  */
+  public String getFirstName()
+  {
+    return firstName;
+  }
+  
+  /**
+  getLastName() method returns a Customer object's lastName
+  @return The value in the lastName field
+  */
+  public String getLastName()
+  {
+    return lastName;
+  }
+  
+  /**
+  getEmailAddress() method returns a Customer object's emailAddress
+  @return The value in the emailAddress field
+  */
+  public String getEmailAddress()
+  {
+    return emailAddress;
   }
   
   //login
