@@ -14,11 +14,12 @@ class Vehicle
   private String vehicleType;
   private String vehicleMake;
   private String vehicleModel;
+  private int modelYear;
   private String vehicleColor;
   
   
   //constructor
-  public Vehicle(String lPlate, String vType, String vMake, String vModel, String vColor)
+  public Vehicle(String lPlate, String vType, String vMake, String vModel, int mYear, String vColor)
   {
     //set to default values
   }
@@ -57,6 +58,11 @@ class Vehicle
   public void setVehicleModel(String vmod)
   {
     vehicleModel = vmod;
+  }
+  
+  public void setModelYear(int mYear)
+  {
+    modelYear = mYear;
   }
   
   /**
@@ -104,6 +110,15 @@ class Vehicle
   public String getVehicleModel()
   {
     return vehicleModel;
+  }
+  
+  /**
+  getModelYear method returns modelYear
+  @return Value of modelYear field
+  */
+  public int getModelYear()
+  {
+    return modelYear;
   }
   
   /**
