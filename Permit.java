@@ -10,7 +10,7 @@ import java.util.*;
 
 class Permit
 {
-  int permitNumber;//pn
+  int permitNumber;//pk
   String permitType;  
   
   //constructor
@@ -21,7 +21,7 @@ class Permit
   //methods
   //mutators
   /**
-  setPermitNumber() method stores a value in the permitNumber field
+  setPermitNumber method stores a value in the permitNumber field
   @param pn The value to store in permitNumber
   */
   public void setPermitNumber(int pn)
@@ -30,7 +30,7 @@ class Permit
   }
   
   /**
-  setpermitType() method stores a value in the permitType field
+  setpermitType method stores a value in the permitType field
   @param pt The value to store in permitType
   */
   public void setPermitType(String pt)
@@ -40,7 +40,7 @@ class Permit
   
   //accessors
   /**
-  getPermitNumber() method returns a object's permitNumber
+  getPermitNumber method returns a object's permitNumber
   @return The value in the permitNumber field
   */
   public int getPermitNumber()
@@ -49,7 +49,7 @@ class Permit
   }
   
   /**
-  getPermitType() method returns a object's permitType
+  getPermitType method returns a object's permitType
   @return The value in the permitType field
   */
   public String getPermitType()
