@@ -21,7 +21,7 @@ class Customer
   private String firstName;
   private String lastName;
   private String emailAddress;
-  private Vehicle vehicle = new Vehicle();
+  private Vehicle vehicle;
   private PaymentMethod payment = new PaymentMethod();
   
   //constructor
@@ -145,7 +145,17 @@ class Customer
   }
   
   /**
+  addVehicle() method adds a vehicle class and returns true if successful
+  @param plateNum The vehicle's license plate number
+  @param type The type of vehicle
+  @param make The vehicle's manufacturer
+  @param model The vehicle's model
+  @param year The year the vehicle's model was released
+  @param color The vehicle's color
+  @return Boolean value
   */
-  public 
-  
+  public boolean addVehicle(String plateNum, String type, String make, String model, int year, String color) {
+    vehicle = new Vehicle(plateNum, type, make, model, color);
+    return true;
+  }
 }
