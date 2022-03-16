@@ -1,10 +1,10 @@
 /*
 Project name: ParkingSystem.java
 
-Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal
+Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 
-Purpose: Develop class skeleton for CPP Parking System. This includes attributes and their types.
-A method skeleton is also included.
+Purpose: main method for the cpp parking systems project.  this system will allow users to purchase, look up, and update 
+their parking permit for a specific semester.  
 */
 
 import java.io.*;
