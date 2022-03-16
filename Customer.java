@@ -21,6 +21,8 @@ class Customer
   private String firstName;
   private String lastName;
   private String emailAddress;
+  private Vehicle vehicle = new Vehicle();
+  private PaymentMethod payment = new PaymentMethod();
   
   //constructor
   public Customer()
@@ -141,5 +143,9 @@ class Customer
     //compare userInput to password
     //if it does ot match return false.  if it does match return true
   }
+  
+  /**
+  */
+  public 
   
 }
