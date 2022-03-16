@@ -2,6 +2,9 @@
 Class name: Permit.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 Purpose: 
+
+Check list:
+basics completed
 */
 
 import javax.swing.*;
@@ -12,6 +15,7 @@ class Permit
 {
   int permitNumber;//pk
   String permitType;  
+  Rate rate = new Rate();
   
   //constructor
   public Permit()
