@@ -1,9 +1,15 @@
 /*
 Class name: PaymentMethod.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
-Purpose: Checks and validates the Payment method entered by the user.  Attributes: creditCard,
-debitCard, 
+Purpose: PaymentMethod class holds the attributes: creditNumber, expirationDateM, expirationY,
+securityCode, name, and billingAddress.  
+The PaymentMethod class's methods recieve, send, update, and validate user input.
 
+We are assuming for this system that all cc are valid.
+
+Gets called by Customer.
+
+Checklist:
 basics completed.
 */
 
