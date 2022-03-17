@@ -6,6 +6,8 @@ vehicle, and paymentMethod.
 The Customer class' methods recieve, update, and compares user input to the system database's info.
 Customers calls Vehicle and PaymentMethod objects.
 
+We are assuming everyone has a valid broncoID, that the Customer exists, and the email address is valid.
+
 Checklist:
 basics done
 
