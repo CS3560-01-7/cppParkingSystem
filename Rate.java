@@ -9,6 +9,7 @@ class Rate
 //attributes
   private int studentRate;
   private int facultyRate;
+  private int residentRate;
   private String shortSemester;
   private tring longSemester;
   private boolean faculty;
@@ -36,6 +37,15 @@ class Rate
   public void setFacultyRate(int fr)
   {
     facultyRate = fr;
+  }
+  
+  /**
+  setResidentRate method stores a value in the residentRate field
+  @param rr The value to store in residentRate
+  */
+  public void setResidentRate(int rr)
+  {
+    residentRate = rr;
   }
   
   /**
@@ -72,6 +82,15 @@ class Rate
   public int getFacultyRate()
   {
     return facultyRate;
+  }
+  
+  /**
+  getResidentRate method returns residentRate
+  @return the value in the residentRate field
+  */
+  public int getResidentRate()
+  {
+    return residentRate;
   }
   
   /**
