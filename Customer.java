@@ -167,9 +167,9 @@ class Customer
   @param billAddr The card's billing address
   @return Boolean vehicle
   */
-  public boolean addPaymentMethod(String cardNum, String secCode, String billAddr)
+  public boolean addPaymentMethod(String cardNum, int exDateM, int exDateY, String secCode, String name, String billAddr)
   {
-     paymentMethod = new paymentMethod(cardNum, secCode, billAddr);
+     paymentMethod = new paymentMethod(cardNum, exDateM, exDateY, secCode, name, billAddr);
      return true;
   }
 }
