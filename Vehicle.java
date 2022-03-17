@@ -1,7 +1,9 @@
 /*
 Class name: Vehicle.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
-Purpose: 
+Purpose: The Vehicle class holds the attributes: licensePlate, vehicleType, vehicleMake, vehicleModel, vehicleColor, vehicleYear, Customer and Permit.
+The Vehicle class' methods recieve and update user input in the database.
+Vehicle calls Customer and Permit objects. 
 
 We are assuming that these vehices exist and have a valid license plate.
 */
