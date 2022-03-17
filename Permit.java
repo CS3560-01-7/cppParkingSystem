@@ -3,6 +3,9 @@ Class name: Permit.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 Purpose: 
 
+Calls Rate.
+Gets called by Vehicle.
+
 Check list:
 basics completed
 */
