@@ -1,7 +1,10 @@
 /*
 Class name: Rate.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
-Purpose: The purpose of rate.java is to set the price of the permit for students and faculty. It also checks the status of the customer and decides the rate to offer.
+Purpose: The Rate class holds the attributes: shortSemester, longSemester, studentRate, facultyRate and Permit.
+The Rate class' methods set the price of the permit for students and faculty. They also check the status of the customer and decides the rate to offer.
+Rate calls Permit objects
+
 */
 
 class Rate
