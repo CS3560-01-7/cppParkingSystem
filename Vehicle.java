@@ -130,4 +130,13 @@ class Vehicle
   {
     return vehicleColor;
   }
+  
+  /**
+  addPermit method creates new permit object and returns boolean value
+  @return boolean value
+  */
+  public boolean addPermit(int permitNum, String type, Rate rate) {
+    permit = new Permit(permitNum, type, rate);
+    return true;
+  }
 }
