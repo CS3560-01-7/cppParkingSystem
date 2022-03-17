@@ -16,6 +16,7 @@ class Vehicle
   private String vehicleModel;
   private int modelYear;
   private String vehicleColor;
+  private Permit permit;
   
   
   //constructor
