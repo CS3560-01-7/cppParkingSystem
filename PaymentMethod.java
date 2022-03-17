@@ -5,7 +5,7 @@ Purpose: PaymentMethod class holds the attributes: creditNumber, expirationDateM
 securityCode, name, and billingAddress.  
 The PaymentMethod class's methods recieve, send, update, and validate user input.
 
-We are assuming for this system that all cc are valid.
+We are assuming for this system that all cc are valid and so is the billing address.
 
 Gets called by Customer.
 
