@@ -3,8 +3,8 @@ Class name: Permit.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 Purpose: The permit class holds the atributes: permitNumber, permitType, permitRate, Vehicle and Rate.
 The Permit class' methods receive information from user input about what permitType they want to buy. 
-Then system decides what kind of permitRate should system apply for this particular custumer.
-Last, the system will create/generate a permitNumber for custumer.
+Then system decides what kind of permitRate should system apply for this particular customer.
+Last, the system will create/generate a permitNumber for customer.
 
 Permit calls Rate object and get calld by Vehicle's object
 
