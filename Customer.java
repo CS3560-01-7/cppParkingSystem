@@ -160,4 +160,16 @@ class Customer
     vehicle = new Vehicle(plateNum, type, make, model, year, color);
     return true;
   }
+  /**
+  addPaymentMethod() method adds a payment method and returns true if successful.
+  @param cardNum The credit or debit card's number
+  @param secCode The card's security code
+  @param billAddr The card's billing address
+  @return Boolean vehicle
+  */
+  public boolean addPaymentMethod(String cardNum, String secCode, String billAddr)
+  {
+     paymentMethod = new paymentMethod(cardNum, secCode, billAddr);
+     return true;
+  }
 }
