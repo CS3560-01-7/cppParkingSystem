@@ -2,6 +2,8 @@
 Class name: Vehicle.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 Purpose: 
+
+We are assuming that these vehices exist and have a valid license plate.
 */
 import javax.swing.*;
 import java.io.*;
