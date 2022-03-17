@@ -15,6 +15,7 @@ class Permit
 {
   int permitNumber;//pk
   String permitType;  
+  int vehicleNum = 0;
   Rate rate = new Rate();
   
   //constructor
