@@ -14,13 +14,17 @@ import javax.swing.*;
 class PaymentMethod
 {
   //attributes
-  private int creditCard;//pk
-  private int debitCard;
+  private int cardNumber;//pk
+  private int expirationDateM;
+  private int expirationDateY;
   private int securityCode;
+  private String name;
   private String billingAddress;  
   
   //constructor
-  
+  public PaymentMethod(int cardnum, int expirationM, int expirationY, int securityCode, String name, String address)
+  {
+  }
   //methods 
   //mutators
   /**
