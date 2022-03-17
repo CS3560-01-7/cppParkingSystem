@@ -13,10 +13,10 @@ import java.util.*;
 
 class Permit
 {
-  int permitNumber;//pk
-  String permitType;  
-  int vehicleNum = 0;
-  Rate rate = new Rate();
+  private int permitNumber;//pk
+  private String permitType;  
+  private int vehicleNum = 0;
+  private Rate rate;
   
   //constructor
   public Permit()
