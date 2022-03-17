@@ -1,9 +1,9 @@
 /*
 Class name: Customer.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
-Purpose: The Customer class holds the attributes: broncoID (primary key), password, first name, last 
-name, and email address.  The Customer class' method'srecieves and compares user input to the system 
-database's info.
+Purpose: The Customer class holds the attributes: broncoID (primary key), password, first name, last name, email address,
+vehicle, and paymentMethod.
+The Customer class' methods recieve, update, and compares user input to the system database's info.
 
 Checklist:
 basics done
@@ -35,7 +35,7 @@ class Customer
   //methods
   //mutators
   /**
-  setBroncoID() method stores a value in the broncoID field
+  setBroncoID method stores a value in the broncoID field
   @param id The value to store in broncoID
   */
   public void setBroncoID(int id)
@@ -44,7 +44,7 @@ class Customer
   }
   
    /**
-  setPassword() method stores a value in the password field
+  setPassword method stores a value in the password field
   @param pw The value to store in password
   */
   public void setPassword(String pw)
@@ -53,7 +53,7 @@ class Customer
   }
   
   /**
-  setFirstName() method stores value in the firstName field
+  setFirstName method stores value in the firstName field
   @param first The value to store in firstName
   */
   public void getFirstName(String first)
@@ -62,7 +62,7 @@ class Customer
   }
   
   /**
-  setLastName() method stores a value in the lastName field
+  setLastName method stores a value in the lastName field
   @param last The value to store into lastName 
   */
   public void setLastName(String last)
@@ -71,7 +71,7 @@ class Customer
   }
   
   /**
-  setEmailAddress() method stores a value in the emailAddress field
+  setEmailAddress method stores a value in the emailAddress field
   @param ea The value to store in emailAddress
   */
   public void setEmailAddress(String ea)
@@ -81,7 +81,7 @@ class Customer
   
   //accessors
   /**
-  getBroncoID() method returns a Customer object's broncoID
+  getBroncoID method returns a Customer object's broncoID
   @return The value in the broncoID field
   */
   public int getBroncoID()
@@ -90,7 +90,7 @@ class Customer
   }
   
   /**
-  getPassword() method returns a Customer object's password
+  getPassword method returns a Customer object's password
   @return The value in the password field
   */
   public String getPassword()
@@ -99,7 +99,7 @@ class Customer
   }
   
   /**
-  getFirstName() method returns a Customer object's firstName
+  getFirstName method returns a Customer object's firstName
   @return The value in the firstName field
   */
   public String getFirstName()
@@ -108,7 +108,7 @@ class Customer
   }
   
   /**
-  getLastName() method returns a Customer object's lastName
+  getLastName method returns a Customer object's lastName
   @return The value in the lastName field
   */
   public String getLastName()
@@ -117,7 +117,7 @@ class Customer
   }
   
   /**
-  getEmailAddress() method returns a Customer object's emailAddress
+  getEmailAddress method returns a Customer object's emailAddress
   @return The value in the emailAddress field
   */
   public String getEmailAddress()
@@ -127,7 +127,7 @@ class Customer
   
   //login
    /**
-  checkBrocoID() method returns boolean depending on if broncoID matches userInput
+  checkBrocoID method returns boolean depending on if broncoID matches userInput
   @return Boolean value
   */
   public boolean checkBrocoID(int userInput)
@@ -137,7 +137,7 @@ class Customer
   }
   
   /**
-  checkPassword() method returns boolean depending on password matches userInput
+  checkPassword method returns boolean depending on password matches userInput
   @return Boolean value
   */
   public boolean checkPassword(String userInput)
@@ -147,7 +147,7 @@ class Customer
   }
   
   /**
-  addVehicle() method adds a vehicle class and returns true if successful
+  addVehicle method adds a vehicle class and returns true if successful
   @param plateNum The vehicle's license plate number
   @param type The type of vehicle
   @param make The vehicle's manufacturer
