@@ -4,6 +4,7 @@ Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambard
 Purpose: The Customer class holds the attributes: broncoID (primary key), password, first name, last name, email address,
 vehicle, and paymentMethod.
 The Customer class' methods recieve, update, and compares user input to the system database's info.
+Customers calls Vehicle and PaymentMethod objects.
 
 Checklist:
 basics done
