@@ -1,13 +1,11 @@
 /*
 Class name: PaymentMethod.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
-Purpose: PaymentMethod class holds the attributes: creditNumber, expirationDateM, expirationY,
-securityCode, name, and billingAddress.  
-The PaymentMethod class's methods recieve, send, update, and validate user input.
+Purpose: PaymentMethod class holds the attributes: cardNumber, securityCode, expDate, name, billingAddress, and Custumer
+The PaymentMethod class's methods recieve, send, update, and validate user input (credit card's information)
+PaymentMethod calls Customer object.
 
-We are assuming for this system that all cc are valid and so is the billing address.
-
-Gets called by Customer.
+We are assuming for this system that all cards are valid and so is the billing address.
 
 Checklist:
 basics completed.
@@ -21,14 +19,13 @@ class PaymentMethod
 {
   //attributes
   private int cardNumber;//pk
-  private int expirationDateM;
-  private int expirationDateY;
   private int securityCode;
+  private int expDate;
   private String name;
   private String billingAddress;  
   
   //constructor
-  public PaymentMethod(int cardnum, int expirationM, int expirationY, int securityCode, String name, String address)
+  public PaymentMethod(int cardNumber, int securityCode, int expDate, String name, String billingAddress)
   {
   }
   //methods 
@@ -37,19 +34,11 @@ class PaymentMethod
   setCreditCard method stores a value into creditCard field
   @param cc The value to store in creditCard
   */
-  public void setCreditCard(int cc)
+  public void setCardNumber(int cc)
   {
-    creditCard = cc;
+    cardNumber = cc;
   }
   
-  /**
-  setDebitCard method stores a value into debitCard field
-  @param dc The value to store in debitCard
-  */
-  public void setDebitCard(int dc)
-  {
-    debitCard = dc;
-  }
   
   /**
   setSecurityCode method stores a value into securityCode field
@@ -60,6 +49,25 @@ class PaymentMethod
     securityCode = sc;
   }
   
+  
+  /**
+  setExpDate method stores a value into expDate field
+  @param ba The value to store in expDate
+  */
+  public void setExpDate(int ed)
+  {
+    expDate = ed;
+  }
+  
+  
+  /**
+  setName method stores a value into name field
+  @param ba The value to store in name
+  */
+  public void setName(String n)
+  {
+    name = n;
+  }
   /**
   setBillingAddress method stores a value into billingAddress field
   @param ba The value to store in billingAddress
@@ -71,21 +79,12 @@ class PaymentMethod
   
   //accessors
   /**
-  getCreditCard method returns PaymentMethod object's creditCard
-  @return The value in creditCard
+  getCardNumber method returns PaymentMethod object's cardNumber
+  @return The value in cardNumber
   */
-  public int getCreditCard()
+  public int getCardNumber()
   {
-    return creditCard;
-  }
-  
-  /**
-  getDebitCard method returns PaymentMethod object's debitCard
-  @return The value in debitCard
-  */
-  public int getDebitCard()
-  {
-    return debitCard;
+    return cardNumber;
   }
   
   /**
@@ -95,6 +94,25 @@ class PaymentMethod
   public int getSecurityCode()
   {
     return securityCode;
+  }
+  
+  
+  /**
+  getExpDate method returns PaymentMethod object's expDate
+  @return The value in expDate
+  */
+  public int getExpDate()
+  {
+    return expDate;
+  }
+  
+  /**
+  getName method returns PaymentMethod object's name
+  @return The value in name
+  */
+  public int getName()
+  {
+    return name;
   }
   
   /**
