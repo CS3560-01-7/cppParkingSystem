@@ -45,6 +45,13 @@ CREATE TABLE Cart (
     PRIMARY KEY (cartID, broncoID, permitID)
 );
 
+CREATE TABLE Rate (
+	rateID INT (2),
+    rate INT (3),
+    rateDescription VARCHAR (50),
+    PRIMARY KEY (rateID)
+);
+
 CREATE TABLE Permit (
 	permitID INT (9),
     vehicleID INT (9),
@@ -53,11 +60,4 @@ CREATE TABLE Permit (
     FOREIGN KEY (vehicleID) REFERENCES Vehicle (vehicleID),
     FOREIGN KEY (rateID) REFERENCES Rate (rateID),
     PRIMARY KEY (permitID, vehicleID, cartID, rateID)
-);
-
-CREATE TABLE Rate (
-	rateID INT (2),
-    rate INT (3),
-    rateDescription VARCHAR (50),
-    PRIMARY KEY (rateID)
 );
