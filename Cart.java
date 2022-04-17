@@ -10,22 +10,54 @@ import java.util.*;
 
 public class Cart
 {
-  private ArrayList<Permit> cart = new ArrayList<Permit>();
-  private String customerName;
+  private Permit permit;
+  private Customer customer;
+  private PaymentMethod payment;
   
   public Cart()
   {
-    
+    permit = new Permit();
+    customer = new Customer();
+    payment = new PaymentMethod();
   }
   
-  public void addPermit(Permit p)
+  public Cart(Permit p, Customer c, PaymentMethod pm)
   {
-    cart.add(p);
+    permit = p;
+    customer = c;
+    payment = pm;
   }
   
-  //remove permit???
-  public void removePermit()
+  
+  //getters and setters
+  public void setPermit(Permit p)
   {
-    cart.remove(0);
+    permit = p;
   }
+  
+  public void setCustomer(Customer c)
+  {
+    customer = c;
+  }
+  
+  public void setPaymentMethod(PaymentMethod pm)
+  {
+    payment = pm;
+  }
+  
+  public Permit getPermit()
+  {
+    return permit;
+  }
+  
+  public Customer getCustomer()
+  {
+    return customer;
+  }
+  
+  public PaymentMethod getPaymentMethod()
+  {
+    return payment;
+  }
+  
 }//end class
