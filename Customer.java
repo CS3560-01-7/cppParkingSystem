@@ -26,6 +26,7 @@ class Customer
   private String firstName;
   private String lastName;
   private String emailAddress;
+  private String address;
   private Vehicle vehicle;
   private PaymentMethod payment = new PaymentMethod();
   
