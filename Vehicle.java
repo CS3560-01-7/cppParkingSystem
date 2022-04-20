@@ -14,19 +14,38 @@ import java.util.*;
 class Vehicle
 {
   //attributes
+  private String vin;//pk
   private String licensePlate;//pk
   private String vehicleType;
   private String vehicleMake;
   private String vehicleModel;
   private int modelYear;
   private String vehicleColor;
+  private Customer driver;
   private Permit permit;
   
   
   //constructor
-  public Vehicle(String lPlate, String vType, String vMake, String vModel, int mYear, String vColor)
+  public Vehicle(String vin, String lPlate, String vType, String vMake, String vModel, int mYear, String vColor, Customer customer)
   {
-    //set to default values
+    this.vin = vin
+    this.licensePlate = lPlate;
+    this.vehicleType = vType;
+    this.vehicleMake = vMake;
+    this.vehicleModel = vModel;
+    this.modelYear = mYear;
+    this.vehicleColor = vColor;
+    this.driver = customer;
+    //create new entry in vehicle table for this customer and fill in the values
+  }
+  
+  /**
+  setVIN method stores a string in the vin field
+  @param vID The value to store in vin
+  */
+  public void setVin(String vID)
+  {
+    this.vin = vID;
   }
   
   /**
@@ -36,6 +55,7 @@ class Vehicle
   public void setLicensePlate(String lp)
   {
     licensePlate = lp;
+    //change license plate attribute in database
   }
   
   /**
@@ -80,7 +100,34 @@ class Vehicle
     vehicleColor = vc;
   }
   
+  /**
+  setDriver method stores a customer object in the driver field
+  @param customer Value to store in driver
+  */
+  public void setDriver(Customer customer)
+  {
+    this.driver = customer;
+  }
+  
+  /**
+  setPermit method stores a Permit object in the permit field
+  @param perm Value to store in permit
+  */
+  public void setPermit(Permit perm)
+  {
+    this.permit = perm;
+  }
+  
   //accessors
+  /**
+  getVIN method returns vin
+  @return Value of vin field
+  */
+  public String getVIN()
+  {
+    return vin;
+  }
+  
   /**
   getLicensePlate method returns licensePlate
   @return Value of licensePlate field
@@ -133,6 +180,31 @@ class Vehicle
   public String getVehicleColor()
   {
     return vehicleColor;
+  }
+  
+  /**
+  getDriver method returns driver
+  @return Value of driver field
+  */
+  public Customer getDriver()
+  {
+    return driver;
+  }
+  
+  /**
+  getPermit method returns permit
+  @return Value of permit field if not null
+  */
+  public Permit getPermit()
+  {
+    if (permit == null) 
+    {
+      //tell dispatcher vehicle has not been assigned to a permit yet
+    }
+    else 
+    {
+      return permit
+      }
   }
   
   /**
