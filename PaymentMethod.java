@@ -13,7 +13,6 @@ basics completed.
 
 import java.io.*;
 import java.util.*;
-import javax.swing.*;
 
 class PaymentMethod
 {
@@ -25,8 +24,17 @@ class PaymentMethod
   private String billingAddress;  
   
   //constructor
+  public PaymentMethod()
+  {
+    cardNumber = 0;
+    securityCode = 0;
+    expDate = 0;
+    name = "";
+    billingAddress = "";
+  }
   public PaymentMethod(int cardNumber, int securityCode, int expDate, String name, String billingAddress)
   {
+    
   }
   //methods 
   //mutators
