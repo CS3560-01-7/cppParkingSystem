@@ -27,13 +27,18 @@ class Customer
   private String lastName;
   private String emailAddress;
   private String address;
-  private Vehicle vehicle;
+  private Vehicle vehicle = new Vehicle();
   private PaymentMethod payment = new PaymentMethod();
   
   //constructor
   public Customer()
   {
-    //
+    broncoID = 0;
+    password = "";
+    firstName = "";
+    lastName = "";
+    emailAddress = "";
+    address = "";
   }
   
   //methods
@@ -60,7 +65,7 @@ class Customer
   setFirstName method stores value in the firstName field
   @param first The value to store in firstName
   */
-  public void getFirstName(String first)
+  public void setFirstName(String first)
   {
     firstName = first;
   }
@@ -118,6 +123,15 @@ class Customer
   public String getLastName()
   {
     return lastName;
+  }
+  
+  /**
+  getName method returns Customers first and last name
+  @return the values in firstName and lastName field
+  */
+  public String getName()
+  {
+    return firstName + lastName;
   }
   
   /**
