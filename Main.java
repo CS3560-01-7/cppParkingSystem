@@ -1,5 +1,5 @@
 /*
-Project name: ParkingSystem.java
+Project name: Main.java
 
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 
@@ -16,11 +16,23 @@ import java.io.*;
 import java.util.*;
 import java.swing.*;
 
-class ParkingSystem
+class Main
 {
   public class static void main(String[] args)
   {
+    //broncoId and password window, get user input, get info from Customer database
     
+    //create new Customer object based on input
+    Customer customer = new Customer();
+    
+    //open permit window and ask for information
+    Permit permit = new Permit();
+    
+    //get new vehicle or show saved vehicle information
+    Vehicle vehicle = new Vehicle();
+    
+    //ask for payment if 
+    PaymentMethod = new PaymentMethod;
     
   }//end main
 }
