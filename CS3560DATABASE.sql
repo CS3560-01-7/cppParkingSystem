@@ -7,7 +7,6 @@ CREATE TABLE Customer (
     firstName VARCHAR (20),
     lastName VARCHAR (50),
     emailAddress VARCHAR (50),
-    customerPassword VARCHAR (50),
     address VARCHAR (50),
     checkStudent BOOLEAN,
     PRIMARY KEY (broncoID)
@@ -26,7 +25,7 @@ CREATE TABLE PaymentMethod (
 );
 
 CREATE TABLE Vehicle (
-	vehicleID INT (9),
+	vin VARCHAR (17),
     broncoID INT (9),
     licensePlate VARCHAR (7),
     vehicleType VARCHAR (20),
@@ -35,16 +34,14 @@ CREATE TABLE Vehicle (
     vehicleYear INT (4),
     state VARCHAR (15),
     FOREIGN KEY (broncoID) REFERENCES Customer (broncoID),
-    PRIMARY KEY (vehicleID, broncoID)
+    PRIMARY KEY (vin)
 );
 
 CREATE TABLE Permit (
 	permitID INT (9),
-    vehicleID INT (9),
-	cartID INT (9),
-    rateID INT (2),
-    FOREIGN KEY (vehicleID) REFERENCES Vehicle (vehicleID),
-    PRIMARY KEY (permitID, vehicleID)
+    vin VARCHAR (17),
+    FOREIGN KEY (vin) REFERENCES Vehicle (vin),
+    PRIMARY KEY (permitID)
 );
 
 CREATE TABLE Rate (
@@ -54,15 +51,4 @@ CREATE TABLE Rate (
     rateDescription VARCHAR (50),
     FOREIGN KEY (permitID) REFERENCES Permit (permitID),
     PRIMARY KEY (rateID, permitID)
-);
-
-CREATE TABLE Cart (
-	cartID INT (9),
-    broncoID INT (9),
-    permitID INT (9),
-    paymentMethodID INT(9),
-    FOREIGN KEY (broncoID) REFERENCES Customer (broncoID),
-    FOREIGN KEY (permitID) REFERENCES Permit (permitID),
-    FOREIGN KEY (paymentMethodID) REFERENCES PaymentMethod (paymentMethodID),
-    PRIMARY KEY (cartID, broncoID, permitID, paymentMethodID)
 );
