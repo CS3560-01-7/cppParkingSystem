@@ -11,28 +11,26 @@ And finally, let customer enter their credit card's information to pay.
 
 put all user prompts here...
 */
-
-import java.io.*;
 import java.util.*;
-import java.swing.*;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-class Main
-{
-  public class static void main(String[] args)
-  {
-    //broncoId and password window, get user input, get info from Customer database
-    
-    //create new Customer object based on input
-    Customer customer = new Customer();
-    
-    //open permit window and ask for information
-    Permit permit = new Permit();
-    
-    //get new vehicle or show saved vehicle information
-    Vehicle vehicle = new Vehicle();
-    
-    //ask for payment if 
-    PaymentMethod = new PaymentMethod;
-    
-  }//end main
+public class Main {
+
+	public static void main(String[] args) throws Exception{
+		Scanner scnr = new Scanner(System.in);
+		Customer customer = new Customer();
+		CustomerDB db = new CustomerDB();
+		
+		System.out.println("Enter bronco id:");
+		customer.setBroncoID(scnr.nextInt());
+		db.selectCustomer(customer);
+		
+		System.out.println(customer.getFullName());
+	
+	}
 }
+		
