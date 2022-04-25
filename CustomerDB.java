@@ -1,5 +1,3 @@
-package cpp_parking_system;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,7 +5,7 @@ import java.sql.ResultSet;
 
 public class CustomerDB {
 
-public static Customer selectCustomer(Customer customer) throws Exception
+public Customer selectCustomer(Customer customer) throws Exception
 {
 	try {
 		Connection con = getConnection();
@@ -34,13 +32,13 @@ public static Connection getConnection() throws Exception
 {
 	try {
 		String driver = "com.mysql.cj.jdbc.Driver";
-		String url = "jdbc:mysql://127.0.0.1:3306/cpp_parking_system";//replace with your own
-		String username = "";//for sql
-		String password = "";//for sql
+		String url = "jdbc:mysql://127.0.0.1:3306/cpp_parking_system";//jdbc:mysql://portNumber/databseName
+		String username = "root";
+		String password = "passwordhere";
 		Class.forName(driver);
 		
 		Connection conn = DriverManager.getConnection(url, username, password);
-		System.out.println("Connected");
+		//System.out.println("Connected");
 		
 		return conn;
 	}catch (Exception e) {System.out.println(e);}
@@ -49,4 +47,6 @@ public static Connection getConnection() throws Exception
 }
 
 }
+
+
 
