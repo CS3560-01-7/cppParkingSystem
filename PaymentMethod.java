@@ -34,7 +34,11 @@ class PaymentMethod
   }
   public PaymentMethod(int cardNumber, int securityCode, int expDate, String name, String billingAddress)
   {
-    
+    this.cardNumber = cardNumber;
+    this.securityCode = securityCode;
+    this.expDate = expDate;
+    this.name = name;
+    this.billingAddress = billingAddress;
   }
   //methods 
   //mutators
