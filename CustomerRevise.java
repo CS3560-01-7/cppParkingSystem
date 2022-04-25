@@ -1,3 +1,10 @@
+/*
+still need to implement an array or arraylist of Vehicles 
+add vehicle method
+read vehicle (owned) method
+
+in here call PaymentMethod to be read from DB.... 
+*/
 public class CustomerRevise {
 	protected int broncoID;
 	protected String firstName;
