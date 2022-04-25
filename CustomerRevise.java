@@ -89,6 +89,9 @@ public class CustomerRevise {
 	}
 		
 	//connection
+	/**
+	purpose: calls database to fill information about this Customer
+	*/
 	public void getInfoFromDB() throws Exception
 	{
 		db.selectCustomer(this);
