@@ -21,7 +21,8 @@ class PaymentMethod
   private int securityCode;
   private int expDate;
   private String name;
-  private String billingAddress;  
+  private String billingAddress; 
+  private PaymentMethodDB db;
   
   //constructor
   public PaymentMethod()
@@ -135,7 +136,13 @@ class PaymentMethod
   {
     return billingAddress;
   }
-  //
-  
+ 
+  //connection
+	/**
+	public void getInfoFromDB() throws Exception
+	{
+		db.selectPaymentMethod(this);//keep in mind this may return nothing so we need an add method if it returns nothing
+	}
+  */
   
 }
