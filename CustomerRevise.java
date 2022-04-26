@@ -5,16 +5,18 @@ read vehicle (owned) method
 
 in here call PaymentMethod to be read from DB.... 
 */
-public class CustomerRevise {
-	private int broncoID;
-	private String firstName;
-	private String lastName;
-	private String emailAddress;
-	private String address;
-	private int vehicleCount;
-	private boolean student;
-	private Vehicle vehicle;
-	private PaymentMethod payment;
+package application;
+
+public class Customer {
+	protected int broncoID;
+	protected String firstName;
+	protected String lastName;
+	protected String emailAddress;
+	protected String address;
+	protected int vehicleCount;
+	protected boolean student;
+	protected Vehicle vehicle;
+	protected PaymentMethod payment;
 	private CustomerDB db = new CustomerDB();
 
 	//constructor
@@ -69,6 +71,7 @@ public class CustomerRevise {
 		return payment;
 	}
 	
+		
 	//setters
 	public void setBroncoID(int id)
 	{
@@ -95,13 +98,22 @@ public class CustomerRevise {
 		address = ad;
 		
 	}
-		
+	public void setVehicle(Vehicle v)
+	{
+		vehicle = v;
+	}
+	public void setPayment(PaymentMethod p)
+	{
+		payment = p;
+	}
+	
+	
+	
+	
 	//connection
-	/**
-	purpose: calls database to fill information about this Customer
-	*/
 	public void getInfoFromDB() throws Exception
 	{
 		db.selectCustomer(this);
 	}
 }
+
