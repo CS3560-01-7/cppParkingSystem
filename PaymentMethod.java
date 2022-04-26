@@ -85,7 +85,7 @@ class PaymentMethod
   setBillingAddress method stores a value into billingAddress field
   @param ba The value to store in billingAddress
   */
-  public void setBillingAddress(int ba)
+  public void setBillingAddress(String ba)
   {
     billingAddress = ba;
   }
@@ -123,7 +123,7 @@ class PaymentMethod
   getName method returns PaymentMethod object's name
   @return The value in name
   */
-  public int getName()
+  public String getName()
   {
     return name;
   }
