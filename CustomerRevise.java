@@ -60,7 +60,15 @@ public class CustomerRevise {
 	{
 		return student;
 	}
-		
+	public Vehicle getVehicle()
+	{
+		return vehicle;
+	}
+	public PaymentMethod getPayment()
+	{
+		return payment;
+	}
+	
 	//setters
 	public void setBroncoID(int id)
 	{
