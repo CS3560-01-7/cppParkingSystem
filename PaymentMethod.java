@@ -10,15 +10,13 @@ We are assuming for this system that all cards are valid and so is the billing a
 Checklist:
 basics completed.
 */
-
-import java.io.*;
-import java.util.*;
 package application;
 
 public class PaymentMethod {
 	private long cardNumber;//pk
 	  private int securityCode;
-	  private int expDate;
+	  private int expDateM;
+	  private int expDateY;
 	  private String firstName;
 	  private String lastName;
 	  private String billingAddress; 
@@ -31,16 +29,18 @@ public class PaymentMethod {
 	  {
 	    cardNumber = 0;
 	    securityCode = 0;
-	    expDate = 0;
+	    expDateM = 0;
+	    expDateY = 0;
 	    firstName = "";
 	    lastName = "";
 	    billingAddress = "";
 	  }
-	  public PaymentMethod(long cardNumber, int securityCode, int expDate, String firstName, String lastName, String billingAddress)
+	  public PaymentMethod(long cardNumber, int securityCode, int expDateM, int expDateY, String firstName, String lastName, String billingAddress)
 	  {
 	    this.cardNumber = cardNumber;
 	    this.securityCode = securityCode;
-	    this.expDate = expDate;
+	    this.expDateM = expDateM;
+	    this.expDateY = expDateY;
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.billingAddress = billingAddress;
@@ -68,12 +68,21 @@ public class PaymentMethod {
 	  
 	  
 	  /**
-	  setExpDate method stores a value into expDate field
+	  setExpDateM method stores a value into expDate field
 	  @param ba The value to store in expDate
 	  */
-	  public void setExpDate(int ed)
+	  public void setExpDateM(int ed)
 	  {
-	    expDate = ed;
+	    expDateM = ed;
+	  }
+	  
+	  /**
+	  setExpDateM method stores a value into expDate field
+	  @param ba The value to store in expDate
+	  */
+	  public void setExpDateY(int ed)
+	  {
+	    expDateY = ed;
 	  }
 	  
 	  
@@ -126,9 +135,18 @@ public class PaymentMethod {
 	  getExpDate method returns PaymentMethod object's expDate
 	  @return The value in expDate
 	  */
-	  public int getExpDate()
+	  public int getExpDateM()
 	  {
-	    return expDate;
+	    return expDateM;
+	  }
+	  
+	  /**
+	  getExpDate method returns PaymentMethod object's expDate
+	  @return The value in expDate
+	  */
+	  public int getExpDateY()
+	  {
+	    return expDateY;
 	  }
 	  
 	  /**
