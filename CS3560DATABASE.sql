@@ -15,10 +15,11 @@ CREATE TABLE Customer (
 CREATE TABLE PaymentMethod (
 	paymentMethodID INT (9),
     broncoID INT (9),
-    cardNumber INT (16),
+    cardNumber BIGINT (19),
     securityCode INT (3),
     expirationDate INT (4),
-    cardName VARCHAR (50),
+    firstName VARCHAR (20),
+    lastName VARCHAR (50),
     address VARCHAR (50),
     FOREIGN KEY (broncoID) REFERENCES Customer (broncoID),
     PRIMARY KEY (paymentMethodID, broncoID)
