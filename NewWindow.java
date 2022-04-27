@@ -4,14 +4,21 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 
 public class NewWindow
@@ -22,26 +29,31 @@ public class NewWindow
 		
 		//create a GridPane
 		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
-		grid.setVgap(8);//set vertical spacing to 8 pixels
-		grid.setHgap(10);//set horizontal spacing to 8 pixels
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(10);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
 		
-		//set up username label and input
-		Label username = new Label("BroncoID: ");
+		//set up username label and input textfield
+		Label username = new Label("BroncoID: ");//create new label
+		username.setTextFill(Color.WHITE);//set font color
+		username.setFont(new Font("Verdana",12));//set font type and size
 		GridPane.setConstraints(username, 0, 0);//set on grid
-		TextField id = new TextField();
-		id.setPromptText("BrocoID");
-		GridPane.setConstraints(id, 1, 0);//set on grid
+		TextField id = new TextField();//create user input space
+		id.setPromptText("BrocoID");//user prompt
+		GridPane.setConstraints(id, 0, 1);//set on grid
 		
 		//set up password label and input
-		Label password = new Label("Username: ");
-		GridPane.setConstraints(password, 0, 1);//set on grid
+		Label password = new Label("Password: ");
+		password.setTextFill(Color.WHITE);//set font color
+		password.setFont(new Font("Verdana",12));//set font type and size
+		GridPane.setConstraints(password, 0, 2);//set on grid
 		PasswordField pw = new PasswordField();
-		pw.setPromptText("password");
-		GridPane.setConstraints(pw, 1, 1);//set on grid
+		pw.setPromptText("Password");
+		GridPane.setConstraints(pw, 0, 3);//set on grid
 		
 		Button button = new Button("Next");
-		GridPane.setConstraints(button, 1, 2);//under the textfields
+		GridPane.setConstraints(button, 0, 4);//under the textfields
 		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
 		{
 			@Override
@@ -54,7 +66,10 @@ public class NewWindow
 					primaryStage.setScene(payForPermit(primaryStage, customer));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					System.out.println("IN BRONCOID");
+					System.out.println("IN BRONCOID");//check if fail
+					Text error = new Text("Invalid BrocoID");
+					error.setFill(Color.RED);
+					GridPane.setConstraints(error, 0, 5);
 					e.printStackTrace();
 				}
 				
@@ -66,20 +81,18 @@ public class NewWindow
 		grid.getChildren().addAll(username, id, password, pw, button);
 		
 		//set up scene
-		Scene scene = new Scene(grid, 300, 125);
-		scene.getStylesheets().add("Green.css");
+		Scene scene = new Scene(grid, 400, 300);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-		/*new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
-		{
-			@Override
-			public void handle (ActionEvent event)
-			{
-				
-			}
-		});
-		*/
+		
 		return scene;
 	}
 	
@@ -90,28 +103,28 @@ public class NewWindow
 		//create a GridPane
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
-		grid.setVgap(8);//set vertical spacing to 8 pixels
+		grid.setVgap(10);//set vertical spacing to 8 pixels
 		grid.setHgap(10);//set horizontal spacing to 8 pixels
-		
+		grid.setAlignment(Pos.CENTER);
 		//total cost is a temp for total of permit cost
 		
 		//Label
 		Label total = new Label("Total: $");
-		GridPane.setConstraints(total, 1, 0);
+		GridPane.setConstraints(total, 0, 0);
 		Label firstName = new Label("First name: ");
-		GridPane.setConstraints(firstName, 1, 1);
+		GridPane.setConstraints(firstName, 0, 1);
 		Label lastName = new Label("Last name: ");
-		GridPane.setConstraints(lastName, 1, 2);
+		GridPane.setConstraints(lastName, 0, 2);
 		Label cardNumber = new Label("Card Number: ");
-		GridPane.setConstraints(cardNumber, 1, 3);
+		GridPane.setConstraints(cardNumber, 0, 3);
 		Label expiration = new Label("Expiration Date: ");
-		GridPane.setConstraints(expiration, 1, 4);
+		GridPane.setConstraints(expiration, 0, 4);
 		Label securityCode = new Label("Security Code: ");
-		GridPane.setConstraints(securityCode, 1, 5);
+		GridPane.setConstraints(securityCode, 0, 5);
 		Label billingAddress = new Label("Billing Address: ");
-		GridPane.setConstraints(billingAddress, 1, 6);
+		GridPane.setConstraints(billingAddress, 0, 6);
 		Label zip = new Label("ZIP: ");
-		GridPane.setConstraints(zip, 1, 7);
+		GridPane.setConstraints(zip, 0, 7);
 		
 		//TextField
 		TextField totalF = new TextField();
@@ -150,7 +163,7 @@ public class NewWindow
 			
 			//set up button
 			Button button = new Button("Next");
-			GridPane.setConstraints(button, 3, 8);//under the textfields
+			GridPane.setConstraints(button, 2, 8);//under the textfields
 			button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
 			{
 				@Override
@@ -181,7 +194,7 @@ public class NewWindow
 		}//end else
 		
 		//set up scene
-		Scene scene = new Scene(grid, 800, 700);
+		Scene scene = new Scene(grid, 600, 450);
 		scene.getStylesheets().add("Green.css");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -196,36 +209,40 @@ public class NewWindow
 		//create a GridPane
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
-		grid.setVgap(8);//set vertical spacing to 8 pixels
+		grid.setVgap(10);//set vertical spacing to 8 pixels
 		grid.setHgap(10);//set horizontal spacing to 8 pixels
+		grid.setAlignment(Pos.CENTER);
 		
-		//set up username label and input
-		Label username = new Label("Your temporary permit has been sent to your cpp email.\nHave a nice semester!");
-		GridPane.setConstraints(username, 0, 0);//set on grid
-		
+		Text thank = new Text("Thank you for your purchase!");
+		thank.setFont(Font.font("Verdana",20));
+		thank.setFill(Color.WHITE);
+		GridPane.setConstraints(thank, 0, 0);
+		Text text1 = new Text("The temporary permit has been sent to your cpp email.");
+		text1.setFont(Font.font("Verdana",12));
+		text1.setFill(Color.WHITE);
+		GridPane.setConstraints(text1, 0, 1);
+		Text text2 = new Text("Your permit will be mailed between 2-3 business days.");
+		text2.setFont(Font.font("Verdana",12));
+		text2.setFill(Color.WHITE);
+		GridPane.setConstraints(text2, 0, 2);
 		Button button = new Button("Exit");
-		GridPane.setConstraints(button, 3, 3);//under the textfields
+		GridPane.setConstraints(button, 1, 3);//under the textfields
 		button.setOnAction(event -> Platform.exit());
 		
 		
 		//set up grid
-		grid.getChildren().addAll(username, button);
+		grid.getChildren().addAll(thank,text1, text2, button);
 		
 		//set up scene
-		Scene scene = new Scene(grid, 700, 600);
-		scene.getStylesheets().add("Green.css");
+		Scene scene = new Scene(grid, 600, 450);
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		//scene.getStylesheets().add("Green.css");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-		/*new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
-		{
-			@Override
-			public void handle (ActionEvent event)
-			{
-				
-			}
-		});
-		*/
 		return scene;
 	}
 }
