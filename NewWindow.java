@@ -37,7 +37,7 @@ public class NewWindow
 		//set up username label and input textfield
 		Label username = new Label("BroncoID: ");//create new label
 		username.setTextFill(Color.WHITE);//set font color
-		username.setFont(new Font("Verdana",12));//set font type and size
+		username.setFont(new Font("Times New Roman",12));//set font type and size
 		GridPane.setConstraints(username, 0, 0);//set on grid
 		TextField id = new TextField();//create user input space
 		id.setPromptText("BrocoID");//user prompt
@@ -46,7 +46,7 @@ public class NewWindow
 		//set up password label and input
 		Label password = new Label("Password: ");
 		password.setTextFill(Color.WHITE);//set font color
-		password.setFont(new Font("Verdana",12));//set font type and size
+		password.setFont(new Font("Times New Roman",12));//set font type and size
 		GridPane.setConstraints(password, 0, 2);//set on grid
 		PasswordField pw = new PasswordField();
 		pw.setPromptText("Password");
@@ -110,20 +110,36 @@ public class NewWindow
 		
 		//Label
 		Label total = new Label("Total: $");
+		total.setFont(Font.font("Verdana",15));
+		total.setTextFill(Color.WHITE);
 		GridPane.setConstraints(total, 0, 0);
 		Label firstName = new Label("First name: ");
+		firstName.setFont(Font.font("Verdana",15));
+		firstName.setTextFill(Color.WHITE);
 		GridPane.setConstraints(firstName, 0, 1);
 		Label lastName = new Label("Last name: ");
+		lastName.setFont(Font.font("Verdana",15));
+		lastName.setTextFill(Color.WHITE);
 		GridPane.setConstraints(lastName, 0, 2);
 		Label cardNumber = new Label("Card Number: ");
+		cardNumber.setFont(Font.font("Verdana",15));
+		cardNumber.setTextFill(Color.WHITE);
 		GridPane.setConstraints(cardNumber, 0, 3);
 		Label expiration = new Label("Expiration Date: ");
+		expiration.setFont(Font.font("Verdana",15));
+		expiration.setTextFill(Color.WHITE);
 		GridPane.setConstraints(expiration, 0, 4);
 		Label securityCode = new Label("Security Code: ");
+		securityCode.setFont(Font.font("Verdana",15));
+		securityCode.setTextFill(Color.WHITE);
 		GridPane.setConstraints(securityCode, 0, 5);
 		Label billingAddress = new Label("Billing Address: ");
+		billingAddress.setFont(Font.font("Verdana",15));
+		billingAddress.setTextFill(Color.WHITE);
 		GridPane.setConstraints(billingAddress, 0, 6);
 		Label zip = new Label("ZIP: ");
+		zip.setFont(Font.font("Verdana",15));
+		zip.setTextFill(Color.WHITE);
 		GridPane.setConstraints(zip, 0, 7);
 		
 		//TextField
@@ -195,7 +211,12 @@ public class NewWindow
 		
 		//set up scene
 		Scene scene = new Scene(grid, 600, 450);
-		scene.getStylesheets().add("Green.css");
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		//scene.getStylesheets().add("Green.css");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
