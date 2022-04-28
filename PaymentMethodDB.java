@@ -10,6 +10,28 @@ import java.util.*;
 
 class PaymentMethodDB
 {
+    public static PaymentMethod addPaymentMethod(Customer customer)  throws Exception{
+
+        try {
+            Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            String query = "INSERT INTO PaymentMethod  Values("+customer.getBroncoID()+","+customer.getPayment().getCardNumber()+","
+                    +customer.getPayment().getSecurityCode()+","+customer.getPayment().getExpDateM()+","
+                    +customer.getPayment().getExpDateY()+","+customer.getPayment().getFirstName()+","
+                    +customer.getPayment().getLastName()+","+customer.getPayment().getBillingAddress()+")";
+            st.executeQuery(query);
+            st.close();
+            conn.close();
+            return selectPaymentMethod(customer);
+
+        }catch(Exception e) {
+            System.out.println(e);
+
+        }
+        return null;
+
+    }
+    
     public static PaymentMethod selectPaymentMethod(Customer customer) throws Exception
     {
         PaymentMethod paymentMethod = new PaymentMethod();
