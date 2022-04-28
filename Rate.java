@@ -14,7 +14,7 @@ class Rate
   private int facultyRate;
   private int residentRate;
   private String shortSemester;
-  private tring longSemester;
+  private String longSemester;
   private boolean faculty;
   
   //constructor
