@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -23,21 +24,21 @@ import javafx.scene.text.Text;
 
 public class NewWindow
 {
-	public Scene BroncoID(Stage primaryStage, Customer customer)
+	public Scene BroncoID(Stage primaryStage, Customer customer)//COMPLETE DO NOT TOUCH PLEASE
 	{
         primaryStage.setTitle("LOG IN TO CPP");
 		
 		//create a GridPane
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
-		grid.setVgap(10);//set vertical spacing to 10 pixels
+		grid.setVgap(8);//set vertical spacing to 10 pixels
 		grid.setHgap(10);//set horizontal spacing to 10 pixels
 		grid.setAlignment(Pos.CENTER);
 		
 		//set up username label and input textfield
 		Label username = new Label("BroncoID: ");//create new label
 		username.setTextFill(Color.WHITE);//set font color
-		username.setFont(new Font("Times New Roman",12));//set font type and size
+		username.setFont(new Font("Times New Roman",15));//set font type and size
 		GridPane.setConstraints(username, 0, 0);//set on grid
 		TextField id = new TextField();//create user input space
 		id.setPromptText("BrocoID");//user prompt
@@ -46,12 +47,13 @@ public class NewWindow
 		//set up password label and input
 		Label password = new Label("Password: ");
 		password.setTextFill(Color.WHITE);//set font color
-		password.setFont(new Font("Times New Roman",12));//set font type and size
+		password.setFont(new Font("Times New Roman",15));//set font type and size
 		GridPane.setConstraints(password, 0, 2);//set on grid
 		PasswordField pw = new PasswordField();
 		pw.setPromptText("Password");
 		GridPane.setConstraints(pw, 0, 3);//set on grid
 		
+		//create button 
 		Button button = new Button("Next");
 		GridPane.setConstraints(button, 0, 4);//under the textfields
 		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
@@ -59,17 +61,14 @@ public class NewWindow
 			@Override
 			public void handle (ActionEvent event)
 			{
-				customer.setBroncoID(Integer.parseInt(id.getText()));
 				try {
-					customer.getInfoFromDB();
-					System.out.println(customer.getFullName());
+					customer.setBroncoID(Integer.parseInt(id.getText()));
+					customer.getInfoFromDBC();
+					//System.out.println(customer.getFullName());
 					primaryStage.setScene(payForPermit(primaryStage, customer));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("IN BRONCOID");//check if fail
-					Text error = new Text("Invalid BrocoID");
-					error.setFill(Color.RED);
-					GridPane.setConstraints(error, 0, 5);
 					e.printStackTrace();
 				}
 				
@@ -92,138 +91,267 @@ public class NewWindow
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-		
 		return scene;
 	}
 	
-	public Scene payForPermit(Stage primaryStage, Customer customer)
+	public Scene payForPermit(Stage primaryStage, Customer customer) throws Exception//Pay for permit 2
 	{
+		primaryStage.setTitle("Payment Information");
+		//create new grid
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
+		grid.setVgap(10);//set vertical spacing to 8 pixels
+		grid.setHgap(5);//set horizontal spacing to 8 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		//get information from DB
+		customer.getInfoFromDBPM();
+		
+		//check to see if cc exists to decide which form to call
+		if (customer.getPayment().getCardNumber() != 0)//if there is a cc already
+		{
+			//lets you know that there is a cc on file asks whether or not to use
+			Text ask = new Text("Do you want to use this credit card?");
+			ask.setFont(Font.font("Times New Roman",20));
+			ask.setFill(Color.WHITE);
+			GridPane.setConstraints(ask, 0, 0);
+			
+			//Labels
+			Label name = new Label("Name: ");
+			name.setFont(Font.font("Times New Roman",15));
+			name.setTextFill(Color.WHITE);
+			GridPane.setConstraints(name, 0, 1);
+			Label cardNum = new Label("Card Number: ");
+			cardNum.setFont(Font.font("Times New Roman",15));
+			cardNum.setTextFill(Color.WHITE);
+			GridPane.setConstraints(cardNum, 0, 2);
+			Label exp = new Label("Expiration: ");
+			exp.setFont(Font.font("Times New Roman",15));
+			exp.setTextFill(Color.WHITE);
+			GridPane.setConstraints(exp, 0, 3);
+			
+			//get values from database to show
+			TextField n = new TextField(customer.getPayment().getFirstName() + " " + customer.getPayment().getLastName());
+			n.setFont(Font.font("Times New Roman",15));
+			GridPane.setConstraints(n, 1, 1);
+			TextField c = new TextField("" + customer.getPayment().getCardNumber());
+			c.setFont(Font.font("Times New Roman",15));
+			GridPane.setConstraints(c, 1, 2);
+			TextField e = new TextField(customer.getPayment().getExpDateM() + "/" + customer.getPayment().getExpDateY());
+			e.setFont(Font.font("Times New Roman",15));
+			GridPane.setConstraints(e, 1, 3);
+			
+			//set up buttons
+			Button yes = new Button("Yes");
+			Button no = new Button("No");
+			GridPane.setConstraints(yes, 0, 4);
+			GridPane.setConstraints(no, 1, 4);
+			
+			//set children
+			grid.getChildren().addAll(ask,cardNum,name,exp,yes,no,n,c,e);
+			
+			//button actions go to next stage if user likes payment
+			yes.setOnAction(event->primaryStage.setScene(End(primaryStage)));   
+			
+			//delete current data in database and replace
+			no.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+					{
+						@Override
+							public void handle (ActionEvent event)
+							{
+								try {
+									customer.deleteInfoFromDBPM();
+									primaryStage.setScene(newPayment(primaryStage,customer));   
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									System.out.println("IN PAYFORPERMIT");
+									e.printStackTrace();
+								}	
+							}
+					});
+			
+		}//end if
+		else//if there is no cc info get info
+		{
+			return newPayment(primaryStage,customer);
+		}//end else
+	
+		
+		//set up scene
+		Scene scene = new Scene(grid, 600, 450);
+				
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		return scene;
+	}
+	
+	public Scene newPayment(Stage primaryStage, Customer customer)
+	{
+		//top of stage
 		primaryStage.setTitle("Payment Information");
 		
 		//create a GridPane
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
 		grid.setVgap(10);//set vertical spacing to 8 pixels
-		grid.setHgap(10);//set horizontal spacing to 8 pixels
+		grid.setHgap(5);//set horizontal spacing to 8 pixels
 		grid.setAlignment(Pos.CENTER);
 		//total cost is a temp for total of permit cost
 		
-		//Label
-		Label total = new Label("Total: $");
-		total.setFont(Font.font("Verdana",15));
-		total.setTextFill(Color.WHITE);
-		GridPane.setConstraints(total, 0, 0);
-		Label firstName = new Label("First name: ");
-		firstName.setFont(Font.font("Verdana",15));
-		firstName.setTextFill(Color.WHITE);
-		GridPane.setConstraints(firstName, 0, 1);
-		Label lastName = new Label("Last name: ");
-		lastName.setFont(Font.font("Verdana",15));
-		lastName.setTextFill(Color.WHITE);
-		GridPane.setConstraints(lastName, 0, 2);
-		Label cardNumber = new Label("Card Number: ");
-		cardNumber.setFont(Font.font("Verdana",15));
-		cardNumber.setTextFill(Color.WHITE);
-		GridPane.setConstraints(cardNumber, 0, 3);
-		Label expiration = new Label("Expiration Date: ");
-		expiration.setFont(Font.font("Verdana",15));
-		expiration.setTextFill(Color.WHITE);
-		GridPane.setConstraints(expiration, 0, 4);
-		Label securityCode = new Label("Security Code: ");
-		securityCode.setFont(Font.font("Verdana",15));
-		securityCode.setTextFill(Color.WHITE);
-		GridPane.setConstraints(securityCode, 0, 5);
-		Label billingAddress = new Label("Billing Address: ");
-		billingAddress.setFont(Font.font("Verdana",15));
-		billingAddress.setTextFill(Color.WHITE);
-		GridPane.setConstraints(billingAddress, 0, 6);
-		Label zip = new Label("ZIP: ");
-		zip.setFont(Font.font("Verdana",15));
-		zip.setTextFill(Color.WHITE);
-		GridPane.setConstraints(zip, 0, 7);
+		//heading
+		Text info = new Text("Payment Information");
+		info.setFont(Font.font("Times New Roman",20));
+		info.setFill(Color.WHITE);
+		GridPane.setConstraints(info, 0, 0);
 		
-		//TextField
+		//total label
+		Label total = new Label("Total: $");
+		total.setFont(Font.font("Times New Roman",15));
+		total.setTextFill(Color.WHITE);
+		GridPane.setConstraints(total, 0, 1);
+		
+		//first name label
+		Label firstName = new Label("First name: ");
+		firstName.setFont(Font.font("Times New Roman",15));
+		firstName.setTextFill(Color.WHITE);
+		GridPane.setConstraints(firstName, 0, 2);
+		
+		//last name label
+		Label lastName = new Label("Last name: ");
+		lastName.setFont(Font.font("Times New Roman",15));
+		lastName.setTextFill(Color.WHITE);
+		GridPane.setConstraints(lastName, 0, 3);
+		
+		//card number label
+		Label cardNumber = new Label("Card Number: ");
+		cardNumber.setFont(Font.font("Times New Roman",15));
+		cardNumber.setTextFill(Color.WHITE);
+		GridPane.setConstraints(cardNumber, 0, 4);
+		
+		//expiration label
+		Label expiration = new Label("Expiration Date: ");
+		expiration.setFont(Font.font("Times New Roman",15));
+		expiration.setTextFill(Color.WHITE);
+		GridPane.setConstraints(expiration, 0, 5);
+		
+		//security code label
+		Label securityCode = new Label("Security Code: ");
+		securityCode.setFont(Font.font("Times New Roman",15));
+		securityCode.setTextFill(Color.WHITE);
+		GridPane.setConstraints(securityCode, 0, 6);
+		
+		//billing address label
+		Label billingAddress = new Label("Billing Address: ");
+		billingAddress.setFont(Font.font("Times New Roman",15));
+		billingAddress.setTextFill(Color.WHITE);
+		GridPane.setConstraints(billingAddress, 0, 7);
+		
+		//zip code label
+		Label zip = new Label("ZIP: ");
+		zip.setFont(Font.font("Times New Roman",15));
+		zip.setTextFill(Color.WHITE);
+		GridPane.setConstraints(zip, 0, 8);
+		
+		//user input total
 		TextField totalF = new TextField();
 		totalF.setText("Permit Cost");
+		GridPane.setConstraints(totalF, 2, 1);
+		
+		//user input first name
 		TextField firstNameF = new TextField();
 		firstNameF.setPromptText("Billy");
+		GridPane.setConstraints(firstNameF, 2, 2);
+		
+		//user input last name
 		TextField lastNameF = new TextField();
-		lastNameF.setPromptText("Bronco");
+		lastNameF.setPromptText("Bronco");		
+		GridPane.setConstraints(lastNameF, 2, 3);
+		
+		//user input card number
 		TextField cardNumberF = new TextField();
-		cardNumberF.setPromptText("xxxx-xxxx-xxxx-xxxx");
-		TextField expirationF = new TextField();
-		expirationF.setPromptText("xx");
+		cardNumberF.setPromptText("XXXX-XXXX-XXXX-XXXX");	
+		GridPane.setConstraints(cardNumberF, 2, 4);
+		
+		//Choicebox
+		ChoiceBox<Integer> expirationF1 = new ChoiceBox<>();
+		expirationF1.getItems().addAll(1,2,3,4,5,6,7,8,9,10,11,12);						
+		ChoiceBox<Integer> expirationF2 = new ChoiceBox<>();
+		expirationF2.getItems().addAll(22,23,24,25,26,27,28,29,30,31,32,33,34);//can add more as needed
+		expirationF2.setValue(23);
+		expirationF1.setValue(1);
+		GridPane.setConstraints(expirationF1, 2, 5);
+		GridPane.setConstraints(expirationF2, 3, 5);
+		
+		//user input security code
 		TextField securityCodeF = new TextField();
 		securityCodeF.setPromptText("xxx");
+		GridPane.setConstraints(securityCodeF, 2, 6);
+		
+		//user input billing address
 		TextField billingAddressF = new TextField();
 		billingAddressF.setPromptText("123 Sesame Street");
+		GridPane.setConstraints(billingAddressF, 2, 7);
+		
+		//user input zip
 		TextField zipF = new TextField();
 		zipF.setPromptText("xxxxx");
+		GridPane.setConstraints(zipF, 2, 8);
 		
-		if (customer.getPayment().getCardNumber() != 0)//if there is a cc already
+		//set up button
+		Button button = new Button("Next");
+		GridPane.setConstraints(button, 2, 9);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
 		{
-			//Use this card?
-			//yes and no
-		}//end if
-		else//if there is no cc infor get info
-		{
-			//set up
-			GridPane.setConstraints(totalF, 2, 0);
-			GridPane.setConstraints(firstNameF, 2, 1);
-			GridPane.setConstraints(lastNameF, 2, 2);
-			GridPane.setConstraints(cardNumberF, 2, 3);
-			GridPane.setConstraints(expirationF, 2, 4);
-			GridPane.setConstraints(securityCodeF, 2, 5);
-			GridPane.setConstraints(billingAddressF, 2, 6);
-			GridPane.setConstraints(zipF, 2, 7);
-			
-			//set up button
-			Button button = new Button("Next");
-			GridPane.setConstraints(button, 2, 8);//under the textfields
-			button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
-			{
-				@Override
-					public void handle (ActionEvent event)
-					{
-						try {
-							//get values
-							customer.getPayment().setFirstName(firstNameF.getText());
-							customer.getPayment().setLastName(lastNameF.getText());
-							customer.getPayment().setCardNumber(Long.parseLong(cardNumberF.getText()));
-							customer.getPayment().setExpDate(Integer.parseInt(expirationF.getText()));
-							customer.getPayment().setSecurityCode(Integer.parseInt(securityCodeF.getText()));
-							customer.getPayment().setBillingAddress(billingAddressF.getText());
-							
-							System.out.println(customer.getPayment().getBillingAddress());
-							primaryStage.setScene(End(primaryStage));   
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							System.out.println("IN PAYFORPERMIT");
-							e.printStackTrace();
-						}	
-					}
-			});
-			
-			//set children
-			grid.getChildren().addAll(total, firstName, lastName, cardNumber, expiration, securityCode, billingAddress, zip,
-					totalF, firstNameF, lastNameF, cardNumberF, expirationF, securityCodeF, billingAddressF, zipF, button);
-		}//end else
+			@Override
+				public void handle (ActionEvent event)
+				{
+					try {
+						//get values
+						customer.getPayment().setFirstName(firstNameF.getText());
+						customer.getPayment().setLastName(lastNameF.getText());
+						customer.getPayment().setCardNumber(Long.parseLong(cardNumberF.getText()));
+						customer.getPayment().setExpDateM(expirationF1.getValue());
+						customer.getPayment().setExpDateY(expirationF2.getValue());
+						customer.getPayment().setSecurityCode(Integer.parseInt(securityCodeF.getText()));
+						customer.getPayment().setBillingAddress(billingAddressF.getText());
+						
+						//add values to database
+						customer.addInfoToDBPM();
+						
+						//go to next scene
+						primaryStage.setScene(End(primaryStage));   
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println("IN PAYFORPERMIT");
+						e.printStackTrace();
+					}	
+				}
+		});
+		
+		//set children
+		grid.getChildren().addAll(total, firstName, lastName, cardNumber, expiration, securityCode, billingAddress, zip,
+				totalF, firstNameF, lastNameF, cardNumberF, expirationF1, expirationF2, securityCodeF, billingAddressF, zipF, button);
 		
 		//set up scene
 		Scene scene = new Scene(grid, 600, 450);
-		
-		//background
+				
+		//set up the background
 		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
 		Background bg = new Background(bf);
 		grid.setBackground(bg);
-		//scene.getStylesheets().add("Green.css");
+		
+		//display the scene
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
 		return scene;
 	}
 	
-	public Scene End(Stage primaryStage)
+	public Scene End(Stage primaryStage)//basically done
 	{
 		primaryStage.setTitle("THANK YOU");
 		
@@ -231,23 +359,26 @@ public class NewWindow
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
 		grid.setVgap(10);//set vertical spacing to 8 pixels
-		grid.setHgap(10);//set horizontal spacing to 8 pixels
+		grid.setHgap(12);//set horizontal spacing to 8 pixels
 		grid.setAlignment(Pos.CENTER);
 		
 		Text thank = new Text("Thank you for your purchase!");
-		thank.setFont(Font.font("Verdana",20));
+		thank.setFont(Font.font("Times New Roman",20));
 		thank.setFill(Color.WHITE);
 		GridPane.setConstraints(thank, 0, 0);
+		
 		Text text1 = new Text("The temporary permit has been sent to your cpp email.");
-		text1.setFont(Font.font("Verdana",12));
+		text1.setFont(Font.font("Times New Roman",15));
 		text1.setFill(Color.WHITE);
 		GridPane.setConstraints(text1, 0, 1);
+		
 		Text text2 = new Text("Your permit will be mailed between 2-3 business days.");
-		text2.setFont(Font.font("Verdana",12));
+		text2.setFont(Font.font("Times New Roman",15));
 		text2.setFill(Color.WHITE);
 		GridPane.setConstraints(text2, 0, 2);
+		
 		Button button = new Button("Exit");
-		GridPane.setConstraints(button, 1, 3);//under the textfields
+		GridPane.setConstraints(button, 0, 3);//under the textfields
 		button.setOnAction(event -> Platform.exit());
 		
 		
@@ -256,11 +387,13 @@ public class NewWindow
 		
 		//set up scene
 		Scene scene = new Scene(grid, 600, 450);
+		
 		//background
 		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
 		Background bg = new Background(bf);
 		grid.setBackground(bg);
-		//scene.getStylesheets().add("Green.css");
+		
+		//display scene
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
