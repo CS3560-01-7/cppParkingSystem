@@ -15,9 +15,8 @@ public class Customer {
 	protected boolean student;
 	protected Vehicle vehicle;
 	protected PaymentMethod payment;
-	private CustomerDB db = new CustomerDB();
+	private CustomerDB dbc = new CustomerDB();
 	private PaymentMethodDB dbpm = new PaymentMethodDB(); 
-
 
 	//constructor
 	Customer()
@@ -28,8 +27,8 @@ public class Customer {
 		emailAddress = "";
 		address = "";
 		vehicleCount = 0;
-		vehicle = new Vehicle();
-		payment = new PaymentMethod();
+		vehicle = null;
+		payment = null;
 	}
 		
 	//getters
@@ -122,7 +121,7 @@ public class Customer {
 		payment = dbpm.selectPaymentMethod(this);
 		return payment;
 	}
-	public void deleteInforFromDBPM()
+	public void deleteInfoFromDBPM()
 	{
 		payment = dbpm.deletePaymentMethod(this);
 	}
