@@ -62,6 +62,7 @@ class PaymentMethodDB
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 //Lynn please fix this part of the code. so broncoID does not make problem here as we talked today.
+                rs.getInt("broncoID");
                 paymentMethod.setCardNumber(rs.getLong("cardNumber"));
                 paymentMethod.setSecurityCode(rs.getInt("securityCode"));
                 paymentMethod.setExpDateM(rs.getInt("expirationDateMonth"));
