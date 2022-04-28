@@ -1,6 +1,11 @@
 CREATE DATABASE CPP_PARKING_SYSTEM;
 
 USE CPP_PARKING_SYSTEM;
+DROP TABLE Rate;
+DROP TABLE PaymentMethod;
+DROP TABLE Permit;
+DROP TABLE Vehicle;
+DROP TABLE Customer;
 
 CREATE TABLE Customer (
 	broncoID INT (9),
@@ -22,9 +27,8 @@ CREATE TABLE PaymentMethod (
     lastName VARCHAR (50),
     address VARCHAR (50),
     FOREIGN KEY (broncoID) REFERENCES Customer (broncoID),
-    PRIMARY KEY (cardNumber)
+    PRIMARY KEY (cardNumber, broncoID)
 );
-
 CREATE TABLE Vehicle (
 	vin VARCHAR (17),
     broncoID INT (9),
@@ -37,7 +41,6 @@ CREATE TABLE Vehicle (
     FOREIGN KEY (broncoID) REFERENCES Customer (broncoID),
     PRIMARY KEY (vin)
 );
-
 CREATE TABLE Permit (
 	permitID INT (9),
     vin VARCHAR (17),
@@ -53,3 +56,8 @@ CREATE TABLE Rate (
     FOREIGN KEY (permitID) REFERENCES Permit (permitID),
     PRIMARY KEY (rateID, permitID)
 );
+
+INSERT INTO Customer VALUES ('111111111', 'Lynn', 'Takahashi','pizzahut@gmail.com','123 Sesame Street',TRUE),
+('111111112','Professor','Poopypants','professorpoopy@gmail.com','246 Captain Underpants', FALSE),
+('111111113','Ethan','Vazquez','evaq@gmail.com','541 Vazqueef Drive', FALSE);
+INSERT INTO PaymentMethod VALUES ('111111111','123456789','123','11','25','Lynn','Takahashi','123 Sesame Street');
