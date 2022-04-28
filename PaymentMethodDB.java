@@ -15,10 +15,10 @@ class PaymentMethodDB
             Connection conn = getConnection();
             Statement st = conn.createStatement();
             String query = "DELETE FROM PaymentMethod WHERE broncoID = " + customer.getBroncoID();
-            st.executeQuery(query);
+            st.executeUpdate(query);
             st.close();
             conn.close();
-            return selectPaymentMethod(customer);
+            return new PaymentMethod();
 
         }catch(Exception e) {
             System.out.println(e);
@@ -34,11 +34,11 @@ class PaymentMethodDB
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "INSERT INTO PaymentMethod  Values("+customer.getBroncoID()+","+customer.getPayment().getCardNumber()+","
+            String query = "INSERT INTO PaymentMethod Values("+customer.getBroncoID()+","+customer.getPayment().getCardNumber()+","
                     +customer.getPayment().getSecurityCode()+","+customer.getPayment().getExpDateM()+","
-                    +customer.getPayment().getExpDateY()+","+customer.getPayment().getFirstName()+","
-                    +customer.getPayment().getLastName()+","+customer.getPayment().getBillingAddress()+")";
-            st.executeQuery(query);
+                    +customer.getPayment().getExpDateY()+",\'"+customer.getPayment().getFirstName()+"\',\'"
+                    +customer.getPayment().getLastName()+"\',\'"+customer.getPayment().getBillingAddress()+"\')";
+            st.executeUpdate(query);
             st.close();
             conn.close();
             return selectPaymentMethod(customer);
