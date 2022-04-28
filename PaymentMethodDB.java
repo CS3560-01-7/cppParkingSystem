@@ -10,6 +10,25 @@ import java.util.*;
 
 class PaymentMethodDB
 {
+     public static PaymentMethod deletePaymentMethod(Customer customer) {
+        try {
+            Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            String query = "DELETE FROM PaymentMethod WHERE broncoID = " + customer.getBroncoID();
+            st.executeQuery(query);
+            st.close();
+            conn.close();
+            return selectPaymentMethod(customer);
+
+        }catch(Exception e) {
+            System.out.println(e);
+
+        }
+        return null;
+
+    }
+    
+    
     public static PaymentMethod addPaymentMethod(Customer customer)  throws Exception{
 
         try {
@@ -42,6 +61,7 @@ class PaymentMethodDB
             String query ="select * from PaymentMethod WHERE broncoID = " + customer.getBroncoID();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
+                //Lynn please fix this part of the code. so broncoID does not make problem here as we talked today.
                 paymentMethod.setCardNumber(rs.getLong("cardNumber"));
                 paymentMethod.setSecurityCode(rs.getInt("securityCode"));
                 paymentMethod.setExpDateM(rs.getInt("expirationDateMonth"));
