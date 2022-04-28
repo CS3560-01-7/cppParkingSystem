@@ -16,6 +16,8 @@ public class Customer {
 	protected Vehicle vehicle;
 	protected PaymentMethod payment;
 	private CustomerDB db = new CustomerDB();
+	private PaymentMethodDB dbpm = new PaymentMethodDB(); 
+
 
 	//constructor
 	Customer()
@@ -109,9 +111,25 @@ public class Customer {
 	
 	
 	//connection
-	public void getInfoFromDB() throws Exception
+	public void getInfoFromDBC() throws Exception
 	{
-		db.selectCustomer(this);
+		dbc.selectCustomer(this);
+	}
+	
+	//connection and db 
+	public PaymentMethod getInfoFromDBPM() throws Exception
+	{
+		payment = dbpm.selectPaymentMethod(this);
+		return payment;
+	}
+	public void deleteInforFromDBPM()
+	{
+		payment = dbpm.deletePaymentMethod(this);
+	}
+	
+	public void addInfoToDBPM() throws Exception
+	{
+		dbpm.addPaymentMethod(this);
 	}
 }
 
