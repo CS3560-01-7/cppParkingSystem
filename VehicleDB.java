@@ -10,10 +10,10 @@ public class VehicleDB {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
             String query = "DELETE FROM Vehicle WHERE broncoID = " + customer.getBroncoID();
-            st.executeQuery(query);
+            st.executeUpdate(query);
             st.close();
             conn.close();
-            return selectVehicle(customer);
+            return new PaymentMethod();
 
         }catch(Exception e) {
             System.out.println(e);
@@ -28,9 +28,9 @@ public class VehicleDB {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
             String query = "INSERT INTO Vehicle  Values("+customer.getVehicle().getVIN()+","+customer.getBroncoID()+","
-                    +customer.getVehicle().getLicensePlate()+","+customer.getVehicle().getVehicleType()+","
-                    +customer.getVehicle().getVehicleMake()+","+customer.getVehicle().getVehicleColor()+","
-                    +customer.getVehicle().getModelYear()+","+customer.getVehicle().getState()+")";
+                    +customer.getVehicle().getLicensePlate()+",\'"+customer.getVehicle().getVehicleType()+"\',\'"
+                    +customer.getVehicle().getVehicleMake()+"\',\'"+customer.getVehicle().getVehicleColor()+"\',"
+                    +customer.getVehicle().getModelYear()+",\'"+customer.getVehicle().getState()+"\')";
             st.executeQuery(query);
             st.close();
             conn.close();
