@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 
 public class NewWindow
 {
-	public Scene BroncoID(Stage primaryStage, Customer customer)//COMPLETE DO NOT TOUCH PLEASE
+	public Scene BroncoID(Stage primaryStage, Cart cart)//COMPLETE DO NOT TOUCH PLEASE
 	{
         primaryStage.setTitle("LOG IN TO CPP");
 		
@@ -62,10 +62,10 @@ public class NewWindow
 			public void handle (ActionEvent event)
 			{
 				try {
-					customer.setBroncoID(Integer.parseInt(id.getText()));
-					customer.getInfoFromDBC();
+					cart.getCustomer().setBroncoID(Integer.parseInt(id.getText()));
+					cart.getCustomer().getInfoFromDBC();
 					//System.out.println(customer.getFullName());
-					primaryStage.setScene(payForPermit(primaryStage, customer));   
+					primaryStage.setScene(payForPermit(primaryStage, cart));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("IN BRONCOID");//check if fail
@@ -94,7 +94,7 @@ public class NewWindow
 		return scene;
 	}
 	
-	public Scene payForPermit(Stage primaryStage, Customer customer) throws Exception//Pay for permit 2
+	public Scene payForPermit(Stage primaryStage, Cart cart) throws Exception//Pay for permit 2
 	{
 		primaryStage.setTitle("Payment Information");
 		//create new grid
@@ -105,10 +105,10 @@ public class NewWindow
 		grid.setAlignment(Pos.CENTER);
 		
 		//get information from DB
-		customer.getInfoFromDBPM();
+		cart.getCustomer().getInfoFromDBPM();
 		
 		//check to see if cc exists to decide which form to call
-		if (customer.getPayment().getCardNumber() != 0)//if there is a cc already
+		if (cart.getCustomer().getPayment().getCardNumber() != 0)//if there is a cc already
 		{
 			//lets you know that there is a cc on file asks whether or not to use
 			Text ask = new Text("Do you want to use this credit card?");
@@ -131,13 +131,13 @@ public class NewWindow
 			GridPane.setConstraints(exp, 0, 3);
 			
 			//get values from database to show
-			TextField n = new TextField(customer.getPayment().getFirstName() + " " + customer.getPayment().getLastName());
+			TextField n = new TextField(cart.getCustomer().getPayment().getFirstName() + " " + cart.getCustomer().getPayment().getLastName());
 			n.setFont(Font.font("Times New Roman",15));
 			GridPane.setConstraints(n, 1, 1);
-			TextField c = new TextField("" + customer.getPayment().getCardNumber());
+			TextField c = new TextField("" + cart.getCustomer().getPayment().getCardNumber());
 			c.setFont(Font.font("Times New Roman",15));
 			GridPane.setConstraints(c, 1, 2);
-			TextField e = new TextField(customer.getPayment().getExpDateM() + "/" + customer.getPayment().getExpDateY());
+			TextField e = new TextField(cart.getCustomer().getPayment().getExpDateM() + "/" + cart.getCustomer().getPayment().getExpDateY());
 			e.setFont(Font.font("Times New Roman",15));
 			GridPane.setConstraints(e, 1, 3);
 			
@@ -160,8 +160,8 @@ public class NewWindow
 							public void handle (ActionEvent event)
 							{
 								try {
-									customer.deleteInfoFromDBPM();
-									primaryStage.setScene(newPayment(primaryStage,customer));   
+									cart.getCustomer().deleteInfoFromDBPM();
+									primaryStage.setScene(newPayment(primaryStage,cart));   
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
 									System.out.println("IN PAYFORPERMIT");
@@ -173,7 +173,7 @@ public class NewWindow
 		}//end if
 		else//if there is no cc info get info
 		{
-			return newPayment(primaryStage,customer);
+			return newPayment(primaryStage,cart);
 		}//end else
 	
 		
@@ -189,7 +189,7 @@ public class NewWindow
 		return scene;
 	}
 	
-	public Scene newPayment(Stage primaryStage, Customer customer)
+	public Scene newPayment(Stage primaryStage, Cart cart)
 	{
 		//top of stage
 		primaryStage.setTitle("Payment Information");
@@ -258,7 +258,7 @@ public class NewWindow
 		
 		//user input total
 		TextField totalF = new TextField();
-		totalF.setText("Permit Cost");
+		totalF.setText("" + cart.getPermit().getRate());
 		GridPane.setConstraints(totalF, 2, 1);
 		
 		//user input first name
@@ -311,16 +311,16 @@ public class NewWindow
 				{
 					try {
 						//get values
-						customer.getPayment().setFirstName(firstNameF.getText());
-						customer.getPayment().setLastName(lastNameF.getText());
-						customer.getPayment().setCardNumber(Long.parseLong(cardNumberF.getText()));
-						customer.getPayment().setExpDateM(expirationF1.getValue());
-						customer.getPayment().setExpDateY(expirationF2.getValue());
-						customer.getPayment().setSecurityCode(Integer.parseInt(securityCodeF.getText()));
-						customer.getPayment().setBillingAddress(billingAddressF.getText());
+						cart.getCustomer().getPayment().setFirstName(firstNameF.getText());
+						cart.getCustomer().getPayment().setLastName(lastNameF.getText());
+						cart.getCustomer().getPayment().setCardNumber(Long.parseLong(cardNumberF.getText()));
+						cart.getCustomer().getPayment().setExpDateM(expirationF1.getValue());
+						cart.getCustomer().getPayment().setExpDateY(expirationF2.getValue());
+						cart.getCustomer().getPayment().setSecurityCode(Integer.parseInt(securityCodeF.getText()));
+						cart.getCustomer().getPayment().setBillingAddress(billingAddressF.getText());
 						
 						//add values to database
-						customer.addInfoToDBPM();
+						cart.getCustomer().addInfoToDBPM();
 						
 						//go to next scene
 						primaryStage.setScene(End(primaryStage));   
