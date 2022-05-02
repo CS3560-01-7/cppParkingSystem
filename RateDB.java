@@ -3,6 +3,7 @@ Class name: RateDB.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 Purpose: RateDB used as a database accessor.
 */
+// needs correction
 
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class RateDB {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "SELECT checkStudent FROM Customer WHERE broncoID = " + customer.getBroncoID();
+            String query = "SELECT studentCheck FROM Rate WHERE rateID = " + customer.getBroncoID();
             ResultSet result = st.executeQuery(query);
 
             st.close();
