@@ -12,59 +12,42 @@ Check list:
 basics completed
 */
 
-import javax.swing.*;
-import java.io.*;
-import java.util.*;
+package application;
 
-class Permit
-{
-  private int permitNumber;//pk
-  private String permitType;  
-  private int vehicleNum = 0;
-  private Rate rate;
-  
-  //constructor
-  public Permit()
-  {
-  }
-  
-  //methods
-  //mutators
-  /**
-  setPermitNumber method stores a value in the permitNumber field
-  @param pn The value to store in permitNumber
-  */
-  public void setPermitNumber(int pn)
-  {
-    permitNumber = pn;
-  }
-  
-  /**
-  setpermitType method stores a value in the permitType field
-  @param pt The value to store in permitType
-  */
-  public void setPermitType(String pt)
-  {
-    permitType = pt;
-  }
-  
-  //accessors
-  /**
-  getPermitNumber method returns a object's permitNumber
-  @return The value in the permitNumber field
-  */
-  public int getPermitNumber()
-  {
-    return permitNumber;
-  }
-  
-  /**
-  getPermitType method returns a object's permitType
-  @return The value in the permitType field
-  */
-  public String getPermitType()
-  {
-    return permitType;
-  }
-  
+public class Permit extends Rate {
+	
+	private int permitNumber;
+	int vin;
+	
+	public Permit() {
+		super();
+		permitNumber = 0;
+		vin = 0;
+	}
+	
+	public Permit(int permitNumber, int vin) {
+		super();
+		this.permitNumber = permitNumber;
+		this.vin = vin;
+	}
+
+	public int getPermitNumber()
+	{
+		return permitNumber;
+	}
+	public void setPermitNumber (int pn)
+	{
+		pn = permitNumber + 1;
+		permitNumber = pn;
+	}
+	
+	public int getVIN()
+	{
+		return vin;
+	}
+	public void setVIN(int v)
+	{
+		vin = v;
+	}
+
 }
