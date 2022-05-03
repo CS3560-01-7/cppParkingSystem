@@ -16,7 +16,7 @@ CREATE TABLE Customer (
 );
 
 CREATE TABLE PaymentMethod (
-    customerbroncoID INT (9),
+    broncoID INT (9),
     cardNumber BIGINT (19),
     securityCode INT (3),
     expirationDateMonth INT (2),
@@ -24,8 +24,8 @@ CREATE TABLE PaymentMethod (
     firstName VARCHAR (20),
     lastName VARCHAR (50),
     address VARCHAR (50),
-    FOREIGN KEY (customerbroncoID) REFERENCES Customer (broncoID),
-    PRIMARY KEY (cardNumber, customerbroncoID)
+    FOREIGN KEY (broncoID) REFERENCES Customer (broncoID),
+    PRIMARY KEY (cardNumber, broncoID)
 );
 CREATE TABLE Vehicle (
 	vin VARCHAR (17),
@@ -71,3 +71,5 @@ INSERT INTO Permit values ('1', '1', '12345678901234567');
 
 
 SELECT * FROM Rate;
+SELECT firstName, lastName, emailAddress, address, checkStudent FROM Customer WHERE broncoID = 111111111;
+
