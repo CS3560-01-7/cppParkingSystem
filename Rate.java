@@ -6,120 +6,95 @@ The Rate class' methods set the price of the permit for students and faculty. Th
 Rate calls Permit objects
 
 */
+package application;
 
-class Rate
-{
-//attributes
-  private int studentRate;
-  private int facultyRate;
-  private int residentRate;
-  private String shortSemester;
-  private String longSemester;
-  private boolean faculty;
+public class Rate {
+	//attributes
+	private int rateID;
+	private int rate;
+	private String description;
+	private boolean studentcheck;
+	RateDB db = new RateDB();
   
-  //constructor
-  public Rate()
-  {
-  }
+	//constructor
+	public Rate()
+	{
+		
+	}
   
-  //methods
-  //mutators
-  /**
-  setStudentRate method stores a value in the studentRate field
-  @param sr The value to store in studentRate
-  */
-  public void setStudentRate(int sr)
-  {
-    studentRate = sr;
-  }
+	//methods
+	//mutators
+	/**
+	setRate method stores a value in the rate field
+	@param r The value to store in rate
+	 */
+	public void setRateID(int r)
+	{
+		this.rateID = r;
+	}
+	
+	/**
+	setRate method stores a value in the rate field
+	@param r The value to store in rate
+	 */
+	public void setRate(int r)
+	{
+		this.rate = r;
+	}
   
-  /**
-  setFacultyRate method stores a value in the facultyRate field
-  @param fr The value to store in facultyRate
-  */
-  public void setFacultyRate(int fr)
-  {
-    facultyRate = fr;
-  }
+	/**
+	setDescription method stores description of rate
+	@param d The value to store in longSemester
+	 */
+	public void setDescription(String d)
+	{
+		this.description = d;
+	}
+	
+	/**
+ 	Faculty method checks status of the user and decides what rate to offer
+ 	@return Boolean value
+	 */
+	public void setStudent(boolean s) 
+	{
+		this.studentcheck = s;
+	}
   
-  /**
-  setResidentRate method stores a value in the residentRate field
-  @param rr The value to store in residentRate
-  */
-  public void setResidentRate(int rr)
-  {
-    residentRate = rr;
-  }
+	/**
+	getRate method returns rate
+	@return The value in the rate field
+	 */
+	public int getRateID()
+	{
+		return this.rateID;
+	}
+	
+	/**
+	getRate method returns rate
+	@return The value in the rate field
+	 */
+	public int getRate()
+	{
+		return this.rate;
+	}
   
-  /**
-  setLongSemester method stores a value in the longSemester field
-  @param ls The value to store in longSemester
-  */
-  public void setLongSemester(String ls)
-  {
-    longSemester = ls;
-  }
+	/**
+	getFacultyRate method returns a facultyRate
+	@return The value in the facultyRate field
+	 */
+	public String getDescription()
+	{
+        return this.description;
+    }
   
-  /**
-  setShortSemester method stores a value in the shortSemester field
-  @param ss The value to store in shortSemester
-  */
-  public void setShortSemester(String ss)
-  {
-    shortSemester = ss;
-  }
-  
-    /**
-  getStudentRate method returns a studentRate
-  @return The value in the studentRate field
-  */
-  public int getStudentRate()
-  {
-    return studentRate;
-  }
-  
-  /**
-  getFacultyRate method returns a facultyRate
-  @return The value in the facultyRate field
-  */
-  public int getFacultyRate()
-  {
-    return facultyRate;
-  }
-  
-  /**
-  getResidentRate method returns residentRate
-  @return the value in the residentRate field
-  */
-  public int getResidentRate()
-  {
-    return residentRate;
-  }
-  
-  /**
-  getLongSemester method returns longSemester
-  @return The value in the longSemester field
-  */
-  public String getLongSemester()
-  {
-    return longSemester;
-  }
-  
-  /**
-   getShortSemester method returns shortSemester
-  @return The value in the shortSemester field
-  */
-  public String getShortSemester()
-  {
-    return shortSemester;
-  }
-  
-  /**
-  Faculty method checks status of the user and decides what rate to offer
-  @return Boolean value
-  */
-  public boolean Faculty() (String userInput)
-  //check if user entered Student or Faculty as their campus status. 
-  //If faculty, return true. If student, return false.
-  
-}  
+	/**
+ 	Faculty method checks status of the user and decides what rate to offer
+ 	@return Boolean value
+	 */
+	public boolean getStudent() 
+	{
+		return this.studentcheck;
+	}
+	//check if user entered Student or Faculty as their campus status. 
+	//If faculty, return true. If student, return false.
+}
