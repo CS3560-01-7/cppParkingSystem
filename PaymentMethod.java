@@ -22,8 +22,6 @@ public class PaymentMethod {
 	  private String billingAddress; 
 	  private int zip;
 	  
-	  //private PaymentMethodDB db;
-	  
 	  //constructor
 	  public PaymentMethod()
 	  {
@@ -34,8 +32,9 @@ public class PaymentMethod {
 	    firstName = "";
 	    lastName = "";
 	    billingAddress = "";
+	    zip = 0;
 	  }
-	  public PaymentMethod(long cardNumber, int securityCode, int expDateM, int expDateY, String firstName, String lastName, String billingAddress)
+	  public PaymentMethod(long cardNumber, int securityCode, int expDateM, int expDateY, String firstName, String lastName, String billingAddress, int zip)
 	  {
 	    this.cardNumber = cardNumber;
 	    this.securityCode = securityCode;
@@ -44,6 +43,7 @@ public class PaymentMethod {
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.billingAddress = billingAddress;
+	    this.zip = zip;
 	  }
 	  //methods 
 	  //mutators
@@ -109,6 +109,15 @@ public class PaymentMethod {
 	  public void setBillingAddress(String ba)
 	  {
 	    billingAddress = ba;
+	  }
+	  
+	  /**
+	  setZIP method stores a value into zip field
+	  @param ba The value to store in zip
+	  */
+	  public void setZIP(int z)
+	  {
+	    zip = z;
 	  }
 	  
 	  //accessors
@@ -183,5 +192,11 @@ public class PaymentMethod {
 	  {
 	    return billingAddress;
 	  }
+	  
+	  public int getZIP()
+	  {
+		  return zip;
+	  }
+	
 	 
 }
