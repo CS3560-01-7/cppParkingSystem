@@ -24,6 +24,7 @@ CREATE TABLE PaymentMethod (
     firstName VARCHAR (20),
     lastName VARCHAR (50),
     address VARCHAR (50),
+    zip INT(5),
     FOREIGN KEY (broncoID) REFERENCES Customer (broncoID),
     PRIMARY KEY (cardNumber, broncoID)
 );
@@ -62,7 +63,7 @@ CREATE TABLE Permit (
 INSERT INTO Customer VALUES ('111111111', 'Lynn', 'Takahashi','pizzahut@gmail.com','123 Sesame Street',TRUE),
 ('111111112','Professor','Poopypants','professorpoopy@gmail.com','246 Captain Underpants', FALSE),
 ('111111113','Ethan','Vazquez','evaq@gmail.com','541 Vazqueef Drive', FALSE);
-INSERT INTO PaymentMethod VALUES ('111111111','123456789','123','11','25','Lynn','Takahashi','123 Sesame Street');
+INSERT INTO PaymentMethod VALUES ('111111111','123456789','123','11','25','Lynn','Takahashi','123 Sesame Street','12345');
 INSERT INTO Vehicle VALUES ('12345678901234567','111111111','ABCDEFG','Corolla','Toyota','gray','2012', 'CA');
 INSERT INTO Rate VALUES ('1', '150', 'STUDENT FALL MO/WE/FRI', true),
 ('2', '150', 'STUDENT FALL TU/TH', true),('3', '200', 'STUDENT FALL WEEK', true),
@@ -72,4 +73,6 @@ INSERT INTO Permit values ('1', '1', '12345678901234567');
 
 SELECT * FROM Rate;
 SELECT firstName, lastName, emailAddress, address, checkStudent FROM Customer WHERE broncoID = 111111111;
+
+
 
