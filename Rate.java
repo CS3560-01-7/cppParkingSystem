@@ -14,7 +14,7 @@ public class Rate {
     private int rate;
     private String rateDescription;
     private boolean studentcheck;
-    RateDB ratedb = new RateDB();
+    RateDB rateDB = new RateDB();
 
     //constructor
     public Rate()
