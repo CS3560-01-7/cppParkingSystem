@@ -67,7 +67,7 @@ INSERT INTO PaymentMethod VALUES ('111111111','123456789','123','11','25','Lynn'
 INSERT INTO Vehicle VALUES ('12345678901234567','111111111','ABCDEFG','Corolla','Toyota','gray','2012', 'CA');
 INSERT INTO Rate VALUES ('1', '150', 'STUDENT FALL MO/WE/FRI', true),
 ('2', '150', 'STUDENT FALL TU/TH', true),('3', '200', 'STUDENT FALL WEEK', true),
-('4', '100', 'FACULTY FALL WEEK', false);
+('4', '125', 'STUDENT FALL MOTOR', true),('5', '100', 'FACULTY FALL WEEK', false);
 INSERT INTO Permit values ('1', '1', '12345678901234567');
 
 
