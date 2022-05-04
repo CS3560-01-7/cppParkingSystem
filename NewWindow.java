@@ -20,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 
 public class NewWindow
@@ -65,7 +66,7 @@ public class NewWindow
 					cart.getCustomer().setBroncoID(Integer.parseInt(id.getText()));
 					cart.getCustomer().getInfoFromDBC();
 					//System.out.println(customer.getFullName());
-					primaryStage.setScene(payForPermit(primaryStage, cart));   
+					primaryStage.setScene(selectVehicles(primaryStage, cart));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("IN BRONCOID");//check if fail
@@ -93,6 +94,137 @@ public class NewWindow
 		
 		return scene;
 	}
+	
+	public Scene selectVehicles(Stage primaryStage, Cart cart)//ETHAN
+	{
+        primaryStage.setTitle("Vehicle Selection");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		Text text = new Text("Select the Vehicle for your Permit");
+		text.setFont(Font.font("Times New Roman",20));
+		text.setFill(Color.WHITE);
+		GridPane.setConstraints(text, 0, 0);
+		
+		
+		//create button 
+		Button button = new Button("Next");
+		GridPane.setConstraints(button, 0, 1);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(payForPermit(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN SELECT");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+		
+		//create button 
+		Button add = new Button("Add");
+		GridPane.setConstraints(add, 1,1);//under the textfields
+		add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(vehicleInformation(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN ADD");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+				
+		//set up grid
+		grid.getChildren().addAll(text, add, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 400, 300);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	public Scene vehicleInformation(Stage primaryStage, Cart cart)//Amal
+	{
+        primaryStage.setTitle("Vehicle Information");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		Text text = new Text("Please Input your Vehicle Information");
+		text.setFont(Font.font("Times New Roman",20));
+		text.setFill(Color.WHITE);
+		GridPane.setConstraints(text, 0, 0);
+		
+		
+		//create button 
+		Button button = new Button("Next");
+		GridPane.setConstraints(button, 0, 1);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(selectVehicles(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN BRONCOID");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+		
+		
+		//set up grid
+		grid.getChildren().addAll(text, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 400, 300);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	
+	
 	
 	public Scene payForPermit(Stage primaryStage, Cart cart) throws Exception//Pay for permit 2
 	{
@@ -151,7 +283,7 @@ public class NewWindow
 			grid.getChildren().addAll(ask,cardNum,name,exp,yes,no,n,c,e);
 			
 			//button actions go to next stage if user likes payment
-			yes.setOnAction(event->primaryStage.setScene(End(primaryStage)));   
+			yes.setOnAction(event->primaryStage.setScene(finalVerification(primaryStage, cart)));   
 			
 			//delete current data in database and replace
 			no.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
@@ -323,7 +455,7 @@ public class NewWindow
 						cart.getCustomer().addInfoToDBPM();
 						
 						//go to next scene
-						primaryStage.setScene(End(primaryStage));   
+						primaryStage.setScene(finalVerification(primaryStage, cart));   
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						System.out.println("IN PAYFORPERMIT");
@@ -333,11 +465,12 @@ public class NewWindow
 		});
 		
 		//set children
-		grid.getChildren().addAll(total, firstName, lastName, cardNumber, expiration, securityCode, billingAddress, zip,
+		grid.getChildren().addAll(info,total, firstName, lastName, cardNumber, expiration, securityCode, billingAddress, zip,
 				totalF, firstNameF, lastNameF, cardNumberF, expirationF1, expirationF2, securityCodeF, billingAddressF, zipF, button);
 		
 		//set up scene
 		Scene scene = new Scene(grid, 600, 450);
+		//scene.getStylesheets().add("Green.css");
 				
 		//set up the background
 		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
@@ -351,7 +484,81 @@ public class NewWindow
 		return scene;
 	}
 	
-	public Scene End(Stage primaryStage)//basically done
+	public Scene finalVerification(Stage primaryStage, Cart cart)//ETHAN
+	{
+        primaryStage.setTitle("Verify the information submitted");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		Text text = new Text("Is this Information Correct?");
+		text.setFont(Font.font("Times New Roman",20));
+		text.setFill(Color.WHITE);
+		GridPane.setConstraints(text, 0, 0);
+		
+		
+		//create button 
+		Button button = new Button("Yes");
+		GridPane.setConstraints(button, 0, 1);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(end(primaryStage));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN SELECT");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+		
+		//create button 
+		Button add = new Button("No");
+		GridPane.setConstraints(add, 1, 1);//under the textfields
+		add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(selectVehicles(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN ADD");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+				
+		//set up grid
+		grid.getChildren().addAll(text, add, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 400, 300);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	
+	public Scene end(Stage primaryStage)//COMPLETE DO NOT TOUCH PLEASE 
 	{
 		primaryStage.setTitle("THANK YOU");
 		
@@ -366,24 +573,21 @@ public class NewWindow
 		thank.setFont(Font.font("Times New Roman",20));
 		thank.setFill(Color.WHITE);
 		GridPane.setConstraints(thank, 0, 0);
+		thank.setTextAlignment(TextAlignment.CENTER);
 		
-		Text text1 = new Text("The temporary permit has been sent to your cpp email.");
-		text1.setFont(Font.font("Times New Roman",15));
+		Text text1 = new Text("The temporary permit has been sent to your cpp email.\nYour permit will be mailed between 2-3 business days.");
+		text1.setFont(Font.font("Times New Roman",18));
 		text1.setFill(Color.WHITE);
 		GridPane.setConstraints(text1, 0, 1);
-		
-		Text text2 = new Text("Your permit will be mailed between 2-3 business days.");
-		text2.setFont(Font.font("Times New Roman",15));
-		text2.setFill(Color.WHITE);
-		GridPane.setConstraints(text2, 0, 2);
+		text1.setTextAlignment(TextAlignment.CENTER);
 		
 		Button button = new Button("Exit");
-		GridPane.setConstraints(button, 0, 3);//under the textfields
+		GridPane.setConstraints(button, 0, 2);//under the textfields
 		button.setOnAction(event -> Platform.exit());
 		
 		
 		//set up grid
-		grid.getChildren().addAll(thank,text1, text2, button);
+		grid.getChildren().addAll(thank,text1, button);
 		
 		//set up scene
 		Scene scene = new Scene(grid, 600, 450);
