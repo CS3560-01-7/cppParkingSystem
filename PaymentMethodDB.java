@@ -4,13 +4,15 @@ Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambard
 Purpose: PaymentMethodDB used as a database accessor.
 */
 
-import java.io.*;
-import java.sql.*;
-import java.util.*;
+package application;
 
-class PaymentMethodDB
-{
-     public static PaymentMethod deletePaymentMethod(Customer customer) {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class PaymentMethodDB {
+	public PaymentMethod deletePaymentMethod(Customer customer) {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
@@ -25,33 +27,30 @@ class PaymentMethodDB
 
         }
         return null;
-
     }
     
     
-    public static PaymentMethod addPaymentMethod(Customer customer)  throws Exception{
+    public void addPaymentMethod(Customer customer)  throws Exception{
 
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "INSERT INTO PaymentMethod Values("+customer.getBroncoID()+","+customer.getPayment().getCardNumber()+","
+            String query = "INSERT INTO PaymentMethod  Values("+customer.getBroncoID()+","+customer.getPayment().getCardNumber()+","
                     +customer.getPayment().getSecurityCode()+","+customer.getPayment().getExpDateM()+","
                     +customer.getPayment().getExpDateY()+",\'"+customer.getPayment().getFirstName()+"\',\'"
-                    +customer.getPayment().getLastName()+"\',\'"+customer.getPayment().getBillingAddress()+"\')";
+                    +customer.getPayment().getLastName()+"\',\'"+customer.getPayment().getBillingAddress()+"\',\'"
+                    +customer.getPayment().getZIP()+"\')";
             st.executeUpdate(query);
             st.close();
             conn.close();
-            return selectPaymentMethod(customer);
 
         }catch(Exception e) {
             System.out.println(e);
 
         }
-        return null;
 
     }
-    
-    public static PaymentMethod selectPaymentMethod(Customer customer) throws Exception
+	public PaymentMethod selectPaymentMethod(Customer customer) throws Exception
     {
         PaymentMethod paymentMethod = new PaymentMethod();
         try {
@@ -61,8 +60,7 @@ class PaymentMethodDB
             String query ="select * from PaymentMethod WHERE broncoID = " + customer.getBroncoID();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                //Lynn please fix this part of the code. so broncoID does not make problem here as we talked today.
-                rs.getInt("broncoID");
+            	rs.getInt("broncoID");
                 paymentMethod.setCardNumber(rs.getLong("cardNumber"));
                 paymentMethod.setSecurityCode(rs.getInt("securityCode"));
                 paymentMethod.setExpDateM(rs.getInt("expirationDateMonth"));
@@ -70,13 +68,12 @@ class PaymentMethodDB
                 paymentMethod.setFirstName(rs.getString("firstName"));
                 paymentMethod.setLastName(rs.getString("lastName"));
                 paymentMethod.setBillingAddress(rs.getString("address"));
+                paymentMethod.setZIP(rs.getInt("zip"));
 
-
-                return paymentMethod;
             }
             st.close();
             conn.close();
-
+            return paymentMethod;
         }catch(Exception e) {System.out.println(e);}
         return null;
     }
@@ -88,8 +85,8 @@ class PaymentMethodDB
             String username = "root";
             String password = "****";//password
             Class.forName(driver);
-
             Connection conn = DriverManager.getConnection(url, username, password);
+            //System.out.println("connection made in payment");
             return conn;
         } catch (Exception e) {
             System.out.println(e);
