@@ -46,8 +46,8 @@ CREATE TABLE Rate (
     rate INT (3),
     rateDescription VARCHAR (50),
     studentcheck BOOLEAN,
-    validDate VARCHAR (9),
-    expirationDate VARCHAR (9),
+    validDate VARCHAR (10),
+    expirationDate VARCHAR (10),
     PRIMARY KEY (rateID)
 );
 
@@ -75,6 +75,3 @@ INSERT INTO Permit values ('1', '1', '12345678901234567');
 
 SELECT * FROM Rate;
 SELECT firstName, lastName, emailAddress, address, checkStudent FROM Customer WHERE broncoID = 111111111;
-
-
-
