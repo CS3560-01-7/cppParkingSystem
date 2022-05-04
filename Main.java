@@ -12,11 +12,12 @@ And finally, let customer enter their credit card's information to pay.
 put all user prompts here...
 */
 package application;
+	
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application{
-	static Customer customer = new Customer();
+	static Cart cart = new Cart();
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -25,7 +26,10 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		//set title 
 		NewWindow window = new NewWindow();
-		window.BroncoID(primaryStage, customer);
+		primaryStage.setScene(window.BroncoID(primaryStage, cart));
+		
+		primaryStage.show();
 		
 	}
 }
+	
