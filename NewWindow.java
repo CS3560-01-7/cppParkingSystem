@@ -47,6 +47,7 @@ public class NewWindow
 		grid.add(username, 0, 0, 1, 1);//set on grid
 		TextField id = new TextField();//create user input space
 		id.setPromptText("BrocoID");//user prompt
+		id.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(id, 0, 1, 1, 1);//set on grid
 		
 		//set up password label and input
@@ -56,12 +57,15 @@ public class NewWindow
 		grid.add(password, 0, 2,1,1);//set on grid
 		PasswordField pw = new PasswordField();
 		pw.setPromptText("Password");
+		pw.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(pw, 0, 3,1,1);//set on grid
 		
 		//create button 
 		Button button = new Button("Next");
-		grid.add(button, 0, 4,1,1);//under the textfields
+		grid.add(button, 0, 5,1,1);//under the textfields
 		GridPane.setHalignment(button, HPos.CENTER);
+		button.setMinSize(70,20);
+		button.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
 		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
 		{
 			@Override
@@ -251,7 +255,7 @@ public class NewWindow
 		{
 			//lets you know that there is a cc on file asks whether or not to use
 			Text ask = new Text("Do you want to use this credit card?");
-			ask.setFont(Font.font("Times New Roman",20));
+			ask.setFont(Font.font("Times New Roman",25));
 			ask.setFill(Color.WHITE);
 			grid.add(ask, 0, 0, 2,1);
 			GridPane.setHalignment(ask, HPos.CENTER);
@@ -274,12 +278,17 @@ public class NewWindow
 			TextField n = new TextField(cart.getCustomer().getPayment().getFirstName() + " " + cart.getCustomer().getPayment().getLastName());
 			n.setFont(Font.font("Times New Roman",15));
 			grid.add(n, 1, 1,1,1);
+			n.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+			
 			TextField c = new TextField("" + cart.getCustomer().getPayment().getCardNumber());
 			c.setFont(Font.font("Times New Roman",15));
 			grid.add(c, 1, 2,1,1);
+			c.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+			
 			TextField e = new TextField(cart.getCustomer().getPayment().getExpDateM() + "/" + cart.getCustomer().getPayment().getExpDateY());
 			e.setFont(Font.font("Times New Roman",15));
 			grid.add(e, 1, 3,1,1);
+			e.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 			
 			//set up buttons
 			Button yes = new Button("Yes");
@@ -288,6 +297,10 @@ public class NewWindow
 			grid.add(no, 1, 4,1,1);
 			GridPane.setHalignment(yes, HPos.CENTER);
 			GridPane.setHalignment(no, HPos.CENTER);
+			yes.setMinSize(70,20);
+			yes.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
+			no.setMinSize(70,20);
+			no.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
 			
 			//set children
 			//grid.getChildren().addAll(ask,cardNum,name,exp,yes,no,n,c,e);
@@ -403,21 +416,25 @@ public class NewWindow
 		//user input total
 		TextField totalF = new TextField();
 		totalF.setText("" + cart.getPermit().getRate());
+		totalF.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(totalF, 2, 1,2,1);
 		
 		//user input first name
 		TextField firstNameF = new TextField();
 		firstNameF.setPromptText("Billy");
+		firstNameF.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(firstNameF, 2, 2,2,1);
 		
 		//user input last name
 		TextField lastNameF = new TextField();
-		lastNameF.setPromptText("Bronco");		
+		lastNameF.setPromptText("Bronco");	
+		lastNameF.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(lastNameF, 2, 3,2,1);
 		
 		//user input card number
 		TextField cardNumberF = new TextField();
 		cardNumberF.setPromptText("XXXX-XXXX-XXXX-XXXX");	
+		cardNumberF.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(cardNumberF, 2, 4,2,1);
 		
 		//Choicebox
@@ -427,28 +444,35 @@ public class NewWindow
 		expirationF2.getItems().addAll(22,23,24,25,26,27,28,29,30,31,32,33,34);//can add more as needed
 		expirationF2.setValue(23);
 		expirationF1.setValue(1);
+		//expirationF1.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+		//expirationF2.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(expirationF1, 2, 5,1,1);
 		grid.add(expirationF2, 3, 5,1,1);
 		
 		//user input security code
 		TextField securityCodeF = new TextField();
 		securityCodeF.setPromptText("xxx");
+		securityCodeF.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(securityCodeF, 2, 6,2,1);
 		
 		//user input billing address
 		TextField billingAddressF = new TextField();
 		billingAddressF.setPromptText("123 Sesame Street");
+		billingAddressF.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(billingAddressF, 2, 7,2,1);
 		
 		//user input zip
 		TextField zipF = new TextField();
 		zipF.setPromptText("xxxxx");
+		zipF.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
 		grid.add(zipF, 2, 8,2,1);
 		
 		//set up button
 		Button button = new Button("Next");
 		grid.add(button, 2, 9,1,1);//under the textfields
 		GridPane.setHalignment(button, HPos.CENTER);
+		button.setMinSize(70,20);
+		button.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
 		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
 		{
 			@Override
@@ -601,6 +625,8 @@ public class NewWindow
 		Button button = new Button("Exit");
 		GridPane.setConstraints(button, 0, 2);//under the textfields
 		GridPane.setHalignment(button, HPos.CENTER);
+		button.setMinSize(70,20);
+		button.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
 		button.setOnAction(event -> Platform.exit());
 		
 		
