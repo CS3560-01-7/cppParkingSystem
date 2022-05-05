@@ -22,16 +22,15 @@ class Vehicle
   private String vehicleColor;
   
   //constructor
-  public Vehicle(String vin, String lPlate, String vType, String vMake, String vModel, int mYear, String vColor, Customer customer)
+  public Vehicle(String vin, String lPlate, String vType, String vMake, String vModel, int mYear, String vColor)
   {
-    this.vin = vin
+    this.vin = vin;
     this.licensePlate = lPlate;
     this.vehicleType = vType;
     this.vehicleMake = vMake;
     this.vehicleModel = vModel;
     this.modelYear = mYear;
     this.vehicleColor = vColor;
-    this.driver = customer;
     //create new entry in vehicle table for this customer and fill in the values
   }
   
