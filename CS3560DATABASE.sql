@@ -60,6 +60,16 @@ CREATE TABLE Permit (
     PRIMARY KEY (permitID)
 );
 
+//auto increment for permitID
+CREATE TABLE Permit (
+	permitID INT (9) auto_increment,
+    rateID INT (2),
+    vin VARCHAR (17),
+    FOREIGN KEY (vin) REFERENCES Vehicle (vin),
+    FOREIGN KEY (rateID) REFERENCES Rate (rateID),
+    PRIMARY KEY (permitID)
+);
+
 
 
 INSERT INTO Customer VALUES ('111111111', 'Lynn', 'Takahashi','pizzahut@gmail.com','123 Sesame Street',TRUE),
