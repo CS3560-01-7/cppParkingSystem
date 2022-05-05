@@ -7,7 +7,6 @@ Vehicle calls Customer and Permit objects.
 
 We are assuming that these vehices exist and have a valid license plate.
 */
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -21,9 +20,6 @@ class Vehicle
   private String vehicleModel;
   private int modelYear;
   private String vehicleColor;
-  private Customer driver;
-  private Permit permit;
-  
   
   //constructor
   public Vehicle(String vin, String lPlate, String vType, String vMake, String vModel, int mYear, String vColor, Customer customer)
@@ -190,29 +186,3 @@ class Vehicle
   {
     return driver;
   }
-  
-  /**
-  getPermit method returns permit
-  @return Value of permit field if not null
-  */
-  public Permit getPermit()
-  {
-    if (permit == null) 
-    {
-      //tell dispatcher vehicle has not been assigned to a permit yet
-    }
-    else 
-    {
-      return permit
-      }
-  }
-  
-  /**
-  addPermit method creates new permit object and returns boolean value
-  @return boolean value
-  */
-  public boolean addPermit(int permitNum, String type, Rate rate) {
-    permit = new Permit(permitNum, type, rate);
-    return true;
-  }
-}
