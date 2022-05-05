@@ -17,7 +17,6 @@ class Vehicle
   private String licensePlate;//pk
   private String vehicleType;
   private String vehicleMake;
-  private String vehicleModel;
   private String vehicleColor;
   private int modelYear;
   private String state;
@@ -29,18 +28,16 @@ class Vehicle
     this.licensePlate="";//pk
     this.vehicleType="";
     this.vehicleMake="";
-    this.vehicleModel="";
     this.vehicleColor="";
     this.modelYear=0;
     this.state="";
   }
-  public Vehicle(String vin, String licensePlate, String vehicleType, String vehicleMake, String vehicleModel, String vehicleColor, int modelYear,String state)
+  public Vehicle(String vin, String licensePlate, String vehicleType, String vehicleMake, String vehicleColor, int modelYear,String state)
   {
     this.vin = vin;
     this.licensePlate = licensePlate;
     this.vehicleType = vehicleType;
     this.vehicleMake = vehicleMake;
-    this.vehicleModel = vehicleModel;
     this.modelYear = modelYear;
     this.vehicleColor = vehicleColor;
     this.state = state;
@@ -82,15 +79,6 @@ class Vehicle
   public void setVehicleMake(String vmak)
   {
     vehicleMake = vmak;
-  }
-  
-  /**
-  setVehicleModel method stores a string in the vehicleModel field
-  @param vmod Value to store in vehicleModel
-  */  
-  public void setVehicleModel(String vmod)
-  {
-    vehicleModel = vmod;
   }
   
   public void setModelYear(int mYear)
@@ -148,15 +136,6 @@ class Vehicle
   public String getVehicleMake()
   {
     return vehicleMake;
-  }
-  
-   /**
-  getVehicleModel method returns vehicleModel
-  @return Value of vehicleModel field
-  */
-  public String getVehicleModel()
-  {
-    return vehicleModel;
   }
   
   /**
