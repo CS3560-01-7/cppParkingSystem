@@ -13,8 +13,8 @@ public class PermitDB {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "INSERT INTO Permit(rateID,vin)  Values("+permit.getRate().getRateID()+",\'"+permit.getVehicle().getVIN()+"\')";
-            st.executeQuery(query);
+            String query = "INSERT INTO Permit (rateID,vin)  Values("+permit.getRate().getRateID()+",\'"+permit.getVehicle().getVIN()+"\')";
+            st.executeUpdate(query);
             st.close();
             conn.close();
         }catch(Exception e) {
