@@ -13,6 +13,8 @@ public class Rate {
     private int rateID;
     private int rate;
     private String rateDescription;
+    private String validDate;
+    private String expirationDate;
     private boolean studentcheck;
     RateDB rateDB = new RateDB();
 
@@ -85,6 +87,24 @@ public class Rate {
     public String getDescription()
     {
         return this.rateDescription;
+    }
+
+
+    public String getValidDate() {
+        return validDate;
+    }
+
+
+    public void setValidDate(String validDate) {
+        this.validDate = validDate;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     /**
