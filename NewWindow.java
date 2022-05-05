@@ -3,6 +3,7 @@ package application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -29,8 +31,6 @@ public class NewWindow
 	{
         primaryStage.setTitle("LOG IN TO CPP");
 		
-		primaryStage.setTitle("LOG IN TO CPP");
-		
 		//create a GridPane
 		GridPane grid = new GridPane();
 		//grid.setGridLinesVisible(true);
@@ -43,7 +43,6 @@ public class NewWindow
 		//set up username label and input textfield
 		Label username = new Label("BroncoID: ");//create new label
 		username.setTextFill(Color.WHITE);//set font color
-		//username.setStyle("-fx-border-color: black;");
 		username.setFont(new Font("Times New Roman",15));//set font type and size
 		grid.add(username, 0, 0, 1, 1);//set on grid
 		TextField id = new TextField();//create user input space
@@ -52,7 +51,6 @@ public class NewWindow
 		
 		//set up password label and input
 		Label password = new Label("Password: ");
-		//password.setStyle("-fx-border-color: black;");
 		password.setTextFill(Color.WHITE);//set font color
 		password.setFont(new Font("Times New Roman",15));//set font type and size
 		grid.add(password, 0, 2,1,1);//set on grid
@@ -340,6 +338,8 @@ public class NewWindow
 		
 		//create a GridPane
 		GridPane grid = new GridPane();
+		//grid.setGridLinesVisible(true);
+		grid.getColumnConstraints().add(new ColumnConstraints(115));
 		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
 		grid.setVgap(10);//set vertical spacing to 8 pixels
 		grid.setHgap(5);//set horizontal spacing to 8 pixels
@@ -350,75 +350,75 @@ public class NewWindow
 		Text info = new Text("Payment Information");
 		info.setFont(Font.font("Times New Roman",20));
 		info.setFill(Color.WHITE);
-		GridPane.setConstraints(info, 0, 0);
+		grid.add(info, 0, 0,1,1);
 		
 		//total label
 		Label total = new Label("Total: $");
 		total.setFont(Font.font("Times New Roman",15));
 		total.setTextFill(Color.WHITE);
-		GridPane.setConstraints(total, 0, 1);
+		grid.add(total, 0, 1,1,1);
 		
 		//first name label
 		Label firstName = new Label("First name: ");
 		firstName.setFont(Font.font("Times New Roman",15));
 		firstName.setTextFill(Color.WHITE);
-		GridPane.setConstraints(firstName, 0, 2);
+		grid.add(firstName, 0, 2,1,1);
 		
 		//last name label
 		Label lastName = new Label("Last name: ");
 		lastName.setFont(Font.font("Times New Roman",15));
 		lastName.setTextFill(Color.WHITE);
-		GridPane.setConstraints(lastName, 0, 3);
+		grid.add(lastName, 0, 3,1,1);
 		
 		//card number label
 		Label cardNumber = new Label("Card Number: ");
 		cardNumber.setFont(Font.font("Times New Roman",15));
 		cardNumber.setTextFill(Color.WHITE);
-		GridPane.setConstraints(cardNumber, 0, 4);
+		grid.add(cardNumber, 0, 4,1,1);
 		
 		//expiration label
 		Label expiration = new Label("Expiration Date: ");
 		expiration.setFont(Font.font("Times New Roman",15));
 		expiration.setTextFill(Color.WHITE);
-		GridPane.setConstraints(expiration, 0, 5);
+		grid.add(expiration, 0, 5,1,1);
 		
 		//security code label
 		Label securityCode = new Label("Security Code: ");
 		securityCode.setFont(Font.font("Times New Roman",15));
 		securityCode.setTextFill(Color.WHITE);
-		GridPane.setConstraints(securityCode, 0, 6);
+		grid.add(securityCode, 0, 6,1,1);
 		
 		//billing address label
 		Label billingAddress = new Label("Billing Address: ");
 		billingAddress.setFont(Font.font("Times New Roman",15));
 		billingAddress.setTextFill(Color.WHITE);
-		GridPane.setConstraints(billingAddress, 0, 7);
+		grid.add(billingAddress, 0, 7,1,1);
 		
 		//zip code label
 		Label zip = new Label("ZIP: ");
 		zip.setFont(Font.font("Times New Roman",15));
 		zip.setTextFill(Color.WHITE);
-		GridPane.setConstraints(zip, 0, 8);
+		grid.add(zip, 0, 8,1,1);
 		
 		//user input total
 		TextField totalF = new TextField();
 		totalF.setText("" + cart.getPermit().getRate());
-		GridPane.setConstraints(totalF, 2, 1);
+		grid.add(totalF, 2, 1,2,1);
 		
 		//user input first name
 		TextField firstNameF = new TextField();
 		firstNameF.setPromptText("Billy");
-		GridPane.setConstraints(firstNameF, 2, 2);
+		grid.add(firstNameF, 2, 2,2,1);
 		
 		//user input last name
 		TextField lastNameF = new TextField();
 		lastNameF.setPromptText("Bronco");		
-		GridPane.setConstraints(lastNameF, 2, 3);
+		grid.add(lastNameF, 2, 3,2,1);
 		
 		//user input card number
 		TextField cardNumberF = new TextField();
 		cardNumberF.setPromptText("XXXX-XXXX-XXXX-XXXX");	
-		GridPane.setConstraints(cardNumberF, 2, 4);
+		grid.add(cardNumberF, 2, 4,2,1);
 		
 		//Choicebox
 		ChoiceBox<Integer> expirationF1 = new ChoiceBox<>();
@@ -427,27 +427,28 @@ public class NewWindow
 		expirationF2.getItems().addAll(22,23,24,25,26,27,28,29,30,31,32,33,34);//can add more as needed
 		expirationF2.setValue(23);
 		expirationF1.setValue(1);
-		GridPane.setConstraints(expirationF1, 2, 5);
-		GridPane.setConstraints(expirationF2, 3, 5);
+		grid.add(expirationF1, 2, 5,1,1);
+		grid.add(expirationF2, 3, 5,1,1);
 		
 		//user input security code
 		TextField securityCodeF = new TextField();
 		securityCodeF.setPromptText("xxx");
-		GridPane.setConstraints(securityCodeF, 2, 6);
+		grid.add(securityCodeF, 2, 6,2,1);
 		
 		//user input billing address
 		TextField billingAddressF = new TextField();
 		billingAddressF.setPromptText("123 Sesame Street");
-		GridPane.setConstraints(billingAddressF, 2, 7);
+		grid.add(billingAddressF, 2, 7,2,1);
 		
 		//user input zip
 		TextField zipF = new TextField();
 		zipF.setPromptText("xxxxx");
-		GridPane.setConstraints(zipF, 2, 8);
+		grid.add(zipF, 2, 8,2,1);
 		
 		//set up button
 		Button button = new Button("Next");
-		GridPane.setConstraints(button, 2, 9);//under the textfields
+		grid.add(button, 2, 9,1,1);//under the textfields
+		GridPane.setHalignment(button, HPos.CENTER);
 		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
 		{
 			@Override
@@ -462,6 +463,7 @@ public class NewWindow
 						cart.getCustomer().getPayment().setExpDateY(expirationF2.getValue());
 						cart.getCustomer().getPayment().setSecurityCode(Integer.parseInt(securityCodeF.getText()));
 						cart.getCustomer().getPayment().setBillingAddress(billingAddressF.getText());
+						cart.getCustomer().getPayment().setZIP(Integer.parseInt(zipF.getText()));
 						
 						//add values to database
 						cart.getCustomer().addInfoToDBPM();
@@ -477,8 +479,8 @@ public class NewWindow
 		});
 		
 		//set children
-		grid.getChildren().addAll(info,total, firstName, lastName, cardNumber, expiration, securityCode, billingAddress, zip,
-				totalF, firstNameF, lastNameF, cardNumberF, expirationF1, expirationF2, securityCodeF, billingAddressF, zipF, button);
+		//grid.getChildren().addAll(info,total, firstName, lastName, cardNumber, expiration, securityCode, billingAddress, zip,
+		//		totalF, firstNameF, lastNameF, cardNumberF, expirationF1, expirationF2, securityCodeF, billingAddressF, zipF, button);
 		
 		//set up scene
 		Scene scene = new Scene(grid, 600, 450);
@@ -502,6 +504,7 @@ public class NewWindow
 		
 		//create a GridPane
 		GridPane grid = new GridPane();
+		
 		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
 		grid.setVgap(8);//set vertical spacing to 10 pixels
 		grid.setHgap(10);//set horizontal spacing to 10 pixels
@@ -576,25 +579,28 @@ public class NewWindow
 		
 		//create a GridPane
 		GridPane grid = new GridPane();
+		//grid.setGridLinesVisible(true);
+		grid.getColumnConstraints().add(new ColumnConstraints(500));
 		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
 		grid.setVgap(10);//set vertical spacing to 8 pixels
 		grid.setHgap(12);//set horizontal spacing to 8 pixels
 		grid.setAlignment(Pos.CENTER);
 		
 		Text thank = new Text("Thank you for your purchase!");
-		thank.setFont(Font.font("Times New Roman",20));
+		thank.setFont(Font.font("Times New Roman",25));
 		thank.setFill(Color.WHITE);
 		GridPane.setConstraints(thank, 0, 0);
-		thank.setTextAlignment(TextAlignment.CENTER);
+		GridPane.setHalignment(thank, HPos.CENTER);
 		
 		Text text1 = new Text("The temporary permit has been sent to your cpp email.\nYour permit will be mailed between 2-3 business days.");
 		text1.setFont(Font.font("Times New Roman",18));
 		text1.setFill(Color.WHITE);
 		GridPane.setConstraints(text1, 0, 1);
-		text1.setTextAlignment(TextAlignment.CENTER);
+		GridPane.setHalignment(text1, HPos.CENTER);
 		
 		Button button = new Button("Exit");
 		GridPane.setConstraints(button, 0, 2);//under the textfields
+		GridPane.setHalignment(button, HPos.CENTER);
 		button.setOnAction(event -> Platform.exit());
 		
 		
