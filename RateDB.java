@@ -3,8 +3,9 @@ Class name: RateDB.java
 Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambardzumyan
 Purpose: RateDB used as a database accessor.
 */
-// needs correction
 
+
+import application.Rate;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,22 +13,31 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class RateDB {
-    public static boolean checkFaculty (Customer customer) {
+    public static Rate selectRate (int rateID) {
+        Rate rate = new Rate();
         try {
             Connection conn = getConnection();
-            Statement st = conn.createStatement();
-            String query = "SELECT studentCheck FROM Rate WHERE rateID = " + customer.getBroncoID();
-            ResultSet result = st.executeQuery(query);
 
+            Statement st = conn.createStatement();
+            String query ="select * from Rate WHERE rateID = " + rateID;
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                rs.getInt("rateID");
+                rate.setRate(rs.getInt("rate"));
+                rate.setRateDescription(rs.getString("rateDescription"));
+                rate.setStudent(rs.getBoolean("studentcheck"));
+                rate.setValidDate(rs.getString("validDate"));
+                rate.setExpirationDate(rs.getString("expirationDate"));
+            }
             st.close();
             conn.close();
-            return result.getBoolean("checkStudent");
+            return rate;
 
         }catch(Exception e) {
             System.out.println(e);
 
         }
-        return false; // I return false here so if the system can't find anything we assume it is a student
+        return null;
 
     }
 
