@@ -238,6 +238,8 @@ public class NewWindow
 		primaryStage.setTitle("Payment Information");
 		//create new grid
 		GridPane grid = new GridPane();
+		//grid.setGridLinesVisible(true);
+		grid.getColumnConstraints().add(new ColumnConstraints(150));
 		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
 		grid.setVgap(10);//set vertical spacing to 8 pixels
 		grid.setHgap(5);//set horizontal spacing to 8 pixels
@@ -253,41 +255,44 @@ public class NewWindow
 			Text ask = new Text("Do you want to use this credit card?");
 			ask.setFont(Font.font("Times New Roman",20));
 			ask.setFill(Color.WHITE);
-			GridPane.setConstraints(ask, 0, 0);
+			grid.add(ask, 0, 0, 2,1);
+			GridPane.setHalignment(ask, HPos.CENTER);
 			
 			//Labels
 			Label name = new Label("Name: ");
 			name.setFont(Font.font("Times New Roman",15));
 			name.setTextFill(Color.WHITE);
-			GridPane.setConstraints(name, 0, 1);
+			grid.add(name, 0, 1,1,1);
 			Label cardNum = new Label("Card Number: ");
 			cardNum.setFont(Font.font("Times New Roman",15));
 			cardNum.setTextFill(Color.WHITE);
-			GridPane.setConstraints(cardNum, 0, 2);
+			grid.add(cardNum, 0, 2,1,1);
 			Label exp = new Label("Expiration: ");
 			exp.setFont(Font.font("Times New Roman",15));
 			exp.setTextFill(Color.WHITE);
-			GridPane.setConstraints(exp, 0, 3);
+			grid.add(exp, 0, 3,1,1);
 			
 			//get values from database to show
 			TextField n = new TextField(cart.getCustomer().getPayment().getFirstName() + " " + cart.getCustomer().getPayment().getLastName());
 			n.setFont(Font.font("Times New Roman",15));
-			GridPane.setConstraints(n, 1, 1);
+			grid.add(n, 1, 1,1,1);
 			TextField c = new TextField("" + cart.getCustomer().getPayment().getCardNumber());
 			c.setFont(Font.font("Times New Roman",15));
-			GridPane.setConstraints(c, 1, 2);
+			grid.add(c, 1, 2,1,1);
 			TextField e = new TextField(cart.getCustomer().getPayment().getExpDateM() + "/" + cart.getCustomer().getPayment().getExpDateY());
 			e.setFont(Font.font("Times New Roman",15));
-			GridPane.setConstraints(e, 1, 3);
+			grid.add(e, 1, 3,1,1);
 			
 			//set up buttons
 			Button yes = new Button("Yes");
 			Button no = new Button("No");
-			GridPane.setConstraints(yes, 0, 4);
-			GridPane.setConstraints(no, 1, 4);
+			grid.add(yes, 0, 4,1,1);
+			grid.add(no, 1, 4,1,1);
+			GridPane.setHalignment(yes, HPos.CENTER);
+			GridPane.setHalignment(no, HPos.CENTER);
 			
 			//set children
-			grid.getChildren().addAll(ask,cardNum,name,exp,yes,no,n,c,e);
+			//grid.getChildren().addAll(ask,cardNum,name,exp,yes,no,n,c,e);
 			
 			//button actions go to next stage if user likes payment
 			yes.setOnAction(event->primaryStage.setScene(finalVerification(primaryStage, cart)));   
