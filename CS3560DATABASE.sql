@@ -60,15 +60,6 @@ CREATE TABLE Permit (
     PRIMARY KEY (permitID)
 );
 
-//auto increment for permitID
-CREATE TABLE Permit (
-	permitID INT (9) auto_increment,
-    rateID INT (2),
-    vin VARCHAR (17),
-    FOREIGN KEY (vin) REFERENCES Vehicle (vin),
-    FOREIGN KEY (rateID) REFERENCES Rate (rateID),
-    PRIMARY KEY (permitID)
-);
 
 
 
@@ -81,8 +72,7 @@ INSERT INTO Rate VALUES ('1', '150', 'STUDENT SPRING MO/WE/FRI', true, '01/16/20
 ('2', '150', 'STUDENT SPRING TU/TH', true, '01/16/2022','05/28/2022'),('3', '200', 'STUDENT SPRING WEEK', true, '01/16/2022','05/28/2022'),
 ('4', '125', 'STUDENT SRPRING MOTOR', true, '01/16/2022','05/28/2022'),('5', '100', 'FACULTY SPRING WEEK', false, '01/16/2022','05/28/2022');
 INSERT INTO Permit values ('1', '1', '12345678901234567');
-//if using auto increment, no need to input the permit ID, so insert will look like below
-INSERT INTO Permit (rateID, vin) values ('1', '12345678901234567');
+
 
 
 
