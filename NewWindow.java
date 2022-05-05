@@ -34,7 +34,7 @@ public class NewWindow
 		//create a GridPane
 		GridPane grid = new GridPane();
 		//grid.setGridLinesVisible(true);
-		grid.getColumnConstraints().add(new ColumnConstraints(200));
+		grid.getColumnConstraints().add(new ColumnConstraints(150));
 		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
 		grid.setVgap(8);//set vertical spacing to 10 pixels
 		grid.setHgap(10);//set horizontal spacing to 10 pixels
