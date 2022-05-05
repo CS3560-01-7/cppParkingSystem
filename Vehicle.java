@@ -18,19 +18,32 @@ class Vehicle
   private String vehicleType;
   private String vehicleMake;
   private String vehicleModel;
-  private int modelYear;
   private String vehicleColor;
+  private int modelYear;
+  private String state;
   
   //constructor
-  public Vehicle(String vin, String lPlate, String vType, String vMake, String vModel, int mYear, String vColor)
+  public Vehicle()
+  {
+    this.vin="";//pk
+    this.licensePlate="";//pk
+    this.vehicleType="";
+    this.vehicleMake="";
+    this.vehicleModel="";
+    this.vehicleColor="";
+    this.modelYear=0;
+    this.state="";
+  }
+  public Vehicle(String vin, String licensePlate, String vehicleType, String vehicleMake, String vehicleModel, String vehicleColor, int modelYear,String state)
   {
     this.vin = vin;
-    this.licensePlate = lPlate;
-    this.vehicleType = vType;
-    this.vehicleMake = vMake;
-    this.vehicleModel = vModel;
-    this.modelYear = mYear;
-    this.vehicleColor = vColor;
+    this.licensePlate = licensePlate;
+    this.vehicleType = vehicleType;
+    this.vehicleMake = vehicleMake;
+    this.vehicleModel = vehicleModel;
+    this.modelYear = modelYear;
+    this.vehicleColor = vehicleColor;
+    this.state = state;
     //create new entry in vehicle table for this customer and fill in the values
   }
   
@@ -95,22 +108,9 @@ class Vehicle
     vehicleColor = vc;
   }
   
-  /**
-  setDriver method stores a customer object in the driver field
-  @param customer Value to store in driver
-  */
-  public void setDriver(Customer customer)
+  public void setState(String s)
   {
-    this.driver = customer;
-  }
-  
-  /**
-  setPermit method stores a Permit object in the permit field
-  @param perm Value to store in permit
-  */
-  public void setPermit(Permit perm)
-  {
-    this.permit = perm;
+    state = s;
   }
   
   //accessors
@@ -181,7 +181,7 @@ class Vehicle
   getDriver method returns driver
   @return Value of driver field
   */
-  public Customer getDriver()
+  public String getState()
   {
-    return driver;
+    return state;
   }
