@@ -29,8 +29,12 @@ public class NewWindow
 	{
         primaryStage.setTitle("LOG IN TO CPP");
 		
+		primaryStage.setTitle("LOG IN TO CPP");
+		
 		//create a GridPane
 		GridPane grid = new GridPane();
+		//grid.setGridLinesVisible(true);
+		grid.getColumnConstraints().add(new ColumnConstraints(200));
 		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
 		grid.setVgap(8);//set vertical spacing to 10 pixels
 		grid.setHgap(10);//set horizontal spacing to 10 pixels
@@ -39,24 +43,27 @@ public class NewWindow
 		//set up username label and input textfield
 		Label username = new Label("BroncoID: ");//create new label
 		username.setTextFill(Color.WHITE);//set font color
+		//username.setStyle("-fx-border-color: black;");
 		username.setFont(new Font("Times New Roman",15));//set font type and size
-		GridPane.setConstraints(username, 0, 0);//set on grid
+		grid.add(username, 0, 0, 1, 1);//set on grid
 		TextField id = new TextField();//create user input space
 		id.setPromptText("BrocoID");//user prompt
-		GridPane.setConstraints(id, 0, 1);//set on grid
+		grid.add(id, 0, 1, 1, 1);//set on grid
 		
 		//set up password label and input
 		Label password = new Label("Password: ");
+		//password.setStyle("-fx-border-color: black;");
 		password.setTextFill(Color.WHITE);//set font color
 		password.setFont(new Font("Times New Roman",15));//set font type and size
-		GridPane.setConstraints(password, 0, 2);//set on grid
+		grid.add(password, 0, 2,1,1);//set on grid
 		PasswordField pw = new PasswordField();
 		pw.setPromptText("Password");
-		GridPane.setConstraints(pw, 0, 3);//set on grid
+		grid.add(pw, 0, 3,1,1);//set on grid
 		
 		//create button 
 		Button button = new Button("Next");
-		GridPane.setConstraints(button, 0, 4);//under the textfields
+		grid.add(button, 0, 4,1,1);//under the textfields
+		GridPane.setHalignment(button, HPos.CENTER);
 		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
 		{
 			@Override
@@ -78,7 +85,7 @@ public class NewWindow
 		
 		
 		//set up grid
-		grid.getChildren().addAll(username, id, password, pw, button);
+		//grid.getChildren().addAll(username, id, password, pw, button);
 		
 		//set up scene
 		Scene scene = new Scene(grid, 400, 300);
