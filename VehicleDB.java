@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class VehicleDB {
 
@@ -9,11 +10,11 @@ public class VehicleDB {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "DELETE FROM Vehicle WHERE broncoID = " + customer.getBroncoID();
+            String query = "DELETE FROM Vehicle WHERE vin = " + customer.getVehicle().getVIN();
             st.executeUpdate(query);
             st.close();
             conn.close();
-            return new PaymentMethod();
+            return new Vehicle();
 
         }catch(Exception e) {
             System.out.println(e);
@@ -23,17 +24,22 @@ public class VehicleDB {
 
     }
 
-    public static Vehicle addVehicle(Customer customer) {
+    public static ArrayList<Vehicle> addVehicle(Customer customer) {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "INSERT INTO Vehicle  Values("+customer.getVehicle().getVIN()+","+customer.getBroncoID()+","
-                    +customer.getVehicle().getLicensePlate()+",\'"+customer.getVehicle().getVehicleType()+"\',\'"
-                    +customer.getVehicle().getVehicleMake()+"\',\'"+customer.getVehicle().getVehicleColor()+"\',"
-                    +customer.getVehicle().getModelYear()+",\'"+customer.getVehicle().getState()+"\')";
-            st.executeQuery(query);
-            st.close();
-            conn.close();
+
+            for (int i = 0; i < customer.getArrayOfVehicles().size(); i++) {
+                String query = "INSERT INTO Vehicle  Values("+customer.getArrayOfVehicles().get(i).getVIN()+","+customer.getBroncoID()+","
+                        +customer.getArrayOfVehicles().get(i).getLicensePlate()+",\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
+                        +customer.getArrayOfVehicles().get(i).getVehicleMake()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleColor()+"\',"
+                        +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\')";
+                st.executeUpdate(query);
+                st.close();
+                conn.close();
+
+            }
+
             return selectVehicle(customer);
 
         }catch(Exception e) {
@@ -43,15 +49,21 @@ public class VehicleDB {
         return null;
     }
 
-    public static Vehicle selectVehicle(Customer customer) throws Exception {
-        Vehicle vehicle = new Vehicle();
+    public static ArrayList<Vehicle> selectVehicle(Customer customer) throws Exception {
+
+        ArrayList<Vehicle> arrayOfVehicles = new ArrayList<>();
+
         try {
+
             Connection conn = getConnection();
 
             Statement st = conn.createStatement();
             String query ="select * from Vehicle WHERE broncoID = " + customer.getBroncoID();
             ResultSet rs = st.executeQuery(query);
+
             while (rs.next()) {
+                Vehicle vehicle = new Vehicle();
+
                 vehicle.setVin(rs.getString("vin"));
                 rs.getInt("broncoID");
                 vehicle.setLicensePlate(rs.getString("licensePlate"));
@@ -61,10 +73,11 @@ public class VehicleDB {
                 vehicle.setModelYear(rs.getInt("vehicleYear"));
                 vehicle.setState(rs.getString("state"));
 
+                arrayOfVehicles.add(vehicle);
             }
             st.close();
             conn.close();
-            return vehicle;
+            return arrayOfVehicles;
 
         }catch(Exception e) {
             System.out.println(e);
