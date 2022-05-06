@@ -5,189 +5,192 @@ Purpose: The Customer class holds the attributes: broncoID (primary key), passwo
 vehicle, and paymentMethod.
 The Customer class' methods recieve, update, and compares user input to the system database's info.
 Customers calls Vehicle and PaymentMethod objects.
-
 We are assuming everyone has a valid broncoID, that the Customer exists, and the email address is valid.
-
 Checklist:
 basics done
-
-
 */
 
-import javax.swing.*;
-import java.io.*;
-import java.util.*;
+/*
+still need to implement an array or arraylist of Vehicles 
+add vehicle method
+read vehicle (owned) method
+*/
 
-class Customer
-{
-  //attributes
-  private int broncoID;//pk
-  private String password;
-  private String firstName;
-  private String lastName;
-  private String emailAddress;
-  private String address;
-  private Vehicle vehicle = new Vehicle();
-  private PaymentMethod payment = new PaymentMethod();
-  
-  //constructor
-  public Customer()
-  {
-    broncoID = 0;
-    password = "";
-    firstName = "";
-    lastName = "";
-    emailAddress = "";
-    address = "";
-  }
-  
-  //methods
-  //mutators
-  /**
-  setBroncoID method stores a value in the broncoID field
-  @param id The value to store in broncoID
-  */
-  public void setBroncoID(int id)
-  {
-    broncoID = id;
-  }
-  
-   /**
-  setPassword method stores a value in the password field
-  @param pw The value to store in password
-  */
-  public void setPassword(String pw)
-  {
-    password = pw;
-  }
-  
-  /**
-  setFirstName method stores value in the firstName field
-  @param first The value to store in firstName
-  */
-  public void setFirstName(String first)
-  {
-    firstName = first;
-  }
-  
-  /**
-  setLastName method stores a value in the lastName field
-  @param last The value to store into lastName 
-  */
-  public void setLastName(String last)
-  {
-    lastName = last;
-  }
-  
-  /**
-  setEmailAddress method stores a value in the emailAddress field
-  @param ea The value to store in emailAddress
-  */
-  public void setEmailAddress(String ea)
-  {
-    emailAddress = ea;
-  }
-  
-  //accessors
-  /**
-  getBroncoID method returns a Customer object's broncoID
-  @return The value in the broncoID field
-  */
-  public int getBroncoID()
-  {
-    return broncoID;
-  }
-  
-  /**
-  getPassword method returns a Customer object's password
-  @return The value in the password field
-  */
-  public String getPassword()
-  {
-    return password;
-  }
-  
-  /**
-  getFirstName method returns a Customer object's firstName
-  @return The value in the firstName field
-  */
-  public String getFirstName()
-  {
-    return firstName;
-  }
-  
-  /**
-  getLastName method returns a Customer object's lastName
-  @return The value in the lastName field
-  */
-  public String getLastName()
-  {
-    return lastName;
-  }
-  
-  /**
-  getName method returns Customers first and last name
-  @return the values in firstName and lastName field
-  */
-  public String getName()
-  {
-    return firstName + lastName;
-  }
-  
-  /**
-  getEmailAddress method returns a Customer object's emailAddress
-  @return The value in the emailAddress field
-  */
-  public String getEmailAddress()
-  {
-    return emailAddress;
-  }
-  
-  //login
-   /**
-  checkBrocoID method returns boolean depending on if broncoID matches userInput
-  @return Boolean value
-  */
-  public boolean checkBrocoID(int userInput)
-  {
-    //compare userInput to broncoID
-    //if it does ot match return false.  if it does match return true
-  }
-  
-  /**
-  checkPassword method returns boolean depending on password matches userInput
-  @return Boolean value
-  */
-  public boolean checkPassword(String userInput)
-  {
-    //compare userInput to password
-    //if it does ot match return false.  if it does match return true
-  }
-  
-  /**
-  addVehicle method adds a vehicle class and returns true if successful
-  @param plateNum The vehicle's license plate number
-  @param type The type of vehicle
-  @param make The vehicle's manufacturer
-  @param model The vehicle's model
-  @param year The year the vehicle's model was released
-  @param color The vehicle's color
-  @return Boolean value
-  */
-  public boolean addVehicle(String plateNum, String type, String make, String model, int year, String color) {
-    vehicle = new Vehicle(plateNum, type, make, model, year, color);
-    return true;
-  }
-  /**
-  addPaymentMethod() method adds a payment method and returns true if successful.
-  @param cardNum The credit or debit card's number
-  @param secCode The card's security code
-  @param billAddr The card's billing address
-  @return Boolean vehicle
-  */
-  public boolean addPaymentMethod(String cardNum, int exDateM, int exDateY, String secCode, String name, String billAddr)
-  {
-     paymentMethod = new paymentMethod(cardNum, exDateM, exDateY, secCode, name, billAddr);
-     return true;
-  }
+
+import java.util.ArrayList;
+
+
+public class Customer {
+	protected int broncoID;
+	protected String firstName;
+	protected String lastName;
+	protected String emailAddress;
+	protected String address;
+	protected int vehicleCount = 0;
+	protected int maxVehicles = 3;
+	protected boolean student;
+	protected ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+	protected PaymentMethod payment;
+	private CustomerDB dbc = new CustomerDB();
+	private PaymentMethodDB dbpm = new PaymentMethodDB();
+	private VehicleDB dbv = new VehicleDB();
+
+	//constructor
+	public Customer()
+	{
+		broncoID=0;
+		firstName = "";
+		lastName = "";
+		emailAddress = "";
+		address = "";
+		vehicleCount = 0;
+		payment = null;
+	}
+		
+	//getters
+	public int getBroncoID()
+	{
+		return broncoID;
+	}
+		
+	public String getFirstName()
+	{
+		return firstName;
+	}
+	
+	public String getLastName()
+	{
+		return lastName;
+	}
+	
+	public String getFullName()
+	{
+		return firstName + " " + lastName;
+	}
+	public String getEmailAddress()
+	{
+		return emailAddress;
+	}
+	
+	public String getAddress()
+	{
+		return address;
+	}
+	
+	public boolean getStudent()
+	{
+		return student;
+	}
+	
+	public Vehicle getVehicle(String vin) throws Exception
+	{
+		for (int i = 0; i < vehicleCount; i++) {
+			if (vehicles.get(i).getVIN().equals(vin)) {
+				return vehicles.get(i);
+			}
+		}
+	
+		throw new Exception("Vehicle not found");
+	}
+	
+	public ArrayList<Vehicle> getArrayOfVehicles() {
+		return vehicles;
+	}
+	
+	public PaymentMethod getPayment() {
+		return payment;
+	}
+		
+	//setters
+	public void setBroncoID(int id)
+	{
+		broncoID = id;
+	}
+	
+	public void setFirstName(String name)
+	{
+		firstName = name;
+	}
+	
+	public void setLastName(String name)
+	{
+		lastName = name;
+	}
+	
+	public void setEmailAddress(String address)
+	{
+		emailAddress = address;
+	}
+	
+	public void setStudent(boolean s)
+	{
+		student = s;
+	}
+
+	public void setAddress(String ad) {
+		address = ad;	
+	}
+	
+	public void addVehicle(Vehicle v) throws Exception
+	{
+		if (vehicleCount < maxVehicles) {
+			vehicles.add(v);
+			vehicleCount++;
+		}
+		else {
+			throw new Exception("Maximum number of vehicles reached");
+		}
+	}
+	
+	public void removeVehicle(String vin) throws Exception {
+		for (int i = 0; i < vehicleCount; i++) {
+			if (vehicles.get(i).getVIN().equals(vin)) {
+				vehicles.remove(i);
+			}
+		}
+	
+		throw new Exception("Vehicle not found");
+	}
+	
+	public void setPayment(PaymentMethod p)
+	{
+		payment = p;
+	}
+	
+	
+	
+	
+	//connection
+	public void getInfoFromDBC() throws Exception
+	{
+		dbc.selectCustomer(this);
+	}
+	
+	//connection and db 
+	public PaymentMethod getInfoFromDBPM() throws Exception
+	{
+		payment = dbpm.selectPaymentMethod(this);
+		return payment;
+	}
+	
+	@SuppressWarnings("static-access")
+	public void getInfoFromDBV() throws Exception {
+		vehicles = dbv.selectVehicle(this);
+		vehicleCount = vehicles.size();
+	}
+	
+	@SuppressWarnings("static-access")
+	public void updateDBV() {
+		vehicles = dbv.addVehicle(this);
+	}
+	public void deleteInfoFromDBPM()
+	{
+		payment = dbpm.deletePaymentMethod(this);
+	}
+	
+	public void addInfoToDBPM() throws Exception
+	{
+		dbpm.addPaymentMethod(this);
+	}
+
 }
