@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class VehicleDB {
 
-    public static Vehicle deleteVehicle(Customer customer) {
+    public static Vehicle deleteVehicle(Customer customer, String vin) {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "DELETE FROM Vehicle WHERE vin = " + customer.getVehicle().getVIN();
+            String query = "DELETE FROM Vehicle WHERE vin = " + customer.getVehicle(vin).getVIN();
             st.executeUpdate(query);
             st.close();
             conn.close();
