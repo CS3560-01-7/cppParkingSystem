@@ -1,0 +1,708 @@
+package application;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+//import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+
+
+public class NewWindow
+{
+	public Scene BroncoID(Stage primaryStage, Cart cart)//COMPLETE DO NOT TOUCH PLEASE
+	{
+        primaryStage.setTitle("LOG IN TO CPP");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		//set up username label and input textfield
+		Label username = new Label("BroncoID: ");//create new label
+		username.setTextFill(Color.WHITE);//set font color
+		username.setFont(new Font("Times New Roman",15));//set font type and size
+		GridPane.setConstraints(username, 0, 0);//set on grid
+		TextField id = new TextField();//create user input space
+		id.setPromptText("BrocoID");//user prompt
+		GridPane.setConstraints(id, 0, 1);//set on grid
+		
+		//set up password label and input
+		Label password = new Label("Password: ");
+		password.setTextFill(Color.WHITE);//set font color
+		password.setFont(new Font("Times New Roman",15));//set font type and size
+		GridPane.setConstraints(password, 0, 2);//set on grid
+		PasswordField pw = new PasswordField();
+		pw.setPromptText("Password");
+		GridPane.setConstraints(pw, 0, 3);//set on grid
+		
+		//create button 
+		Button button = new Button("Next");
+		GridPane.setConstraints(button, 0, 4);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					cart.getCustomer().setBroncoID(Integer.parseInt(id.getText()));
+					cart.getCustomer().getInfoFromDBC();
+					//System.out.println(customer.getFullName());
+					primaryStage.setScene(selectPermit(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN BRONCOID");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+		
+		
+		//set up grid
+		grid.getChildren().addAll(username, id, password, pw, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 400, 300);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+
+	
+	public Scene selectPermit(Stage primaryStage, Cart cart) throws Exception
+	{
+		
+		primaryStage.setTitle("Permit Selection");
+		
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		cart.getCustomer().getInfoFromDBC();
+		
+		if(cart.getCustomer().getStudent() != false) {
+		
+		
+		
+			Text text = new Text("Select your permit type");
+			text.setFont(Font.font("Times New Roman",20));
+			text.setFill(Color.WHITE);
+			GridPane.setConstraints(text, 0, 0);
+		
+			Button button = new Button("Next");
+			Button test = new Button("Test");
+			GridPane.setConstraints(button, 1, 6);
+			GridPane.setConstraints(test, 0,6);
+		
+			ChoiceBox<int> Options = new ChoiceBox<>();
+			Options.getItems().addAll(1, 2, 3, 4);
+			button.setOnAction(e -> getChoice(Options));
+			GridPane.setConstraints(Options, 0, 3);
+		
+			
+			grid.getChildren().addAll(text, button, test, Options);
+		
+			
+
+			test.setOnAction(new EventHandler<ActionEvent>()
+			{
+				@Override
+				public void handle (ActionEvent event) {
+					try{
+						cart.getPermit().getRate().setRateID(Options.getValue());
+						//(Integer.parseInt(securityCodeF.getText()));
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println("IN PAYFORPERMIT");
+						e.printStackTrace();
+					}	
+					
+				}
+			});
+		
+		}
+		else {
+			Text text = new Text("Select your permit type");
+			text.setFont(Font.font("Times New Roman",20));
+			text.setFill(Color.WHITE);
+			GridPane.setConstraints(text, 0, 0);
+			
+			grid.getChildren().addAll(text);
+			
+		}
+		
+		
+		//set up scene
+		Scene scene = new Scene (grid, 600, 450);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	//cart.getCustomer().getPayment().setExpDateM(expirationF1.getValue());
+	//cart.getCustomer().addInfoToDBPM();
+	//cart.getCustomer().getPayment().getExpDateM()
+	
+public void getChoice (ChoiceBox<int> Options) {
+	int permitChoice = Options.getValue();
+	System.out.print(permitChoice);
+	
+	
+}
+
+public void getStudent()
+{
+	Customer a = new Customer();
+	System.out.println(a.student);
+}
+
+
+
+	public Scene selectVehicles(Stage primaryStage, Cart cart)//ETHAN
+	{
+        primaryStage.setTitle("Vehicle Selection");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		Text text = new Text("Select the Vehicle for your Permit");
+		text.setFont(Font.font("Times New Roman",20));
+		text.setFill(Color.WHITE);
+		GridPane.setConstraints(text, 0, 0);
+		
+		
+		//create button 
+		Button button = new Button("Next");
+		GridPane.setConstraints(button, 0, 1);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(payForPermit(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN SELECT");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+		
+		//create button 
+		Button add = new Button("Add");
+		GridPane.setConstraints(add, 1,1);//under the textfields
+		add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(vehicleInformation(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN ADD");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+				
+		//set up grid
+		grid.getChildren().addAll(text, add, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 400, 300);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	public Scene vehicleInformation(Stage primaryStage, Cart cart)//Amal
+	{
+        primaryStage.setTitle("Vehicle Information");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		Text text = new Text("Please Input your Vehicle Information");
+		text.setFont(Font.font("Times New Roman",20));
+		text.setFill(Color.WHITE);
+		GridPane.setConstraints(text, 0, 0);
+		
+		
+		//create button 
+		Button button = new Button("Next");
+		GridPane.setConstraints(button, 0, 1);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(selectVehicles(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN BRONCOID");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+		
+		
+		//set up grid
+		grid.getChildren().addAll(text, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 400, 300);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	
+	
+	
+	public Scene payForPermit(Stage primaryStage, Cart cart) throws Exception//Pay for permit 2
+	{
+		primaryStage.setTitle("Payment Information");
+		//create new grid
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
+		grid.setVgap(10);//set vertical spacing to 8 pixels
+		grid.setHgap(5);//set horizontal spacing to 8 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		//get information from DB
+		cart.getCustomer().getInfoFromDBPM();
+		
+		//check to see if cc exists to decide which form to call
+		if (cart.getCustomer().getPayment().getCardNumber() != 0)//if there is a cc already
+		{
+			//lets you know that there is a cc on file asks whether or not to use
+			Text ask = new Text("Do you want to use this credit card?");
+			ask.setFont(Font.font("Times New Roman",20));
+			ask.setFill(Color.WHITE);
+			GridPane.setConstraints(ask, 0, 0);
+			
+			//Labels
+			Label name = new Label("Name: ");
+			name.setFont(Font.font("Times New Roman",15));
+			name.setTextFill(Color.WHITE);
+			GridPane.setConstraints(name, 0, 1);
+			Label cardNum = new Label("Card Number: ");
+			cardNum.setFont(Font.font("Times New Roman",15));
+			cardNum.setTextFill(Color.WHITE);
+			GridPane.setConstraints(cardNum, 0, 2);
+			Label exp = new Label("Expiration: ");
+			exp.setFont(Font.font("Times New Roman",15));
+			exp.setTextFill(Color.WHITE);
+			GridPane.setConstraints(exp, 0, 3);
+			
+			//get values from database to show
+			TextField n = new TextField(cart.getCustomer().getPayment().getFirstName() + " " + cart.getCustomer().getPayment().getLastName());
+			n.setFont(Font.font("Times New Roman",15));
+			GridPane.setConstraints(n, 1, 1);
+			TextField c = new TextField("" + cart.getCustomer().getPayment().getCardNumber());
+			c.setFont(Font.font("Times New Roman",15));
+			GridPane.setConstraints(c, 1, 2);
+			TextField e = new TextField(cart.getCustomer().getPayment().getExpDateM() + "/" + cart.getCustomer().getPayment().getExpDateY());
+			e.setFont(Font.font("Times New Roman",15));
+			GridPane.setConstraints(e, 1, 3);
+			
+			//set up buttons
+			Button yes = new Button("Yes");
+			Button no = new Button("No");
+			GridPane.setConstraints(yes, 0, 4);
+			GridPane.setConstraints(no, 1, 4);
+			
+			//set children
+			grid.getChildren().addAll(ask,cardNum,name,exp,yes,no,n,c,e);
+			
+			//button actions go to next stage if user likes payment
+			yes.setOnAction(event->primaryStage.setScene(finalVerification(primaryStage, cart)));   
+			
+			//delete current data in database and replace
+			no.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+					{
+						@Override
+							public void handle (ActionEvent event)
+							{
+								try {
+									cart.getCustomer().deleteInfoFromDBPM();
+									primaryStage.setScene(newPayment(primaryStage,cart));   
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									System.out.println("IN PAYFORPERMIT");
+									e.printStackTrace();
+								}	
+							}
+					});
+			
+		}//end if
+		else//if there is no cc info get info
+		{
+			return newPayment(primaryStage,cart);
+		}//end else
+	
+		
+		//set up scene
+		Scene scene = new Scene(grid, 600, 450);
+				
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		return scene;
+	}
+	
+	public Scene newPayment(Stage primaryStage, Cart cart)
+	{
+		//top of stage
+		primaryStage.setTitle("Payment Information");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
+		grid.setVgap(10);//set vertical spacing to 8 pixels
+		grid.setHgap(5);//set horizontal spacing to 8 pixels
+		grid.setAlignment(Pos.CENTER);
+		//total cost is a temp for total of permit cost
+		
+		//heading
+		Text info = new Text("Payment Information");
+		info.setFont(Font.font("Times New Roman",20));
+		info.setFill(Color.WHITE);
+		GridPane.setConstraints(info, 0, 0);
+		
+		//total label
+		Label total = new Label("Total: $");
+		total.setFont(Font.font("Times New Roman",15));
+		total.setTextFill(Color.WHITE);
+		GridPane.setConstraints(total, 0, 1);
+		
+		//first name label
+		Label firstName = new Label("First name: ");
+		firstName.setFont(Font.font("Times New Roman",15));
+		firstName.setTextFill(Color.WHITE);
+		GridPane.setConstraints(firstName, 0, 2);
+		
+		//last name label
+		Label lastName = new Label("Last name: ");
+		lastName.setFont(Font.font("Times New Roman",15));
+		lastName.setTextFill(Color.WHITE);
+		GridPane.setConstraints(lastName, 0, 3);
+		
+		//card number label
+		Label cardNumber = new Label("Card Number: ");
+		cardNumber.setFont(Font.font("Times New Roman",15));
+		cardNumber.setTextFill(Color.WHITE);
+		GridPane.setConstraints(cardNumber, 0, 4);
+		
+		//expiration label
+		Label expiration = new Label("Expiration Date: ");
+		expiration.setFont(Font.font("Times New Roman",15));
+		expiration.setTextFill(Color.WHITE);
+		GridPane.setConstraints(expiration, 0, 5);
+		
+		//security code label
+		Label securityCode = new Label("Security Code: ");
+		securityCode.setFont(Font.font("Times New Roman",15));
+		securityCode.setTextFill(Color.WHITE);
+		GridPane.setConstraints(securityCode, 0, 6);
+		
+		//billing address label
+		Label billingAddress = new Label("Billing Address: ");
+		billingAddress.setFont(Font.font("Times New Roman",15));
+		billingAddress.setTextFill(Color.WHITE);
+		GridPane.setConstraints(billingAddress, 0, 7);
+		
+		//zip code label
+		Label zip = new Label("ZIP: ");
+		zip.setFont(Font.font("Times New Roman",15));
+		zip.setTextFill(Color.WHITE);
+		GridPane.setConstraints(zip, 0, 8);
+		
+		//user input total
+		TextField totalF = new TextField();
+		totalF.setText("" + cart.getPermit().getRate());
+		GridPane.setConstraints(totalF, 2, 1);
+		
+		//user input first name
+		TextField firstNameF = new TextField();
+		firstNameF.setPromptText("Billy");
+		GridPane.setConstraints(firstNameF, 2, 2);
+		
+		//user input last name
+		TextField lastNameF = new TextField();
+		lastNameF.setPromptText("Bronco");		
+		GridPane.setConstraints(lastNameF, 2, 3);
+		
+		//user input card number
+		TextField cardNumberF = new TextField();
+		cardNumberF.setPromptText("XXXX-XXXX-XXXX-XXXX");	
+		GridPane.setConstraints(cardNumberF, 2, 4);
+		
+		//Choicebox
+		ChoiceBox<Integer> expirationF1 = new ChoiceBox<>();
+		expirationF1.getItems().addAll(1,2,3,4,5,6,7,8,9,10,11,12);						
+		ChoiceBox<Integer> expirationF2 = new ChoiceBox<>();
+		expirationF2.getItems().addAll(22,23,24,25,26,27,28,29,30,31,32,33,34);//can add more as needed
+		expirationF2.setValue(23);
+		expirationF1.setValue(1);
+		GridPane.setConstraints(expirationF1, 2, 5);
+		GridPane.setConstraints(expirationF2, 3, 5);
+		
+		//user input security code
+		TextField securityCodeF = new TextField();
+		securityCodeF.setPromptText("xxx");
+		GridPane.setConstraints(securityCodeF, 2, 6);
+		
+		//user input billing address
+		TextField billingAddressF = new TextField();
+		billingAddressF.setPromptText("123 Sesame Street");
+		GridPane.setConstraints(billingAddressF, 2, 7);
+		
+		//user input zip
+		TextField zipF = new TextField();
+		zipF.setPromptText("xxxxx");
+		GridPane.setConstraints(zipF, 2, 8);
+		
+		//set up button
+		Button button = new Button("Next");
+		GridPane.setConstraints(button, 2, 9);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+				public void handle (ActionEvent event)
+				{
+					try {
+						//get values
+						cart.getCustomer().getPayment().setFirstName(firstNameF.getText());
+						cart.getCustomer().getPayment().setLastName(lastNameF.getText());
+						cart.getCustomer().getPayment().setCardNumber(Long.parseLong(cardNumberF.getText()));
+						cart.getCustomer().getPayment().setExpDateM(expirationF1.getValue());
+						cart.getCustomer().getPayment().setExpDateY(expirationF2.getValue());
+						cart.getCustomer().getPayment().setSecurityCode(Integer.parseInt(securityCodeF.getText()));
+						cart.getCustomer().getPayment().setBillingAddress(billingAddressF.getText());
+						
+						//add values to database
+						cart.getCustomer().addInfoToDBPM();
+						
+						//go to next scene
+						primaryStage.setScene(finalVerification(primaryStage, cart));   
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println("IN PAYFORPERMIT");
+						e.printStackTrace();
+					}	
+				}
+		});
+		
+		//set children
+		grid.getChildren().addAll(info,total, firstName, lastName, cardNumber, expiration, securityCode, billingAddress, zip,
+				totalF, firstNameF, lastNameF, cardNumberF, expirationF1, expirationF2, securityCodeF, billingAddressF, zipF, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 600, 450);
+		//scene.getStylesheets().add("Green.css");
+				
+		//set up the background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//display the scene
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	public Scene finalVerification(Stage primaryStage, Cart cart)//ETHAN
+	{
+        primaryStage.setTitle("Verify the information submitted");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		Text text = new Text("Is this Information Correct?");
+		text.setFont(Font.font("Times New Roman",20));
+		text.setFill(Color.WHITE);
+		GridPane.setConstraints(text, 0, 0);
+		
+		
+		//create button 
+		Button button = new Button("Yes");
+		GridPane.setConstraints(button, 0, 1);//under the textfields
+		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(end(primaryStage));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN SELECT");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+		
+		//create button 
+		Button add = new Button("No");
+		GridPane.setConstraints(add, 1, 1);//under the textfields
+		add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(selectVehicles(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN ADD");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+				
+		//set up grid
+		grid.getChildren().addAll(text, add, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 400, 300);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	
+	public Scene end(Stage primaryStage)//COMPLETE DO NOT TOUCH PLEASE 
+	{
+		primaryStage.setTitle("THANK YOU");
+		
+		//create a GridPane
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(10,10,10,10));//amount of padding around each edge
+		grid.setVgap(10);//set vertical spacing to 8 pixels
+		grid.setHgap(12);//set horizontal spacing to 8 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		Text thank = new Text("Thank you for your purchase!");
+		thank.setFont(Font.font("Times New Roman",20));
+		thank.setFill(Color.WHITE);
+		GridPane.setConstraints(thank, 0, 0);
+		thank.setTextAlignment(TextAlignment.CENTER);
+		
+		Text text1 = new Text("The temporary permit has been sent to your cpp email.\nYour permit will be mailed between 2-3 business days.");
+		text1.setFont(Font.font("Times New Roman",18));
+		text1.setFill(Color.WHITE);
+		GridPane.setConstraints(text1, 0, 1);
+		text1.setTextAlignment(TextAlignment.CENTER);
+		
+		Button button = new Button("Exit");
+		GridPane.setConstraints(button, 0, 2);//under the textfields
+		button.setOnAction(event -> Platform.exit());
+		
+		
+		//set up grid
+		grid.getChildren().addAll(thank,text1, button);
+		
+		//set up scene
+		Scene scene = new Scene(grid, 600, 450);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//display scene
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+}
