@@ -30,8 +30,8 @@ public class VehicleDB {
             Statement st = conn.createStatement();
 
             for (int i = 0; i < customer.getArrayOfVehicles().size(); i++) {
-                String query = "INSERT INTO Vehicle  Values("+customer.getArrayOfVehicles().get(i).getVIN()+","+customer.getBroncoID()+","
-                        +customer.getArrayOfVehicles().get(i).getLicensePlate()+",\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
+                String query = "INSERT INTO Vehicle  Values(\'" +customer.getArrayOfVehicles().get(i).getVIN()+"\',"+customer.getBroncoID()+",\'"
+                        +customer.getArrayOfVehicles().get(i).getLicensePlate()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
                         +customer.getArrayOfVehicles().get(i).getVehicleMake()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleColor()+"\',"
                         +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\')";
                 st.executeUpdate(query);
@@ -40,7 +40,7 @@ public class VehicleDB {
 
             }
 
-            return selectVehicle(customer);
+            return customer.getArrayOfVehicles();
 
         }catch(Exception e) {
             System.out.println(e);
