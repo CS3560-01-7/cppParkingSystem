@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -265,8 +267,10 @@ public void getChoice (ChoiceBox<Integer> Options) {
 		
 		cart.getCustomer().getInfoFromDBV();
 		
-		cart.getCustomer().getArrayOfVehicles();
-		System.out.println(cart.getCustomer().vehicleCount);
+
+		ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+		System.out.println(vehicles.size());
+		
 		
 		if (cart.getCustomer().vehicleCount <3) {
 			Button add = new Button("Add");
