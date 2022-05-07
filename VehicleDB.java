@@ -28,17 +28,26 @@ public class VehicleDB {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
+            Statement st2 = conn.createStatement();
 
             for (int i = 0; i < customer.getArrayOfVehicles().size(); i++) {
-                String query = "INSERT INTO Vehicle  Values(\'" +customer.getArrayOfVehicles().get(i).getVIN()+"\',"+customer.getBroncoID()+",\'"
-                        +customer.getArrayOfVehicles().get(i).getLicensePlate()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
-                        +customer.getArrayOfVehicles().get(i).getVehicleMake()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleColor()+"\',"
-                        +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\')";
-                st.executeUpdate(query);
-                st.close();
-                conn.close();
-
+            	String check = "select * from Vehicle WHERE vin ="+ customer.getArrayOfVehicles().get(i).getVIN()+";";
+            	ResultSet found = st2.executeQuery(check);
+            	if (found.next() == false) {
+            		String query = "INSERT INTO Vehicle  Values(\'" +customer.getArrayOfVehicles().get(i).getVIN()+"\',"+customer.getBroncoID()+",\'"
+                    +customer.getArrayOfVehicles().get(i).getLicensePlate()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
+                    +customer.getArrayOfVehicles().get(i).getVehicleMake()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleColor()+"\',"
+                    +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\')";
+            		st.executeUpdate(query);
+            	}
+            	else {
+            		continue;
+            	}
             }
+            
+            st.close();
+    		st2.close();
+    		conn.close();
 
             return customer.getArrayOfVehicles();
 
