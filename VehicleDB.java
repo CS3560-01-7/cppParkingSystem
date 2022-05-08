@@ -10,7 +10,7 @@ public class VehicleDB {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "DELETE FROM Vehicle WHERE vin = " + customer.getVehicle(vin).getVIN();
+            String query = "DELETE FROM Vehicle WHERE vin = \'" + customer.getVehicle(vin).getVIN() +"\'";
             st.executeUpdate(query);
             st.close();
             conn.close();
