@@ -7,6 +7,11 @@ Vehicle calls Customer and Permit objects.
 
 We are assuming that these vehices exist and have a valid license plate.
 */
+package application;
+
+//import java.io.*;
+//port java.util.*;
+
 import java.io.*;
 import java.util.*;
 
@@ -20,6 +25,7 @@ class Vehicle
   private String vehicleColor;
   private int modelYear;
   private String state;
+  private boolean appears;
   
   //constructor
   public Vehicle()
@@ -31,6 +37,7 @@ class Vehicle
     this.vehicleColor="";
     this.modelYear=0;
     this.state="";
+    this.appears=true;
   }
   public Vehicle(String vin, String licensePlate, String vehicleType, String vehicleMake, String vehicleColor, int modelYear,String state)
   {
@@ -41,6 +48,7 @@ class Vehicle
     this.modelYear = modelYear;
     this.vehicleColor = vehicleColor;
     this.state = state;
+    this.appears = true;
     //create new entry in vehicle table for this customer and fill in the values
   }
   
@@ -99,6 +107,11 @@ class Vehicle
   public void setState(String s)
   {
     state = s;
+  }
+  
+  public void setAppears(Boolean a)
+  {
+	  appears = a;
   }
   
   //accessors
@@ -164,3 +177,11 @@ class Vehicle
   {
     return state;
   }
+  
+  public boolean getAppears()
+  {
+	  return appears;
+  }
+  
+  
+}
