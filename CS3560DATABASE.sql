@@ -37,6 +37,7 @@ CREATE TABLE Vehicle (
     vehicleColor VARCHAR (15),
     vehicleYear INT (4),
     state VARCHAR (15),
+    appears BOOLEAN,
     FOREIGN KEY (broncoID) REFERENCES Customer (broncoID),
     PRIMARY KEY (vin)
 );
@@ -65,9 +66,9 @@ CREATE TABLE Permit (
 
 INSERT INTO Customer VALUES ('111111111', 'Lynn', 'Takahashi','pizzahut@gmail.com','123 Sesame Street',TRUE),
 ('111111112','Professor','Poopypants','professorpoopy@gmail.com','246 Captain Underpants', FALSE),
-('111111113','Ethan','Vazquez','evaq@gmail.com','541 Vazqueef Drive', FALSE);
+('111111113','Ethan','Vazquez','evaq@gmail.com','541 Vazqueef Drive', TRUE);
 INSERT INTO PaymentMethod VALUES ('111111111','123456789','123','11','25','Lynn','Takahashi','123 Sesame Street','12345');
-INSERT INTO Vehicle VALUES ('12345678901234567','111111111','ABCDEFG','Corolla','Toyota','gray','2012', 'CA');
+INSERT INTO Vehicle VALUES ('12345678901234567','111111111','ABCDEFG','Corolla','Toyota','gray','2012', 'CA', true);
 INSERT INTO Rate VALUES ('1', '150', 'STUDENT SPRING MO/WE/FRI', true, '01/16/2022','05/28/2022'),
 ('2', '150', 'STUDENT SPRING TU/TH', true, '01/16/2022','05/28/2022'),('3', '200', 'STUDENT SPRING WEEK', true, '01/16/2022','05/28/2022'),
 ('4', '125', 'STUDENT SRPRING MOTOR', true, '01/16/2022','05/28/2022'),('5', '100', 'FACULTY SPRING WEEK', false, '01/16/2022','05/28/2022');
@@ -78,3 +79,4 @@ INSERT INTO Permit values ('1', '1', '12345678901234567');
 
 SELECT * FROM Rate;
 SELECT firstName, lastName, emailAddress, address, checkStudent FROM Customer WHERE broncoID = 111111111;
+SELECT * FROM Vehicle;
