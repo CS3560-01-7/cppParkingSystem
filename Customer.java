@@ -17,6 +17,8 @@ read vehicle (owned) method
 */
 
 
+package application;
+
 import java.util.ArrayList;
 
 
@@ -27,7 +29,7 @@ public class Customer {
 	protected String emailAddress;
 	protected String address;
 	protected int vehicleCount = 0;
-	protected int maxVehicles = 3;
+	protected int maxVehicles = 4;
 	protected boolean student;
 	protected ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 	protected PaymentMethod payment;
@@ -97,6 +99,12 @@ public class Customer {
 		return vehicles;
 	}
 	
+	public void setArrayListOfVehicles(ArrayList<Vehicle>v)
+	{
+		vehicles = v;
+		vehicleCount = vehicles.size();
+	}
+	
 	public PaymentMethod getPayment() {
 		return payment;
 	}
@@ -131,9 +139,10 @@ public class Customer {
 		address = ad;	
 	}
 	
+	
 	public void addVehicle(Vehicle v) throws Exception
 	{
-		if (vehicleCount < maxVehicles) {
+		if (vehicleCount <= maxVehicles) {
 			vehicles.add(v);
 			vehicleCount++;
 		}
@@ -143,14 +152,28 @@ public class Customer {
 	}
 	
 	public void removeVehicle(String vin) throws Exception {
-		for (int i = 0; i < vehicleCount; i++) {
-			if (vehicles.get(i).getVIN().equals(vin)) {
-				vehicles.remove(vehicles.get(i));
-			}
-		}
+        Vehicle v = dbv.deleteVehicle(this, vin);
+        for (int i = 0; i < vehicleCount; i++) {
+            if (vehicles.get(i).getVIN().equals(vin)) {
+            	System.out.println("I am in the method");
+            	vehicles.remove(vehicles.get(i));
+            }
+        }
+
+        throw new Exception("Vehicle not found");
+    }
 	
-		throw new Exception("Vehicle not found");
-	}
+	
+	//public void removeVehicle(String vin) {
+	//	for (int i = 0; i < vehicleCount; i++) {
+	//		if (vehicles.get(i).getVIN().equals(vin)) {
+	//			System.out.println("I am in the method");
+	//			vehicles.remove(vehicles.get(i));
+	//		}
+	//	}
+	
+		//throw new Exception("Vehicle not found");
+	//}
 	
 	public void setPayment(PaymentMethod p)
 	{
@@ -183,6 +206,8 @@ public class Customer {
 	public void updateDBV() {
 		vehicles = dbv.addVehicle(this);
 	}
+	
+	
 	public void deleteInfoFromDBPM()
 	{
 		payment = dbpm.deletePaymentMethod(this);
