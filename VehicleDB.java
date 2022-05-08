@@ -12,7 +12,11 @@ public class VehicleDB {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "UPDATE Vehicle SET appears = FALSE WHERE vin = \'" + customer.getVehicle(vin).getVIN() +"\'";
+            System.out.println(vin);
+            System.out.println(customer.getVehicle(vin).getVIN());
+            String query = "UPDATE Vehicle SET appears = FALSE WHERE vin = \'"+ customer.getVehicle(vin).getVIN() + "\'";
+            
+            System.out.println("UPDATE Vehicle SET appears = FALSE WHERE vin = \'"+ customer.getVehicle(vin).getVIN() + "\'");
             st.executeUpdate(query);
             st.close();
             conn.close();
@@ -39,8 +43,7 @@ public class VehicleDB {
             		String query = "INSERT INTO Vehicle  Values(\'" +customer.getArrayOfVehicles().get(i).getVIN()+"\',"+customer.getBroncoID()+",\'"
                     +customer.getArrayOfVehicles().get(i).getLicensePlate()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
                     +customer.getArrayOfVehicles().get(i).getVehicleMake()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleColor()+"\',"
-                    +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\',"
-                        +customer.getArrayOfVehicles().get(i).getAppears()";";
+                    +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\')"+customer.getArrayOfVehicles().get(i);
             		st.executeUpdate(query);
             	}
             	else {
@@ -84,7 +87,6 @@ public class VehicleDB {
                 vehicle.setVehicleColor(rs.getString("vehicleColor"));
                 vehicle.setModelYear(rs.getInt("vehicleYear"));
                 vehicle.setState(rs.getString("state"));
-                vehicle.setAppears(rs.getAppears("appears"));
 
                 arrayOfVehicles.add(vehicle);
             }
