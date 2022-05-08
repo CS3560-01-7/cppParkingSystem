@@ -143,10 +143,9 @@ public class Customer {
 	}
 	
 	public void removeVehicle(String vin) throws Exception {
-		Vehicle v = dbv.deleteVehicle(this);
 		for (int i = 0; i < vehicleCount; i++) {
 			if (vehicles.get(i).getVIN().equals(vin)) {
-				vehicles.remove(i);
+				vehicles.remove(vehicles.get(i));
 			}
 		}
 	
