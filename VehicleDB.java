@@ -1,3 +1,5 @@
+package application;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -6,11 +8,11 @@ import java.util.ArrayList;
 
 public class VehicleDB {
 
-    public static Vehicle deleteVehicle(Customer customer) {
+    public static Vehicle deleteVehicle(Customer customer, String vin) {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "DELETE FROM Vehicle WHERE vin = \'" + customer.getVehicle().getVIN() +"\'";
+            String query = "UPDATE Vehicle SET appears = FALSE WHERE vin = \'" + customer.getVehicle(vin).getVIN() +"\'";
             st.executeUpdate(query);
             st.close();
             conn.close();
@@ -37,7 +39,7 @@ public class VehicleDB {
             		String query = "INSERT INTO Vehicle  Values(\'" +customer.getArrayOfVehicles().get(i).getVIN()+"\',"+customer.getBroncoID()+",\'"
                     +customer.getArrayOfVehicles().get(i).getLicensePlate()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
                     +customer.getArrayOfVehicles().get(i).getVehicleMake()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleColor()+"\',"
-                    +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\')";
+                    +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\')"+customer.getArrayOfVehicles().get(i);
             		st.executeUpdate(query);
             	}
             	else {
@@ -100,7 +102,7 @@ public class VehicleDB {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/cpp_parking_system";
             String username = "root";
-            String password = "****";//password
+            String password = "Eman9232";//password
             Class.forName(driver);
 
             Connection conn = DriverManager.getConnection(url, username, password);
