@@ -88,6 +88,7 @@ public class VehicleDB {
                 vehicle.setVehicleColor(rs.getString("vehicleColor"));
                 vehicle.setModelYear(rs.getInt("vehicleYear"));
                 vehicle.setState(rs.getString("state"));
+                vehicle.setAppears(rs.getBoolean("appears"));
 
                 arrayOfVehicles.add(vehicle);
             }
