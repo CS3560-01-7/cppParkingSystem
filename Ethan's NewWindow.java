@@ -159,7 +159,7 @@ public class NewWindow
 						cart.getPermit().setRateID(Options.getValue());
 						//(Integer.parseInt(securityCodeF.getText()));
 						System.out.println(cart.getPermit().getRateID());
-						primaryStage.setScene(selectVehicles(primaryStage, cart)); 
+						primaryStage.setScene(yourVehicles(primaryStage, cart)); 
 						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -201,7 +201,7 @@ public class NewWindow
 						cart.getPermit().setRateID(Options.getValue());
 						//(Integer.parseInt(securityCodeF.getText()));
 						System.out.println(cart.getPermit().getRateID());
-						primaryStage.setScene(selectVehicles(primaryStage, cart)); 
+						primaryStage.setScene(yourVehicles(primaryStage, cart)); 
 						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -263,6 +263,404 @@ public void getChoice (ChoiceBox<Integer> Options) {
 				
 			//}
 		//});//go here when pressed
+
+
+
+public Scene yourVehicles(Stage primaryStage, Cart cart) throws Exception//ETHAN
+{
+    primaryStage.setTitle("Vehicle Selection");
+	
+	//create a GridPane
+	GridPane grid = new GridPane();
+	grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+	grid.setVgap(8);//set vertical spacing to 10 pixels
+	grid.setHgap(10);//set horizontal spacing to 10 pixels
+	grid.setAlignment(Pos.CENTER);
+	
+	System.out.println("You suck");
+	
+	Text text = new Text ("Press confirm to continue");
+	text.setFont(Font.font("Times New Roman",20));
+	text.setFill(Color.WHITE);
+	GridPane.setConstraints(text, 0, 0);
+	grid.getChildren().addAll(text);
+	
+	cart.getCustomer().getInfoFromDBV();
+	
+
+	ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+	
+	System.out.println(vehicles.size());
+	Vehicle vehicle = vehicles.get(0);
+	
+	vehicle.getAppears();
+	
+	
+	//cart.getCustomer().getStudent() != false
+	
+	
+	for(int i=0; i< vehicles.size(); i++) {
+		vehicles.get(i).getAppears();
+		if (vehicles.get(i).getAppears() != false) {
+			System.out.println(i);
+			System.out.println("Fuck you");
+			System.out.println("Iteration: " + i);
+			
+			if(i == 0) {
+				primaryStage.setScene(vehicleInformation(primaryStage, cart));
+			}
+			if(i == 1) {
+				Button confirm = new Button("Confirm");
+				GridPane.setConstraints(confirm, 0,2);//under the textfields
+				grid.getChildren().add(confirm);
+				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+				{
+					@Override
+					public void handle (ActionEvent event)
+					{
+						try {
+							
+							primaryStage.setScene(oneVehicle(primaryStage, cart));   
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("IN ADD");//check if fail
+							e.printStackTrace();
+						}
+						
+					}
+				});//go here when pressed
+				//primaryStage.setScene(oneVehicle(primaryStage, cart));
+			}
+			
+			if(i == 2) {
+				Button confirm = new Button("Confirm");
+				GridPane.setConstraints(confirm, 0,2);//under the textfields
+				grid.getChildren().add(confirm);
+				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+				{
+					@Override
+					public void handle (ActionEvent event)
+					{
+						try {
+							primaryStage.setScene(twoVehicles(primaryStage, cart));   
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("IN ADD");//check if fail
+							e.printStackTrace();
+						}
+						
+					}
+				});//go here when pressed
+				//primaryStage.setScene(oneVehicle(primaryStage, cart));
+			}
+			if(i == 3) {
+				Button confirm = new Button("Confirm");
+				GridPane.setConstraints(confirm, 0,2);//under the textfields
+				grid.getChildren().add(confirm);
+				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+				{
+					@Override
+					public void handle (ActionEvent event)
+					{
+						try {
+							primaryStage.setScene(twoVehicles(primaryStage, cart));   
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("IN ADD");//check if fail
+							e.printStackTrace();
+						}
+						
+					}
+				});//go here when pressed
+				//primaryStage.setScene(oneVehicle(primaryStage, cart));
+			}
+		
+		}
+		
+	}
+	
+	
+
+	
+	
+	//set up scene
+	Scene scene = new Scene(grid, 400, 300);
+	
+	//background
+	BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+	Background bg = new Background(bf);
+	grid.setBackground(bg);
+	
+	//scene setting
+	primaryStage.setScene(scene);
+	primaryStage.show();
+	
+	return scene;
+}
+
+
+
+public Scene oneVehicle(Stage primaryStage, Cart cart) throws Exception
+{
+    primaryStage.setTitle("Vehicle Selection 1");
+	
+	//create a GridPane
+	GridPane grid = new GridPane();
+	grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+	grid.setVgap(8);//set vertical spacing to 10 pixels
+	grid.setHgap(10);//set horizontal spacing to 10 pixels
+	grid.setAlignment(Pos.CENTER);
+	
+	
+	
+	//cart.getCustomer().getInfoFromDBV();
+	
+
+	ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+	System.out.println(vehicles.size());
+	System.out.println("You're in 1 car");
+	
+
+	
+	
+	for(int i=0; i<vehicles.size(); i++) {
+		vehicles.get(i).getAppears();
+		if (vehicles.get(i).getAppears() != false) {
+			Vehicle vehicle = vehicles.get(i);
+			System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Car1.setFont(Font.font("Times New Roman",12));
+			Car1.setFill(Color.WHITE);
+			GridPane.setConstraints(Car1, 1, 0);
+			grid.getChildren().addAll(Car1);
+		
+		
+			
+		
+		}
+		
+	}
+	
+
+		Button add = new Button("Add");
+		GridPane.setConstraints(add, 0,2);//under the textfields
+		grid.getChildren().add(add);
+		add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(vehicleInformation(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN ADD");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+	
+	
+	
+//	Vehicle vehicle = vehicles.get(0);
+//	Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+//	Car1.setFont(Font.font("Times New Roman",12));
+//	Car1.setFill(Color.WHITE);
+//	GridPane.setConstraints(Car1, 1, 0);
+//	grid.getChildren().addAll(Car1);
+	
+	
+	
+	//create button 
+	Button button = new Button("Next");
+	GridPane.setConstraints(button, 0, 1);//under the textfields
+	button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+	{
+		@Override
+		public void handle (ActionEvent event)
+		{
+			try {
+				primaryStage.setScene(payForPermit(primaryStage, cart));   
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("IN SELECT");//check if fail
+				e.printStackTrace();
+			}
+			
+		}
+	});//go here when pressed
+	
+	
+	Text text = new Text("Vehicles on your permit:");
+	text.setFont(Font.font("Times New Roman",20));
+	text.setFill(Color.WHITE);
+	GridPane.setConstraints(text, 0, 0);
+	
+
+	//set up grid
+	grid.getChildren().addAll(text, button);
+	
+	//set up scene
+	Scene scene = new Scene(grid, 400, 300);
+	
+	//background
+	BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+	Background bg = new Background(bf);
+	grid.setBackground(bg);
+	
+	//scene setting
+	primaryStage.setScene(scene);
+	primaryStage.show();
+	
+	return scene;
+	
+	
+}
+
+
+public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
+{
+    primaryStage.setTitle("Vehicle Selection 2");
+	
+	//create a GridPane
+	GridPane grid = new GridPane();
+	grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+	grid.setVgap(8);//set vertical spacing to 10 pixels
+	grid.setHgap(10);//set horizontal spacing to 10 pixels
+	grid.setAlignment(Pos.CENTER);
+	
+	
+	
+	//cart.getCustomer().getInfoFromDBV();
+	
+
+	ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+	System.out.println(vehicles.size());
+	System.out.println("You're in 2 cars");
+	
+	
+
+	
+	
+	for(int i=0; i<vehicles.size(); i++) {
+		vehicles.get(i).getAppears();
+		if (vehicles.get(i).getAppears() != false) {
+			Vehicle vehicle = vehicles.get(i);
+			System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			System.out.println(i);
+			Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Car1.setFont(Font.font("Times New Roman",12));
+			Car1.setFill(Color.WHITE);
+			GridPane.setConstraints(Car1, 1, 0);
+			grid.getChildren().addAll(Car1);
+			
+			//for(int j = 0; j<vehicles.size(); j++) {
+			//	System.out.println("I'm in the nested loop");
+			//	if (vehicles.get(j).getAppears() != false) {
+					Vehicle vehicle2 = vehicles.get(i);
+					System.out.println("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
+					Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
+					Car2.setFont(Font.font("Times New Roman",12));
+					Car2.setFill(Color.WHITE);
+					GridPane.setConstraints(Car2, 1, 1);
+					grid.getChildren().addAll(Car2);
+				//}
+			//}
+			
+			//System.out.println("Car 2: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			//Text Car2 = new Text("Car 2: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			i++;
+			
+		
+		}
+		
+	}
+	
+
+		Button add = new Button("Add");
+		GridPane.setConstraints(add, 0,2);//under the textfields
+		grid.getChildren().add(add);
+		add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		{
+			@Override
+			public void handle (ActionEvent event)
+			{
+				try {
+					primaryStage.setScene(vehicleInformation(primaryStage, cart));   
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("IN ADD");//check if fail
+					e.printStackTrace();
+				}
+				
+			}
+		});//go here when pressed
+	
+	
+	
+//	Vehicle vehicle = vehicles.get(0);
+//	Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+//	Car1.setFont(Font.font("Times New Roman",12));
+//	Car1.setFill(Color.WHITE);
+//	GridPane.setConstraints(Car1, 1, 0);
+//	grid.getChildren().addAll(Car1);
+	
+	
+	
+	//create button 
+	Button button = new Button("Next");
+	GridPane.setConstraints(button, 0, 1);//under the textfields
+	button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+	{
+		@Override
+		public void handle (ActionEvent event)
+		{
+			try {
+				primaryStage.setScene(payForPermit(primaryStage, cart));   
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("IN SELECT");//check if fail
+				e.printStackTrace();
+			}
+			
+		}
+	});//go here when pressed
+	
+	
+	Text text = new Text("Vehicles on your permit:");
+	text.setFont(Font.font("Times New Roman",20));
+	text.setFill(Color.WHITE);
+	GridPane.setConstraints(text, 0, 0);
+	
+
+	//set up grid
+	grid.getChildren().addAll(text, button);
+	
+	//set up scene
+	Scene scene = new Scene(grid, 400, 300);
+	
+	//background
+	BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+	Background bg = new Background(bf);
+	grid.setBackground(bg);
+	
+	//scene setting
+	primaryStage.setScene(scene);
+	primaryStage.show();
+	
+	return scene;
+	
+	
+}
+
+
+
+
+
+
+
+
 
 
 	public Scene selectVehicles(Stage primaryStage, Cart cart) throws Exception//ETHAN
@@ -749,7 +1147,7 @@ public void getChoice (ChoiceBox<Integer> Options) {
 					cart.getCustomer().updateDBV();
 					System.out.println(v);
 					//System.out.println(cart.getCustomer().vehicleCount);
-					primaryStage.setScene(selectVehicles(primaryStage, cart));   
+					primaryStage.setScene(yourVehicles(primaryStage, cart));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("IN VEHICLEINFO");//check if fail
@@ -769,7 +1167,7 @@ public void getChoice (ChoiceBox<Integer> Options) {
 			public void handle (ActionEvent event)
 			{
 				try {
-					primaryStage.setScene(selectVehicles(primaryStage, cart));   
+					primaryStage.setScene(yourVehicles(primaryStage, cart));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("IN BACK");//check if fail
