@@ -40,6 +40,7 @@ public class NewWindow
 	public Scene BroncoID(Stage primaryStage, Cart cart)//COMPLETE DO NOT TOUCH PLEASE
 	{
         primaryStage.setTitle("LOG IN TO CPP");
+        
 		
 		//create a GridPane
 		GridPane grid = new GridPane();
