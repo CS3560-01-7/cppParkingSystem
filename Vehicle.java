@@ -7,7 +7,7 @@ Vehicle calls Customer and Permit objects.
 
 We are assuming that these vehices exist and have a valid license plate.
 */
-package com.example.application;
+package application;
 
 //import java.io.*;
 //port java.util.*;
