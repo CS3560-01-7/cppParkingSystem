@@ -629,7 +629,7 @@ public void getChoice (ChoiceBox<Integer> Options) {
 			//grid.getChildren().addAll(ask,cardNum,name,exp,yes,no,n,c,e);
 			
 			//button actions go to next stage if user likes payment
-			yes.setOnAction(event->primaryStage.setScene(finalVerification(primaryStage, cart)));   
+			yes.setOnAction(event->primaryStage.setScene(end(primaryStage)));   
 			
 			//delete current data in database and replace
 			no.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
@@ -816,7 +816,7 @@ public void getChoice (ChoiceBox<Integer> Options) {
 						cart.getCustomer().addInfoToDBPM();
 						
 						//go to next scene
-						primaryStage.setScene(finalVerification(primaryStage, cart));   
+						primaryStage.setScene(end(primaryStage));   
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						System.out.println("IN PAYFORPERMIT");
