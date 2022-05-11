@@ -21,7 +21,7 @@ public class Rate {
 	//constructor
 	public Rate()
 	{
-		rateID=0;
+		
 	}
   
 	//methods
@@ -33,7 +33,7 @@ public class Rate {
 	public void setRateID(int r) throws Exception
 	{
 		this.rateID = r;
-		//this.selectRate();
+		this.selectRate();
 	}
 	
 	/**
