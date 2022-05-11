@@ -156,10 +156,51 @@ public class NewWindow
 				@Override
 				public void handle (ActionEvent event) {
 					try{
+						
 						cart.getPermit().setRateID(Options.getValue());
+					
 						//(Integer.parseInt(securityCodeF.getText()));
-						System.out.println(cart.getPermit().getRateID());
-						primaryStage.setScene(yourVehicles(primaryStage, cart)); 
+						System.out.println("This is the rate: " + cart.getPermit().getRate());
+						//primaryStage.setScene(yourVehicles(primaryStage, cart)); 
+						
+						cart.getCustomer().getInfoFromDBV();
+						ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+						
+						int index = 0;
+						int count = 0;
+						
+						while (index < vehicles.size() && count < 3) {
+							if (vehicles.get(index).getAppears() == true) {
+								
+								count++;
+							}
+							
+							index++;
+						}
+							
+							
+						if (count == 0) {
+							primaryStage.setScene(vehicleInformation(primaryStage, cart));
+						}
+	
+						
+						else if (count == 1) {
+							primaryStage.setScene(oneVehicle(primaryStage, cart));
+						}
+
+						
+						else if (count == 2) {
+							primaryStage.setScene(twoVehicles(primaryStage, cart));
+						}
+							
+						else if (count == 3) {
+							primaryStage.setScene(threeVehicles(primaryStage, cart));
+						}				
+						
+						
+						
+						
+						
 						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -201,7 +242,52 @@ public class NewWindow
 						cart.getPermit().setRateID(Options.getValue());
 						//(Integer.parseInt(securityCodeF.getText()));
 						System.out.println(cart.getPermit().getRateID());
-						primaryStage.setScene(yourVehicles(primaryStage, cart)); 
+						
+						cart.getCustomer().getInfoFromDBV();
+						
+						ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+						int entry1 = -1;
+						int entry2 = -1;
+						int entry3 = -1;
+						int index = 0;
+						int count = 0;
+						
+						while (index < vehicles.size() && count < 3) {
+							if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+								entry1 = index;
+								count++;
+							}
+							else if (vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+								entry2 = index;
+								count++;
+							}
+							else if (vehicles.get(index).getAppears() == true && count < 3 && entry3 < 0) {
+								entry3 = index;
+								count++;
+							}
+							index++;
+						}
+							
+							
+						if (count == 0) {
+							primaryStage.setScene(vehicleInformation(primaryStage, cart));
+						}
+	
+						
+						else if (count == 1) {
+							primaryStage.setScene(oneVehicle(primaryStage, cart));
+						}
+
+						
+						else if (count == 2) {
+							primaryStage.setScene(twoVehicles(primaryStage, cart));
+						}
+							
+						else if (count == 3) {
+							primaryStage.setScene(threeVehicles(primaryStage, cart));
+						}				
+						
+						
 						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -265,7 +351,7 @@ public void getChoice (ChoiceBox<Integer> Options) {
 		//});//go here when pressed
 
 
-
+/*
 public Scene yourVehicles(Stage primaryStage, Cart cart) throws Exception//ETHAN
 {
     primaryStage.setTitle("Vehicle Selection");
@@ -291,93 +377,257 @@ public Scene yourVehicles(Stage primaryStage, Cart cart) throws Exception//ETHAN
 	ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
 	
 	System.out.println(vehicles.size());
-	Vehicle vehicle = vehicles.get(0);
 	
-	vehicle.getAppears();
 	
+	int entry1 = -1;
+	int entry2 = -1;
+	int entry3 = -1;
+	int index = 0;
+	int count = 0;
+	
+	while (index < vehicles.size() && count < 3) {
+		if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+			entry1 = index;
+			count++;
+		}
+		else if (vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+			entry2 = index;
+			count++;
+		}
+		else if (vehicles.get(index).getAppears() == true && count < 3 && entry3 < 0) {
+			entry3 = index;
+			count++;
+		}
+		index++;
+	}
+		
+		
+	if (count == 0) {
+		primaryStage.setScene(vehicleInformation(primaryStage, cart));
+	}
+//		Button confirm = new Button("Confirm");
+//		GridPane.setConstraints(confirm, 0,2);//under the textfields
+//		grid.getChildren().add(confirm);
+//		confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+//		{
+//			@Override
+//			public void handle (ActionEvent event)
+//			{
+//				try {
+//					primaryStage.setScene(vehicleInformation(primaryStage, cart));
+//				} catch (Exception e) {
+//					System.out.println("IN ADD");
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+	
+	else if (count == 1) {
+		primaryStage.setScene(oneVehicle(primaryStage, cart));
+	}
+//		Button confirm = new Button("Confirm");
+//		GridPane.setConstraints(confirm, 0,2);//under the textfields
+//		grid.getChildren().add(confirm);
+//		confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+//		{
+//			@Override
+//			public void handle (ActionEvent event)
+//			{
+//				try {
+//					primaryStage.setScene(oneVehicle(primaryStage, cart));
+//				} catch (Exception e) {
+//					System.out.println("IN ADD");
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+	
+	else if (count == 2) {
+		primaryStage.setScene(twoVehicles(primaryStage, cart));
+	}
+		//Button confirm = new Button("Confirm");
+		//GridPane.setConstraints(confirm, 0,2);//under the textfields
+		//grid.getChildren().add(confirm);
+		//confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+		//{
+		//	@Override
+		//	public void handle (ActionEvent event)
+		//	{
+		//		try {
+		//			primaryStage.setScene(twoVehicles(primaryStage, cart));
+		//		} catch (Exception e) {
+		//			System.out.println("IN ADD");
+		//			e.printStackTrace();
+		//		}
+		//	}
+	//	});
+//	}
+	
+	else if (count == 3) {
+		primaryStage.setScene(threeVehicles(primaryStage, cart));
+	}
+//		Button confirm = new Button("Confirm");
+//		GridPane.setConstraints(confirm, 0,2);//under the textfields
+//		grid.getChildren().add(confirm);
+//		confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+//		{
+//			@Override
+//			public void handle (ActionEvent event)
+//			{
+//				try {
+//					primaryStage.setScene(threeVehicles(primaryStage, cart));
+//				} catch (Exception e) {
+//					System.out.println("IN ADD");
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+	
+	
+	
+	
+
+	//Vehicle vehicle = vehicles.get(0);
+	
+	//vehicle.getAppears();
+	
+	
+//	if(vehicles.size() < 1) {
+//		Button confirm = new Button("Confirm");
+//		GridPane.setConstraints(confirm, 0,2);//under the textfields
+//		grid.getChildren().add(confirm);
+//		confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+//		{
+//			@Override
+//			public void handle (ActionEvent event)
+//			{
+//				try {
+//					
+//					primaryStage.setScene(vehicleInformation(primaryStage, cart));   
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					System.out.println("IN ADD");//check if fail
+//					e.printStackTrace();
+//				}
+//				
+//			}
+//		});
+//	}
 	
 	//cart.getCustomer().getStudent() != false
 	
+//if (vehicles.size() == 0) {
+//	Button confirm = new Button("Confirm");
+//	GridPane.setConstraints(confirm, 0,2);//under the textfields
+//	grid.getChildren().add(confirm);
+//	confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+//	{
+//		@Override
+//		public void handle (ActionEvent event)
+//				{
+//			try {
+//				
+//				primaryStage.setScene(vehicleInformation(primaryStage, cart));   
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			System.out.println("IN ADD");//check if fail
+//			e.printStackTrace();
+//		}
+//		
+//	}
+//	});
+
+			
+//} else {
+//	for(int i=0; i< vehicles.size(); i++) {
+//		//vehicles.get(i).getAppears();
+//		if (vehicles.get(i).getAppears() != false) { //ends at 424
+//			System.out.println("Iteration: " + i);
+//			System.out.println("Vehicle size: " + vehicles.size());
+//			
+//			
+		//if(i == 0) {
+			//	primaryStage.setScene(vehicleInformation(primaryStage, cart));
+			//}
+//			if(i == 0) {
+//				Button confirm = new Button("Confirm");
+//				GridPane.setConstraints(confirm, 0,2);//under the textfields
+//				grid.getChildren().add(confirm);
+//				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+//				{
+//					@Override
+//					public void handle (ActionEvent event)
+//					{
+//						try {
+//							
+//							primaryStage.setScene(oneVehicle(primaryStage, cart));   
+//						} catch (Exception e) {
+//							// TODO Auto-generated catch block
+//							System.out.println("IN ADD");//check if fail
+//							e.printStackTrace();
+//						}
+//						
+//					}
+//				});//go here when pressed
+//				//primaryStage.setScene(oneVehicle(primaryStage, cart));
+//			}
+//			
+//			if(i == 1) {
+//				Button confirm = new Button("Confirm");
+//				GridPane.setConstraints(confirm, 0,2);//under the textfields
+//				grid.getChildren().add(confirm);
+//				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+//				{
+//					@Override
+//					public void handle (ActionEvent event)
+//					{
+//						try {
+//							primaryStage.setScene(twoVehicles(primaryStage, cart));   
+//						} catch (Exception e) {
+//							// TODO Auto-generated catch block
+//							System.out.println("IN ADD");//check if fail
+//							e.printStackTrace();
+//						}
+//						
+//					}
+//				});//go here when pressed
+//				//primaryStage.setScene(oneVehicle(primaryStage, cart));
+//			}	
+//			
+//			if(i == 2) {
+//				Button confirm = new Button("Confirm Me");
+//				GridPane.setConstraints(confirm, 0,2);//under the textfields
+//				grid.getChildren().add(confirm);
+//				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+//				{
+//					@Override
+//					public void handle (ActionEvent event)
+//					{
+//						try {
+//							primaryStage.setScene(threeVehicles(primaryStage, cart));   
+//						} catch (Exception e) {
+//							// TODO Auto-generated catch block
+//							System.out.println("IN ADD");//check if fail
+//							e.printStackTrace();
+//						}
+//						
+//					}
+//				});//go here when pressed
+//				//primaryStage.setScene(oneVehicle(primaryStage, cart));
+//			}
+//		
+//		}
+//	}
+//	
 	
-	for(int i=0; i< vehicles.size(); i++) {
-		vehicles.get(i).getAppears();
-		if (vehicles.get(i).getAppears() != false) {
-			System.out.println(i);
-			System.out.println("Fuck you");
-			System.out.println("Iteration: " + i);
-			
-			if(i == 0) {
-				primaryStage.setScene(vehicleInformation(primaryStage, cart));
-			}
-			if(i == 1) {
-				Button confirm = new Button("Confirm");
-				GridPane.setConstraints(confirm, 0,2);//under the textfields
-				grid.getChildren().add(confirm);
-				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
-				{
-					@Override
-					public void handle (ActionEvent event)
-					{
-						try {
-							
-							primaryStage.setScene(oneVehicle(primaryStage, cart));   
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							System.out.println("IN ADD");//check if fail
-							e.printStackTrace();
-						}
-						
-					}
-				});//go here when pressed
-				//primaryStage.setScene(oneVehicle(primaryStage, cart));
-			}
-			
-			if(i == 2) {
-				Button confirm = new Button("Confirm");
-				GridPane.setConstraints(confirm, 0,2);//under the textfields
-				grid.getChildren().add(confirm);
-				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
-				{
-					@Override
-					public void handle (ActionEvent event)
-					{
-						try {
-							primaryStage.setScene(twoVehicles(primaryStage, cart));   
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							System.out.println("IN ADD");//check if fail
-							e.printStackTrace();
-						}
-						
-					}
-				});//go here when pressed
-				//primaryStage.setScene(oneVehicle(primaryStage, cart));
-			}
-			if(i == 3) {
-				Button confirm = new Button("Confirm");
-				GridPane.setConstraints(confirm, 0,2);//under the textfields
-				grid.getChildren().add(confirm);
-				confirm.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
-				{
-					@Override
-					public void handle (ActionEvent event)
-					{
-						try {
-							primaryStage.setScene(twoVehicles(primaryStage, cart));   
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							System.out.println("IN ADD");//check if fail
-							e.printStackTrace();
-						}
-						
-					}
-				});//go here when pressed
-				//primaryStage.setScene(oneVehicle(primaryStage, cart));
-			}
-		
-		}
-		
-	}
+	//}
+	
+	
+	
+	
 	
 	
 
@@ -397,7 +647,7 @@ public Scene yourVehicles(Stage primaryStage, Cart cart) throws Exception//ETHAN
 	
 	return scene;
 }
-
+*/
 
 
 public Scene oneVehicle(Stage primaryStage, Cart cart) throws Exception
@@ -415,15 +665,37 @@ public Scene oneVehicle(Stage primaryStage, Cart cart) throws Exception
 	
 	//cart.getCustomer().getInfoFromDBV();
 	
+	cart.getCustomer().getInfoFromDBV();
 
 	ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
-	System.out.println(vehicles.size());
+	System.out.println("Array length: " + vehicles.size());
 	System.out.println("You're in 1 car");
+	
+	int entry1 = -1;
+	int index = 0;
+	int count = 0;
+	
+	while (index < vehicles.size() && count < 2) {
+		if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+			entry1 = index;
+			System.out.println(entry1);
+			Vehicle vehicle = vehicles.get(entry1);
+			System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Car1.setFont(Font.font("Times New Roman",12));
+			Car1.setFill(Color.WHITE);
+			GridPane.setConstraints(Car1, 1, 0);
+			grid.getChildren().addAll(Car1);
+			count++;
+			
+		}
+		index++;
+	}
 	
 
 	
 	
-	for(int i=0; i<vehicles.size(); i++) {
+	/*for(int i=0; i<vehicles.size(); i++) {
 		vehicles.get(i).getAppears();
 		if (vehicles.get(i).getAppears() != false) {
 			Vehicle vehicle = vehicles.get(i);
@@ -433,15 +705,79 @@ public Scene oneVehicle(Stage primaryStage, Cart cart) throws Exception
 			Car1.setFill(Color.WHITE);
 			GridPane.setConstraints(Car1, 1, 0);
 			grid.getChildren().addAll(Car1);
-		
+			i++;
 		
 			
 		
 		}
 		
 	}
+	*/
 	
-
+	Button remove1 = new Button ("Remove Car 1");
+	GridPane.setConstraints(remove1, 0, 3);
+	grid.getChildren().add(remove1);
+	remove1.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle (ActionEvent event) {
+			try {
+				int entry1 = -1;
+				int index = 0;
+				int count = 0;
+				System.out.println(vehicles.size());
+				System.out.println("Index is " + index);
+				while(index < vehicles.size() && count < 1) {
+					if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+						System.out.println(index);
+						entry1 = index;
+						count++;
+					}
+					index++;
+				}
+				System.out.println(entry1);
+				
+				String vin = vehicles.get(entry1).getVIN();
+				System.out.println(vin);
+				if (vehicles.get(entry1).getVIN().equals(vin)){
+					System.out.println("It matches");
+				} else {
+					System.out.println("Nah fuck you");
+				}
+				
+				cart.getCustomer().removeVehicle(vin);
+				System.out.println(vehicles.size());
+				primaryStage.setScene(vehicleInformation(primaryStage, cart));
+				
+				
+				
+				/*
+				for(int i=0; i<vehicles.size(); i++) {
+					//vehicles.get(i).getAppears();
+					if (vehicles.get(i).getAppears() != false) {
+						String vin = vehicles.get(i).getVIN();
+						System.out.println(vin);
+						if (vehicles.get(i).getVIN().equals(vin)){
+							System.out.println("It matches");
+						} else {
+							System.out.println("Nah fuck you");
+						}
+						cart.getCustomer().removeVehicle(vin);
+						System.out.println(vehicles.size());
+						primaryStage.setScene(vehicleInformation(primaryStage, cart));	
+						break;
+						}	
+				//	primaryStage.setScene(twoVehicles(primaryStage, cart));	
+				}
+				*/
+				
+				}catch (Exception e) {
+				System.out.println("IN REMOVE1");
+				e.printStackTrace();
+			}
+		}
+	});
+	
+	
 		Button add = new Button("Add");
 		GridPane.setConstraints(add, 0,2);//under the textfields
 		grid.getChildren().add(add);
@@ -533,16 +869,51 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 	
 	
 	//cart.getCustomer().getInfoFromDBV();
-	
+	cart.getCustomer().getInfoFromDBV();
 
 	ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
 	System.out.println(vehicles.size());
 	System.out.println("You're in 2 cars");
 	
+	int entry1 = -1;
+	int entry2 = -1;
+	int index = 0;
+	int count = 0;
 	
+	while (index < vehicles.size() && count < 2) {
+		if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+			entry1 = index;
+			System.out.println("Entry 1 is: " + entry1);
+			Vehicle vehicle = vehicles.get(entry1);
+			System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Car1.setFont(Font.font("Times New Roman",12));
+			Car1.setFill(Color.WHITE);
+			GridPane.setConstraints(Car1, 1, 0);
+			grid.getChildren().addAll(Car1);
+			count++;
+			
+		}
+		//index++;
+		else if (vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+			entry2 = index;
+			System.out.println(entry2);
+			Vehicle vehicle2 = vehicles.get(entry2);
+			System.out.println("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
+			Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
+			Car2.setFont(Font.font("Times New Roman",12));
+			Car2.setFill(Color.WHITE);
+			GridPane.setConstraints(Car2, 1, 1);
+			grid.getChildren().addAll(Car2);
+			count++;
+		}
+		
+		index++;
+	
+	}
 
 	
-	
+	/*
 	for(int i=0; i<vehicles.size(); i++) {
 		vehicles.get(i).getAppears();
 		if (vehicles.get(i).getAppears() != false) {
@@ -552,9 +923,10 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 			Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
 			Car1.setFont(Font.font("Times New Roman",12));
 			Car1.setFill(Color.WHITE);
-			GridPane.setConstraints(Car1, 1, 0);
-			grid.getChildren().addAll(Car1);
-			
+		//	GridPane.setConstraints(Car1, 1, 0);
+		//	grid.getChildren().addAll(Car1);
+			grid.add(Car1,1, 0, 1,1);
+			i++;
 			//for(int j = 0; j<vehicles.size(); j++) {
 			//	System.out.println("I'm in the nested loop");
 			//	if (vehicles.get(j).getAppears() != false) {
@@ -563,8 +935,9 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 					Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
 					Car2.setFont(Font.font("Times New Roman",12));
 					Car2.setFill(Color.WHITE);
-					GridPane.setConstraints(Car2, 1, 1);
-					grid.getChildren().addAll(Car2);
+					//GridPane.setConstraints(Car2, 1, 1);
+					//grid.getChildren().addAll(Car2);
+					grid.add(Car2, 1, 1,1,1);
 				//}
 			//}
 			
@@ -577,10 +950,11 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 		
 	}
 	
-
+*/
 		Button add = new Button("Add");
-		GridPane.setConstraints(add, 0,2);//under the textfields
-		grid.getChildren().add(add);
+		//GridPane.setConstraints(add, 0,2);//under the textfields
+		//grid.getChildren().add(add);
+		grid.add(add, 0, 2,1,1);
 		add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
 		{
 			@Override
@@ -598,6 +972,559 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 		});//go here when pressed
 	
 	
+	
+//	Vehicle vehicle = vehicles.get(0);
+//	Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+//	Car1.setFont(Font.font("Times New Roman",12));
+//	Car1.setFill(Color.WHITE);
+//	GridPane.setConstraints(Car1, 1, 0);
+//	grid.getChildren().addAll(Car1);
+	
+		Button remove1 = new Button ("Remove Car 1");
+		GridPane.setConstraints(remove1, 0, 3);
+		grid.getChildren().add(remove1);
+		remove1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				try {
+					int entry1 = -1;
+					int index = 0;
+					int count = 0;
+					System.out.println(vehicles.size());
+					System.out.println("Index is " + index);
+					while(index < vehicles.size() && count < 1) {
+						if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+							System.out.println(index);
+							entry1 = index;
+							count++;
+						}
+						index++;
+					}
+					System.out.println(entry1);
+					
+					String vin = vehicles.get(entry1).getVIN();
+					System.out.println(vin);
+					if (vehicles.get(entry1).getVIN().equals(vin)){
+						System.out.println("It matches");
+					} else {
+						System.out.println("Nah fuck you");
+					}
+					
+					cart.getCustomer().removeVehicle(vin);
+					System.out.println(vehicles.size());
+					primaryStage.setScene(oneVehicle(primaryStage, cart));
+					
+					
+					/*
+					for(int i=0; i<vehicles.size(); i++) {
+						//vehicles.get(i).getAppears();
+						if (vehicles.get(i).getAppears() != false) {
+							String vin = vehicles.get(i).getVIN();
+							System.out.println(vin);
+							if (vehicles.get(i).getVIN().equals(vin)){
+								System.out.println("It matches");
+							} else {
+								System.out.println("Nah fuck you");
+							}
+							cart.getCustomer().removeVehicle(vin);
+							System.out.println(vehicles.size());
+							primaryStage.setScene(oneVehicle(primaryStage, cart));	
+							break;
+							}	
+					//primaryStage.setScene(twoVehicles(primaryStage, cart));	
+					}
+					*/
+					}catch (Exception e) {
+					System.out.println("IN REMOVE1");
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		
+		Button remove2 = new Button ("Remove Car 2");
+		GridPane.setConstraints(remove2, 0, 4);
+		grid.getChildren().add(remove2);
+		remove2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				try {
+					int entry1 = -1;
+					int entry2 = -1;
+					int index = 0;
+					int count = 0;
+					System.out.println("Index is " + index);
+					while(index < vehicles.size() && count < 2) {
+						if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+							entry1 = index;
+							count++;
+						}
+						index++;
+						
+						if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+							entry2 = index;
+							count++;
+						}
+						index++;
+					}
+					System.out.println(entry2);
+					
+					String vin = vehicles.get(entry2).getVIN();
+					System.out.println(vin);
+					if (vehicles.get(entry2).getVIN().equals(vin)){
+						System.out.println("It matches");
+					} else {
+						System.out.println("Nah fuck you");
+					}
+					
+					cart.getCustomer().removeVehicle(vin);
+					System.out.println(vehicles.size());
+					primaryStage.setScene(oneVehicle(primaryStage, cart));
+					
+					/*
+					for(int i=1; i<vehicles.size(); i++) {
+						//vehicles.get(i).getAppears();
+						if (vehicles.get(i).getAppears() != false) {
+							String vin = vehicles.get(i).getVIN();
+							System.out.println(vin);
+							if (vehicles.get(i).getVIN().equals(vin)){
+								System.out.println("It matches");
+							} else {
+								System.out.println("Nah fuck you");
+							}
+							cart.getCustomer().removeVehicle(vin);
+							System.out.println(vehicles.size());
+							primaryStage.setScene(oneVehicle(primaryStage, cart));	
+							break;
+							}	
+						//primaryStage.setScene(twoVehicles(primaryStage, cart));	
+					}
+					*/
+					}catch (Exception e) {
+					System.out.println("IN REMOVE2");
+					e.printStackTrace();
+				}
+			}
+		});
+		
+	
+	//create button 
+	Button button = new Button("Next");
+	//GridPane.setConstraints(button, 0, 1);//under the textfields
+	grid.add(button, 0, 1,1,1);
+	button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+	{
+		@Override
+		public void handle (ActionEvent event)
+		{
+			try {
+				//cart.getPermit().setVIN
+				
+				
+				cart.getPermit().addPermit();
+				primaryStage.setScene(payForPermit(primaryStage, cart));   
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("IN SELECT");//check if fail
+				e.printStackTrace();
+			}
+			
+		}
+	});//go here when pressed
+	
+	
+	Text text = new Text("Vehicles on your permit:");
+	text.setFont(Font.font("Times New Roman",20));
+	text.setFill(Color.WHITE);
+	//GridPane.setConstraints(text, 0, 0);
+	grid.add(text, 0, 0,1,1);
+	
+
+	//set up grid
+	//grid.getChildren().addAll(Car1);
+	
+	//grid.getChildren().addAll(text, button, add);
+	
+	//set up scene
+	Scene scene = new Scene(grid, 400, 300);
+	
+	//background
+	BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+	Background bg = new Background(bf);
+	grid.setBackground(bg);
+	
+	//scene setting
+	primaryStage.setScene(scene);
+	primaryStage.show();
+	
+	return scene;
+	
+	
+}
+
+
+public Scene threeVehicles(Stage primaryStage, Cart cart) throws Exception
+{
+    primaryStage.setTitle("Vehicle Selection 3");
+	
+	//create a GridPane
+	GridPane grid = new GridPane();
+	grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+	grid.setVgap(8);//set vertical spacing to 10 pixels
+	grid.setHgap(10);//set horizontal spacing to 10 pixels
+	grid.setAlignment(Pos.CENTER);
+	
+	
+	
+	//cart.getCustomer().getInfoFromDBV();
+	cart.getCustomer().getInfoFromDBV();
+
+	ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+	System.out.println(vehicles.size());
+	System.out.println("You're in 3 cars");
+	
+	int entry1 = -1;
+	int entry2 = -1;
+	int entry3 = -1;
+	int index = 0;
+	int count = 0;
+	
+	while (index < vehicles.size() && count < 3) {
+		if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+			entry1 = index;
+			System.out.println(entry1);
+			Vehicle vehicle = vehicles.get(entry1);
+			System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Car1.setFont(Font.font("Times New Roman",12));
+			Car1.setFill(Color.WHITE);
+			GridPane.setConstraints(Car1, 1, 0);
+			grid.getChildren().addAll(Car1);
+			count++;
+			
+		}
+		
+		index++;
+		if (vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+			entry2 = index;
+			System.out.println(entry2);
+			Vehicle vehicle2 = vehicles.get(entry2);
+			System.out.println("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
+			Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
+			Car2.setFont(Font.font("Times New Roman",12));
+			Car2.setFill(Color.WHITE);
+			GridPane.setConstraints(Car2, 1, 1);
+			grid.getChildren().addAll(Car2);
+			count++;
+		}
+		
+		index++;
+		if (vehicles.get(index).getAppears() == true && count < 3 && entry3 < 0) {
+			entry3 = index;
+			System.out.println(entry3);
+			Vehicle vehicle3 = vehicles.get(entry3);
+			System.out.println("Car 3: " + vehicle3.getLicensePlate() + ", " + vehicle3.getVehicleMake() + ", " + vehicle3.getVehicleColor());
+			Text Car3 = new Text("Car 3: " + vehicle3.getLicensePlate() + ", " + vehicle3.getVehicleMake() + ", " + vehicle3.getVehicleColor());
+			Car3.setFont(Font.font("Times New Roman",12));
+			Car3.setFill(Color.WHITE);
+			GridPane.setConstraints(Car3, 1, 2);
+			grid.getChildren().addAll(Car3);
+			count++;
+		}
+		index++;
+	}
+	
+	
+	
+	
+	/*
+	for(int i=0; i<vehicles.size(); i++) {
+		vehicles.get(i).getAppears();
+		if (vehicles.get(i).getAppears() != false) {
+			Vehicle vehicle = vehicles.get(i);
+			System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			System.out.println(i);
+			Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			Car1.setFont(Font.font("Times New Roman",12));
+			Car1.setFill(Color.WHITE);
+			GridPane.setConstraints(Car1, 1, 0);
+			grid.getChildren().addAll(Car1);
+			i++;
+			//for(int j = 0; j<vehicles.size(); j++) {
+			//	System.out.println("I'm in the nested loop");
+			//	if (vehicles.get(j).getAppears() != false) {
+					Vehicle vehicle2 = vehicles.get(i);
+					System.out.println("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
+					Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
+					Car2.setFont(Font.font("Times New Roman",12));
+					Car2.setFill(Color.WHITE);
+					GridPane.setConstraints(Car2, 1, 1);
+					grid.getChildren().addAll(Car2);
+					
+					i++;
+					Vehicle vehicle3 = vehicles.get(i);
+					System.out.println("Car 3: " + vehicle3.getLicensePlate() + ", " + vehicle3.getVehicleMake() + ", " + vehicle3.getVehicleColor());
+					Text Car3 = new Text("Car 3: " + vehicle3.getLicensePlate() + ", " + vehicle3.getVehicleMake() + ", " + vehicle3.getVehicleColor());
+					Car3.setFont(Font.font("Times New Roman",12));
+					Car3.setFill(Color.WHITE);
+					GridPane.setConstraints(Car3, 1, 2);
+					grid.getChildren().addAll(Car3);
+					
+				//}
+			//}
+			
+			//System.out.println("Car 2: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			//Text Car2 = new Text("Car 2: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
+			i++;
+			
+		
+		}
+		
+	}
+	*/
+	
+	
+	Button remove1 = new Button ("Remove Car 1");
+	GridPane.setConstraints(remove1, 0, 3);
+	grid.getChildren().add(remove1);
+	remove1.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle (ActionEvent event) {
+			try {
+				int entry1 = -1;
+				int index = 0;
+				int count = 0;
+				System.out.println(vehicles.size());
+				System.out.println("Index is " + index);
+				while(index < vehicles.size() && count < 1) {
+					if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+						System.out.println(index);
+						entry1 = index;
+						count++;
+					}
+					index++;
+				}
+				System.out.println(entry1);
+				
+				String vin = vehicles.get(entry1).getVIN();
+				System.out.println(vin);
+				if (vehicles.get(entry1).getVIN().equals(vin)){
+					System.out.println("It matches");
+				} else {
+					System.out.println("Nah fuck you");
+				}
+				
+				cart.getCustomer().removeVehicle(vin);
+				System.out.println(vehicles.size());
+				primaryStage.setScene(twoVehicles(primaryStage, cart));
+				
+				/*
+				for(int i=0; i<vehicles.size(); i++) {
+					//vehicles.get(i).getAppears();
+					if (vehicles.get(i).getAppears() != false) {
+						String vin = vehicles.get(i).getVIN();
+						System.out.println(vin);
+						if (vehicles.get(i).getVIN().equals(vin)){
+							System.out.println("It matches");
+						} else {
+							System.out.println("Nah fuck you");
+						}
+						cart.getCustomer().removeVehicle(vin);
+						System.out.println(vehicles.size());
+						primaryStage.setScene(twoVehicles(primaryStage, cart));	
+						break;
+						}	
+				//	primaryStage.setScene(twoVehicles(primaryStage, cart));	
+				}
+				*/
+				}catch (Exception e) {
+				System.out.println("IN REMOVE1");
+				e.printStackTrace();
+			}
+		}
+	});
+	
+	
+	Button remove2 = new Button ("Remove Car 2");
+	GridPane.setConstraints(remove2, 0, 4);
+	grid.getChildren().add(remove2);
+	remove2.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle (ActionEvent event) {
+			try {
+				int entry1 = -1;
+				int entry2 = -1;
+				int index = 0;
+				int count = 0;
+				System.out.println("Index is " + index);
+				while(index < vehicles.size() && count < 2) {
+					if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+						entry1 = index;
+						count++;
+					}
+					index++;
+					
+					if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+						entry2 = index;
+						count++;
+					}
+					index++;
+				}
+				System.out.println(entry2);
+				
+				String vin = vehicles.get(entry2).getVIN();
+				System.out.println(vin);
+				if (vehicles.get(entry2).getVIN().equals(vin)){
+					System.out.println("It matches");
+				} else {
+					System.out.println("Nah fuck you");
+				}
+				
+				cart.getCustomer().removeVehicle(vin);
+				System.out.println(vehicles.size());
+				primaryStage.setScene(twoVehicles(primaryStage, cart));
+				
+				
+				/*
+				for(int i=1; i<vehicles.size(); i++) {
+					//vehicles.get(i).getAppears();
+					if (vehicles.get(i).getAppears() != false) {
+						String vin = vehicles.get(i).getVIN();
+						System.out.println(vin);
+						if (vehicles.get(i).getVIN().equals(vin)){
+							System.out.println("It matches");
+						} else {
+							System.out.println("Nah fuck you");
+						}
+						cart.getCustomer().removeVehicle(vin);
+						System.out.println(vehicles.size());
+						primaryStage.setScene(twoVehicles(primaryStage, cart));	
+						break;
+						}	
+					//primaryStage.setScene(twoVehicles(primaryStage, cart));	
+				}
+				*/
+				}catch (Exception e) {
+				System.out.println("IN REMOVE2");
+				e.printStackTrace();
+			}
+		}
+	});
+	
+	Button remove3 = new Button ("Remove Car 3");
+	GridPane.setConstraints(remove3, 0, 5);
+	grid.getChildren().add(remove3);
+	remove3.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle (ActionEvent event) {
+			try {
+				int entry1 = -1;
+				int entry2 = -1;
+				int entry3 = -1;
+				int index = 0;
+				int count = 0;
+				System.out.println("Index is " + index);
+				while(index < vehicles.size() && count < 3) {
+					if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+						entry1 = index;
+						count++;
+					}
+					
+					index++;
+					if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+						entry2 = index;
+						count++;
+					}
+					
+					index++;
+					if(vehicles.get(index).getAppears() == true && count < 3 && entry3 < 0) {
+						entry3 = index;
+						count++;
+					}
+					
+					index++;
+				}
+				System.out.println(entry3);
+				
+				String vin = vehicles.get(entry3).getVIN();
+				System.out.println(vin);
+				if (vehicles.get(entry3).getVIN().equals(vin)){
+					System.out.println("It matches");
+				} else {
+					System.out.println("Nah fuck you");
+				}
+				
+				cart.getCustomer().removeVehicle(vin);
+				System.out.println(vehicles.size());
+				primaryStage.setScene(twoVehicles(primaryStage, cart));
+				
+				
+				
+				
+				
+				/*
+				for(int i=2; i<vehicles.size(); i++) {
+					//vehicles.get(i).getAppears();
+					if (vehicles.get(i).getAppears() != false) {
+						String vin = vehicles.get(i).getVIN();
+						System.out.println(vin);
+						if (vehicles.get(i).getVIN().equals(vin)){
+							System.out.println("It matches");
+						} else {
+							System.out.println("Nah fuck you");
+						}
+						cart.getCustomer().removeVehicle(vin);
+						System.out.println(vehicles.size());
+						primaryStage.setScene(twoVehicles(primaryStage, cart));	
+						break;
+						}	
+					//primaryStage.setScene(twoVehicles(primaryStage, cart));	
+				}
+				*/
+				}catch (Exception e) {
+				System.out.println("IN REMOVE3");
+				e.printStackTrace();
+			}
+		}
+	});
+	
+	
+	
+	
+	
+	
+	//Button remove1 = new Button ("Remove Car 1");
+	//GridPane.setConstraints(remove1,  0,  3);
+	//grid.getChildren().add(remove1);
+	//remove1.setOnAction(new EventHandler<ActionEvent>() {
+	//	@Override
+	//	public void handle (ActionEvent event) {
+	//		try {
+	//			String vin = vehicles.get(0).getVIN();
+	//			System.out.println(vin);
+	//			if (vehicles.get(0).getVIN().equals(vin)){
+	//				System.out.println("It matches");
+	//			}
+	//			else {
+	//				System.out.println("Nah fuck you");
+	//			}
+	//			
+	//			cart.getCustomer().removeVehicle(vin);
+//
+//				
+//				System.out.println(vehicles.size());
+//				
+//				primaryStage.setScene(selectVehicles(primaryStage, cart)); 
+//				
+//			}catch (Exception e ) {
+//				System.out.println("IN REMOVE1");
+//				e.printStackTrace();
+//			}
+//		}
+//	});
+
+
+
 	
 //	Vehicle vehicle = vehicles.get(0);
 //	Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
@@ -1147,7 +2074,61 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 					cart.getCustomer().updateDBV();
 					System.out.println(v);
 					//System.out.println(cart.getCustomer().vehicleCount);
-					primaryStage.setScene(yourVehicles(primaryStage, cart));   
+					
+					
+					//In case we suck, delete this
+					//cart.getCustomer().getInfoFromDBV();
+					
+					
+					ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+					int entry1 = -1;
+					int entry2 = -1;
+					int entry3 = -1;
+					int index = 0;
+					int count = 0;
+					
+					System.out.println(vehicles.size());
+					while (index < vehicles.size() && count < 3) {
+						if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+							entry1 = index;
+							count++;
+						}
+						else if (vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+							entry2 = index;
+							count++;
+						}
+						else if (vehicles.get(index).getAppears() == true && count < 3 && entry3 < 0) {
+							entry3 = index;
+							count++;
+						}
+						index++;
+					}
+						
+
+					
+					if (count == 1) {
+						System.out.println("the count: " + count);
+						primaryStage.setScene(oneVehicle(primaryStage, cart));
+					}
+
+					
+					else if (count == 2) {
+						System.out.println("the count: " + count);
+						primaryStage.setScene(twoVehicles(primaryStage, cart));
+					}
+						
+					else if (count == 3) {
+						System.out.println("the count: " + count);
+						primaryStage.setScene(threeVehicles(primaryStage, cart));
+					}				
+					
+					
+					
+					
+					
+					
+					//Suckiness ends here
+					//primaryStage.setScene(yourVehicles(primaryStage, cart));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("IN VEHICLEINFO");//check if fail
@@ -1167,7 +2148,42 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 			public void handle (ActionEvent event)
 			{
 				try {
-					primaryStage.setScene(yourVehicles(primaryStage, cart));   
+					ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+					int entry1 = -1;
+					int entry2 = -1;
+					int entry3 = -1;
+					int index = 0;
+					int count = 0;
+					
+					while (index < vehicles.size() && count < 3) {
+						if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+							entry1 = index;
+							count++;
+						}
+						else if (vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+							entry2 = index;
+							count++;
+						}
+						else if (vehicles.get(index).getAppears() == true && count < 3 && entry3 < 0) {
+							entry3 = index;
+							count++;
+						}
+						index++;
+					}
+						
+
+					
+					if (count == 2) {
+						primaryStage.setScene(oneVehicle(primaryStage, cart));
+					}
+
+					
+					else if (count == 3) {
+						primaryStage.setScene(twoVehicles(primaryStage, cart));
+					}
+						
+					
+					//primaryStage.setScene(yourVehicles(primaryStage, cart));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("IN BACK");//check if fail
@@ -1181,7 +2197,7 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 		grid.getChildren().addAll(text, button, back);
 		
 		//set up scene
-		Scene scene = new Scene(grid, 400, 300);
+		Scene scene = new Scene(grid, 600, 450);
 		
 		//background
 		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
@@ -1269,7 +2285,7 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 			//grid.getChildren().addAll(ask,cardNum,name,exp,yes,no,n,c,e);
 			
 			//button actions go to next stage if user likes payment
-			yes.setOnAction(event->primaryStage.setScene(finalVerification(primaryStage, cart)));   
+			yes.setOnAction(event->primaryStage.setScene(end(primaryStage)));   
 			
 			//delete current data in database and replace
 			no.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
@@ -1456,7 +2472,7 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 						cart.getCustomer().addInfoToDBPM();
 						
 						//go to next scene
-						primaryStage.setScene(finalVerification(primaryStage, cart));   
+						primaryStage.setScene(end(primaryStage));   
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						System.out.println("IN PAYFORPERMIT");
@@ -1484,12 +2500,14 @@ public Scene twoVehicles(Stage primaryStage, Cart cart) throws Exception
 		
 		return scene;
 	}
+	
 	public Scene finalVerification(Stage primaryStage, Cart cart)//ETHAN
 	{
         primaryStage.setTitle("Verify the information submitted");
 		
 		//create a GridPane
 		GridPane grid = new GridPane();
+		
 		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
 		grid.setVgap(8);//set vertical spacing to 10 pixels
 		grid.setHgap(10);//set horizontal spacing to 10 pixels
