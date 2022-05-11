@@ -1,12 +1,6 @@
-/*
-Class name: Cart.java
-Contributers: Lynn Takahashi
-Purpose: Cart class acts an association class between PaymentMethod,
-Permit, and Customer.
+package application;
 
-*/
-
-import java.util.*;
+//import java.util.*;
 
 public class Cart
 {
