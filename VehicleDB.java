@@ -1,4 +1,4 @@
-package application;
+package com.example.application;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,7 @@ public class VehicleDB {
             System.out.println(vin);
             System.out.println(customer.getVehicle(vin).getVIN());
             String query = "UPDATE Vehicle SET appears = FALSE WHERE vin = \'"+ customer.getVehicle(vin).getVIN() + "\'";
-            
+
             System.out.println("UPDATE Vehicle SET appears = FALSE WHERE vin = \'"+ customer.getVehicle(vin).getVIN() + "\'");
             st.executeUpdate(query);
             st.close();
@@ -37,24 +37,24 @@ public class VehicleDB {
             Statement st2 = conn.createStatement();
 
             for (int i = 0; i < customer.getArrayOfVehicles().size(); i++) {
-            	String check = "select * from Vehicle WHERE vin ="+ customer.getArrayOfVehicles().get(i).getVIN()+";";
-            	ResultSet found = st2.executeQuery(check);
-            	if (found.next() == false) {
-            		String query = "INSERT INTO Vehicle  Values(\'" +customer.getArrayOfVehicles().get(i).getVIN()+"\',"+customer.getBroncoID()+",\'"
-                    +customer.getArrayOfVehicles().get(i).getLicensePlate()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
-                    +customer.getArrayOfVehicles().get(i).getVehicleMake()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleColor()+"\',"
-                    +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\',"
-                    +customer.getArrayOfVehicles().get(i).getAppears()+")";
-            		st.executeUpdate(query);
-            	}
-            	else {
-            		continue;
-            	}
+                String check = "select * from Vehicle WHERE vin ="+ customer.getArrayOfVehicles().get(i).getVIN()+";";
+                ResultSet found = st2.executeQuery(check);
+                if (found.next() == false) {
+                    String query = "INSERT INTO Vehicle  Values(\'" +customer.getArrayOfVehicles().get(i).getVIN()+"\',"+customer.getBroncoID()+",\'"
+                            +customer.getArrayOfVehicles().get(i).getLicensePlate()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleType()+"\',\'"
+                            +customer.getArrayOfVehicles().get(i).getVehicleMake()+"\',\'"+customer.getArrayOfVehicles().get(i).getVehicleColor()+"\',"
+                            +customer.getArrayOfVehicles().get(i).getModelYear()+",\'"+customer.getArrayOfVehicles().get(i).getState()+"\',"
+                            +customer.getArrayOfVehicles().get(i).getAppears()+")";
+                    st.executeUpdate(query);
+                }
+                else {
+                    continue;
+                }
             }
-            
+
             st.close();
-    		st2.close();
-    		conn.close();
+            st2.close();
+            conn.close();
 
             return customer.getArrayOfVehicles();
 
@@ -108,7 +108,7 @@ public class VehicleDB {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/cpp_parking_system";
             String username = "root";
-            String password = "Eman9232";//password
+            String password = "hambardzumyan";//password
             Class.forName(driver);
 
             Connection conn = DriverManager.getConnection(url, username, password);
