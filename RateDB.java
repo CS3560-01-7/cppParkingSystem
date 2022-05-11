@@ -5,7 +5,7 @@ Purpose: RateDB used as a database accessor.
 */
 
 
-import application.Rate;
+package application;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,18 +13,37 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class RateDB {
-    public static Rate selectRate (int rateID) {
-        Rate rate = new Rate();
+    public static boolean checkFaculty (Customer customer) {
+        try {
+            Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            String query = "SELECT studentCheck FROM Rate WHERE rateID = " + customer.getBroncoID();
+            ResultSet result = st.executeQuery(query);
+
+            st.close();
+            conn.close();
+            return result.getBoolean("checkStudent");
+
+        }catch(Exception e) {
+            System.out.println(e);
+
+        }
+        return false; // I return false here so if the system can't find anything we assume it is a student
+
+    }
+    
+    public Rate selectRate (Rate rate) {
+        //Rate rate = new Rate();
         try {
             Connection conn = getConnection();
 
             Statement st = conn.createStatement();
-            String query ="select * from Rate WHERE rateID = " + rateID;
+            String query ="select * from Rate WHERE rateID = " + rate.getRateID();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 rs.getInt("rateID");
                 rate.setRate(rs.getInt("rate"));
-                rate.setRateDescription(rs.getString("rateDescription"));
+                rate.setDescription(rs.getString("rateDescription"));
                 rate.setStudent(rs.getBoolean("studentcheck"));
                 rate.setValidDate(rs.getString("validDate"));
                 rate.setExpirationDate(rs.getString("expirationDate"));
@@ -41,12 +60,14 @@ public class RateDB {
 
     }
 
+    
+
     public static Connection getConnection() {
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/cpp_parking_system";
             String username = "root";
-            String password = "****";//password
+            String password = "Eman9232";//password
             Class.forName(driver);
 
             Connection conn = DriverManager.getConnection(url, username, password);
