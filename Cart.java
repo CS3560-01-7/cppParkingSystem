@@ -1,4 +1,4 @@
-package com.example.application;
+package application;
 
 //import java.util.*;
 
