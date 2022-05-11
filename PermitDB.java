@@ -8,12 +8,12 @@ import java.sql.Statement;
 
 public class PermitDB {
 
-    public static void addPermit(Permit permit)  throws Exception{
-
+    public static void addPermit(Permit permit, String vin)  throws Exception{
+    	
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
-            String query = "INSERT INTO Permit (rateID,vin)  Values("+permit.getRate().getRateID()+",\'"+permit.getVehicle().getVIN()+"\')";
+            String query = "INSERT INTO Permit (rateID,vin)  Values("+permit.getRateID()+",\'"+permit.getVIN()+"\')";
             st.executeUpdate(query);
             st.close();
             conn.close();
