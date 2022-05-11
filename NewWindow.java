@@ -275,16 +275,16 @@ public class NewWindow
 				@Override
 				public void handle (ActionEvent event) { 
 					if (rate1.isSelected()) {
-						cart.getPermit().setRateID(1);
+						cart.getPermit().setRateID(student1.getRateID());
 					}
 					else if (rate2.isSelected()) {
-						cart.getPermit().setRateID(2);
+						cart.getPermit().setRateID(student2.getRateID());
 					}
 					else if (rate3.isSelected()) {
-						cart.getPermit().setRateID(3);
+						cart.getPermit().setRateID(student3.getRateID());
 					}
 					else {
-						cart.getPermit().setRateID(4);
+						cart.getPermit().setRateID(student4.getRateID());
 					}
 					
 					try {
@@ -335,7 +335,7 @@ public class NewWindow
 				@Override
 				public void handle (ActionEvent event) { 
 					if (rate1.isSelected()) {
-						cart.getPermit().setRateID(5);
+						cart.getPermit().setRateID(faculty.getRateID());
 					}
 					
 					try {
@@ -349,7 +349,7 @@ public class NewWindow
 		}
 			
 		//set up scene
-		Scene scene = new Scene (grid, 400, 300);
+		Scene scene = new Scene (grid, 600, 450);
 		
 		//background
 		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
