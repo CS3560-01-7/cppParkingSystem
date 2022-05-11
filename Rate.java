@@ -1,4 +1,4 @@
-package com.example.application;
+package application;
 
 public class Rate {
     //attributes
