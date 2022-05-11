@@ -9,10 +9,9 @@ public class CustomerDB {
 
 public Customer selectCustomer(Customer customer) throws Exception
 {
+	Connection con = getConnection();
+	PreparedStatement statement = con.prepareStatement("SELECT firstName, lastName, emailAddress, address, checkStudent FROM Customer WHERE broncoID=" + customer.getBroncoID());
 	try {
-		Connection con = getConnection();
-		
-		PreparedStatement statement = con.prepareStatement("SELECT firstName, lastName, emailAddress, address, checkStudent FROM customer WHERE broncoID =" + customer.getBroncoID());
 		
 		ResultSet result = statement.executeQuery();
 		
@@ -27,27 +26,30 @@ public Customer selectCustomer(Customer customer) throws Exception
 		
 		return customer;
 	}catch(Exception e) {System.out.println(e);}
+	finally {
+	    if (con != null) {
+	        con.close();
+	    }
+	}
+
 	return null;
 }
 
 public static Connection getConnection() throws Exception
 {
-	try {
+	
 		String driver = "com.mysql.cj.jdbc.Driver";
 		String url = "jdbc:mysql://127.0.0.1:3306/cpp_parking_system";//jdbc:mysql://portNumber/databseName
 		String username = "root";
-		String password = "Eman9232";
+		String password = "Lynn$anity11";
 		Class.forName(driver);
 		
 		Connection conn = DriverManager.getConnection(url, username, password);
+		StackTraceElement[] st = Thread.currentThread().getStackTrace();
+	    System.out.println(  "create connection called from " + st[2] );
 		//System.out.println("Connected");
-		
 		return conn;
-	}catch (Exception e) {System.out.println(e);}
-	
-	return null;
+		
 }
-
 }
-
 
