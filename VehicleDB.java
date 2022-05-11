@@ -8,16 +8,14 @@ import java.util.ArrayList;
 
 public class VehicleDB {
 
-    public static Vehicle deleteVehicle(Customer customer, String vin) throws Exception {
-    	Connection conn = getConnection();
-    	try {
+    public static Vehicle deleteVehicle(Customer customer, String vin) {
+        try {
+            Connection conn = getConnection();
             Statement st = conn.createStatement();
             System.out.println(vin);
             System.out.println(customer.getVehicle(vin).getVIN());
-            System.out.println(vin);
-            System.out.println(customer.getVehicle(vin).getVIN());
             String query = "UPDATE Vehicle SET appears = FALSE WHERE vin = \'"+ customer.getVehicle(vin).getVIN() + "\'";
-
+            
             System.out.println("UPDATE Vehicle SET appears = FALSE WHERE vin = \'"+ customer.getVehicle(vin).getVIN() + "\'");
             st.executeUpdate(query);
             st.close();
@@ -28,17 +26,13 @@ public class VehicleDB {
             System.out.println(e);
 
         }
-    	 finally {
-             if (conn != null)
-                 conn.close();
-         }
         return null;
 
     }
 
-    public static ArrayList<Vehicle> addVehicle(Customer customer) throws Exception {
-    	Connection conn = getConnection();
-    	try {
+    public static ArrayList<Vehicle> addVehicle(Customer customer) {
+        try {
+            Connection conn = getConnection();
             Statement st = conn.createStatement();
             Statement st2 = conn.createStatement();
 
@@ -68,10 +62,6 @@ public class VehicleDB {
             System.out.println(e);
 
         }
-    	 finally {
-             if (conn != null)
-                 conn.close();
-         }
         return null;
     }
 
@@ -79,8 +69,9 @@ public class VehicleDB {
 
         ArrayList<Vehicle> arrayOfVehicles = new ArrayList<>();
 
-        Connection conn = getConnection();
         try {
+
+            Connection conn = getConnection();
 
             Statement st = conn.createStatement();
             String query ="select * from Vehicle WHERE broncoID = " + customer.getBroncoID();
@@ -107,23 +98,26 @@ public class VehicleDB {
 
         }catch(Exception e) {
             System.out.println(e);
-        }
-        finally {
-            if (conn != null)
-                conn.close();
+
         }
         return null;
     }
 
-    public static Connection getConnection() throws Exception{
+    public static Connection getConnection() {
+        try {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/cpp_parking_system";
             String username = "root";
-            String password = "Lynn$anity11";//password
+            String password = "Eman9232";//password
             Class.forName(driver);
 
             Connection conn = DriverManager.getConnection(url, username, password);
             return conn;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return null;
 
     }
 }
