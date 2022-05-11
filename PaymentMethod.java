@@ -10,6 +10,7 @@ We are assuming for this system that all cards are valid and so is the billing a
 Checklist:
 basics completed.
 */
+
 package application;
 
 public class PaymentMethod {
@@ -197,4 +198,6 @@ public class PaymentMethod {
 	  {
 		  return zip;
 	  }
+	
+	 
 }
