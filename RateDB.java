@@ -41,7 +41,7 @@ public class RateDB {
             String query ="select * from Rate WHERE rateID = " + rate.getRateID();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                rs.getInt("rateID");
+                rate.setRateID(rs.getInt("rateID"));
                 rate.setRate(rs.getInt("rate"));
                 rate.setDescription(rs.getString("rateDescription"));
                 rate.setStudent(rs.getBoolean("studentcheck"));
