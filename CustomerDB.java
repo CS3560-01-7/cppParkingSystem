@@ -1,3 +1,5 @@
+package application;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,7 +36,7 @@ public static Connection getConnection() throws Exception
 		String driver = "com.mysql.cj.jdbc.Driver";
 		String url = "jdbc:mysql://127.0.0.1:3306/cpp_parking_system";//jdbc:mysql://portNumber/databseName
 		String username = "root";
-		String password = "passwordhere";
+		String password = "Eman9232";
 		Class.forName(driver);
 		
 		Connection conn = DriverManager.getConnection(url, username, password);
@@ -47,6 +49,5 @@ public static Connection getConnection() throws Exception
 }
 
 }
-
 
 
