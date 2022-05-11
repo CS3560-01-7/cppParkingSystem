@@ -17,15 +17,15 @@ package application;
 public class Permit extends Rate {
 	
 	private int permitNumber;
-	int vin;
+	String vin;
 	
 	public Permit() {
 		super();
 		permitNumber = 0;
-		vin = 0;
+		vin = "";
 	}
 	
-	public Permit(int permitNumber, int vin) {
+	public Permit(int permitNumber, String vin) {
 		super();
 		this.permitNumber = permitNumber;
 		this.vin = vin;
@@ -41,11 +41,11 @@ public class Permit extends Rate {
 		permitNumber = pn;
 	}
 	
-	public int getVIN()
+	public String getVIN()
 	{
 		return vin;
 	}
-	public void setVIN(int v)
+	public void setVIN(String v)
 	{
 		vin = v;
 	}
