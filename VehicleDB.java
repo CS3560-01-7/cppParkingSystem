@@ -14,8 +14,10 @@ public class VehicleDB {
             Statement st = conn.createStatement();
             System.out.println(vin);
             System.out.println(customer.getVehicle(vin).getVIN());
+            System.out.println(vin);
+            System.out.println(customer.getVehicle(vin).getVIN());
             String query = "UPDATE Vehicle SET appears = FALSE WHERE vin = \'"+ customer.getVehicle(vin).getVIN() + "\'";
-            
+
             System.out.println("UPDATE Vehicle SET appears = FALSE WHERE vin = \'"+ customer.getVehicle(vin).getVIN() + "\'");
             st.executeUpdate(query);
             st.close();
