@@ -4,7 +4,7 @@ Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambard
 Purpose: PaymentMethodDB used as a database accessor.
 */
 
-package com.example.application;
+package application;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
