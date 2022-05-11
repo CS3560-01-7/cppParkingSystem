@@ -17,7 +17,7 @@ read vehicle (owned) method
 */
 
 
-package com.example.application;
+package application;
 
 import java.util.ArrayList;
 
