@@ -44,11 +44,15 @@ public class Permit extends Rate {
 	
 	public String getVIN()
 	{
+		System.out.println(vin + "This is in permit");
 		return vin;
+		
 	}
-	public void setVIN(String v)
+	public void setVIN(String v) throws Exception
 	{
 		vin = v;
+		this.addPermit();
+		
 	}
 	
 	public void addPermit() throws Exception{
