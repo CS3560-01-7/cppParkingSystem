@@ -18,6 +18,7 @@ public class Permit extends Rate {
 	
 	private int permitNumber;
 	String vin;
+	protected PermitDB pdb = new PermitDB();
 	
 	public Permit() {
 		super();
@@ -49,5 +50,10 @@ public class Permit extends Rate {
 	{
 		vin = v;
 	}
+	
+	public void addPermit() throws Exception{
+		PermitDB.addPermit(this);
+	}
+	
 
 }
