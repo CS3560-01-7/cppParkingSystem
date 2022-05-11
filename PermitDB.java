@@ -2,13 +2,16 @@
 // The code should work
 // only insert your connection password
 
+package application;
+
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class PermitDB {
 
-    public static void addPermit(Permit permit, String vin)  throws Exception{
+    public static void addPermit(Permit permit)  throws Exception{
     	
         try {
             Connection conn = getConnection();
@@ -29,7 +32,7 @@ public class PermitDB {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/cpp_parking_system";
             String username = "root";
-            String password = "******";//password
+            String password = "Eman9232";//password
             Class.forName(driver);
 
             Connection conn = DriverManager.getConnection(url, username, password);
