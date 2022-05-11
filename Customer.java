@@ -29,7 +29,7 @@ public class Customer {
 	protected String emailAddress;
 	protected String address;
 	protected int vehicleCount = 0;
-	protected int maxVehicles = 4;
+	//protected int maxVehicles = 4;
 	protected boolean student;
 	protected ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 	protected PaymentMethod payment;
@@ -142,25 +142,28 @@ public class Customer {
 	
 	public void addVehicle(Vehicle v) throws Exception
 	{
-		if (vehicleCount <= maxVehicles) {
+		System.out.println("I'm in the add method");
+		//if (vehicleCount <= maxVehicles) {
 			vehicles.add(v);
 			vehicleCount++;
-		}
-		else {
-			throw new Exception("Maximum number of vehicles reached");
-		}
+		//}
+		//else {
+			//throw new Exception("Maximum number of vehicles reached");
+		//}
 	}
 	
 	public void removeVehicle(String vin) throws Exception {
         Vehicle v = dbv.deleteVehicle(this, vin);
+        /*
         for (int i = 0; i < vehicleCount; i++) {
             if (vehicles.get(i).getVIN().equals(vin)) {
             	System.out.println("I am in the method");
-            	vehicles.remove(vehicles.get(i));
+            	//vehicles.remove(vehicles.get(i));
+            	break;
             }
-        }
+        }*/
 
-        throw new Exception("Vehicle not found");
+       // throw new Exception("Vehicle not found");
     }
 	
 	
