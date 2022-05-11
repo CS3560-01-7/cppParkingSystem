@@ -11,7 +11,7 @@ Checklist:
 basics completed.
 */
 
-package com.example.application;
+package application;
 
 public class PaymentMethod {
     private long cardNumber;//pk
