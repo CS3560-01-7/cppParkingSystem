@@ -1,7 +1,7 @@
 
 // The code should work
 // only insert your connection password
-package com.example.application;
+package application;
 
 
 import java.sql.Connection;
