@@ -11,7 +11,7 @@ And finally, let customer enter their credit card's information to pay.
 
 put all user prompts here...
 */
-package com.example.application;
+package application;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
