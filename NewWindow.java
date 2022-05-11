@@ -1,6 +1,8 @@
 package application;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -9,7 +11,9 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -75,7 +79,7 @@ public class NewWindow
 					cart.getCustomer().setBroncoID(Integer.parseInt(id.getText()));
 					cart.getCustomer().getInfoFromDBC();
 					//System.out.println(customer.getFullName());
-					primaryStage.setScene(selectVehicles(primaryStage, cart));   
+					primaryStage.setScene(selectPermit(primaryStage, cart));   
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("IN BRONCOID");//check if fail
@@ -103,6 +107,186 @@ public class NewWindow
 		
 		return scene;
 	}
+	
+
+	public Scene selectPermit(Stage primaryStage, Cart cart) throws Exception
+	{
+		
+		primaryStage.setTitle("Permit Selection");
+		
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(8);//set vertical spacing to 10 pixels
+		grid.setHgap(10);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		cart.getCustomer().getInfoFromDBC();
+		
+		if(cart.getCustomer().getStudent() != false) {
+			Text text = new Text("Select your permit type");
+			text.setFont(Font.font("Times New Roman",20));
+			text.setFill(Color.WHITE);
+			grid.add(text, 0, 0, 1, 1);
+			
+			Text select = new Text("Select");//user prompt
+			select.setFont(Font.font("Times New Roman",12));
+			select.setFill(Color.WHITE);
+			grid.add(select, 0, 1, 1, 1);//set on grid
+			
+			Text fee = new Text("Permit Fee");//user prompt
+			fee.setFont(Font.font("Times New Roman",12));
+			fee.setFill(Color.WHITE);
+			grid.add(fee, 1, 1, 1, 1);//set on grid
+			
+			Text description = new Text("Description");//user prompt
+			description.setFont(Font.font("Times New Roman",12));
+			description.setFill(Color.WHITE);
+			grid.add(description, 2, 1, 1, 1);//set on grid
+			
+			Text valid = new Text("Permit Valid");//user prompt
+			valid.setFont(Font.font("Times New Roman",12));
+			valid.setFill(Color.WHITE);
+			grid.add(valid, 3, 1, 1, 1);//set on grid
+			
+			Text expires = new Text("Permit Expires");//user prompt
+			expires.setFont(Font.font("Times New Roman",12));
+			expires.setFill(Color.WHITE);
+			grid.add(expires, 4, 1, 1, 1);//set on grid
+		
+			Button button = new Button("Next");
+			//Button test = new Button("Test");
+			grid.add(button, 0, 4, 1, 1);
+			//GridPane.setConstraints(button, 1, 6);
+			//GridPane.setConstraints(test, 0,6);
+			
+			CheckBox rate1 = new CheckBox();
+			CheckBox rate2 = new CheckBox();
+			grid.add(rate1, 0, 2, 1, 1);
+			grid.add(rate2, 0, 3, 1, 1);
+			
+			//fill data
+			Rate temp = new Rate();
+			//get permit rate values and put into table
+			
+			
+			
+
+			button.setOnAction(new EventHandler<ActionEvent>()
+			{
+				@Override
+				public void handle (ActionEvent event) {
+					try{
+						if(rate1.isSelected())
+						{
+							cart.getPermit().setRateID(5);
+						}
+						else
+						{
+							cart.getPermit().setRateID(6);
+						}
+						System.out.println(cart.getPermit().getRateID());
+						primaryStage.setScene(selectVehicles(primaryStage, cart)); 
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println("IN PAYFORPERMIT");
+						e.printStackTrace();
+					}	
+					
+				}
+			});
+		
+		}
+		else {
+			Text text = new Text("Select your permit type");
+			text.setFont(Font.font("Times New Roman",20));
+			text.setFill(Color.WHITE);
+			GridPane.setConstraints(text, 0, 0);
+			
+			
+			Button button = new Button("Next");
+			Button test = new Button("Test");
+			GridPane.setConstraints(button, 1, 6);
+			GridPane.setConstraints(test, 0,6);
+		
+			ChoiceBox<Integer> Options = new ChoiceBox<>();
+			Options.getItems().addAll(5);
+			button.setOnAction(e -> getChoice(Options));
+			GridPane.setConstraints(Options, 0, 3);
+			
+			CheckBox rate1 = new CheckBox();
+			CheckBox rate2 = new CheckBox();
+			CheckBox rate3 = new CheckBox();
+			CheckBox rate4 = new CheckBox();		
+		
+			grid.getChildren().addAll(text, button, test, Options);
+		
+			
+
+			test.setOnAction(new EventHandler<ActionEvent>()
+			{
+				@Override
+				public void handle (ActionEvent event) {
+					try{
+						if(rate1.isSelected())
+						{
+							
+						}
+						else if (rate2.isSelected())
+						{
+							
+						}
+						else if (rate3.isSelected())
+						{
+							
+						}
+						else
+						{
+							
+						}
+						cart.getPermit().setRateID(Options.getValue());
+						//(Integer.parseInt(securityCodeF.getText()));
+						System.out.println(cart.getPermit().getRateID());
+						primaryStage.setScene(selectVehicles(primaryStage, cart)); 
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println("IN PAYFORPERMIT");
+						e.printStackTrace();
+					}	
+					
+				}
+			});
+			
+		}
+		
+		
+		//set up scene
+		Scene scene = new Scene (grid, 600, 450);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
+	
+	//cart.getCustomer().getPayment().setExpDateM(expirationF1.getValue());
+	//cart.getCustomer().addInfoToDBPM();
+	//cart.getCustomer().getPayment().getExpDateM()
+	
+public void getChoice (ChoiceBox<Integer> Options) {
+	int permitChoice = Options.getValue();
+	System.out.print(permitChoice);
+	
+	
+}
+
 	
 	public Scene selectVehicles(Stage primaryStage, Cart cart)//ETHAN
 	{
@@ -179,217 +363,196 @@ public class NewWindow
 	
 	public Scene vehicleInformation(Stage primaryStage, Cart cart)//Amal
 	{
-        primaryStage.setTitle("Vehicle Information");
-		
 		//create a GridPane
-		GridPane grid = new GridPane();
-		//grid.setGridLinesVisible(true);
-		grid.getColumnConstraints().add(new ColumnConstraints(150));
-		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
-		grid.setVgap(8);//set vertical spacing to 10 pixels
-		grid.setHgap(10);//set horizontal spacing to 10 pixels
-		grid.setAlignment(Pos.CENTER);
-		
-		Text text = new Text("Please Input your Vehicle Information");
-		text.setFont(Font.font("Times New Roman",20));
-		text.setFill(Color.WHITE);
-		GridPane.setConstraints(text, 0, 0, 1, 1);
-		
-		Label vin = new Label("VIN: ");
-		vin.setTextFill(Color.WHITE);
-		vin.setFont(new Font("Times New Roman",15));
-		grid.add(vin, 0, 1, 1, 1);
-		TextField vinField = new TextField();
-		vinField.setPromptText("VIN");
-  		vinField.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(vinField, 1, 1, 1, 1);
-		
-		Label license = new Label("License Number: ");
-		license.setTextFill(Color.WHITE);
-		license.setFont(new Font("Times New Roman",15));
-		grid.add(license, 0, 2, 1, 1);
-		TextField plateNum = new TextField();
-		plateNum.setPromptText("License Number");
-  		plateNum.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(plateNum, 1, 2, 1, 1);
-		
-		Label make = new Label("Vehicle Make: ");
-		make.setTextFill(Color.WHITE);
-		make.setFont(new Font("Times New Roman",15));
-		grid.add(make, 0, 3, 1, 1);
-		
-		ObservableList<String> makeOptions = FXCollections.observableArrayList("Toyota","Honda","Chevrolet",
-				"Ford","Mercedes-Benz");
-		
-		ComboBox<String> makeBox = new ComboBox<String>(makeOptions);
-		makeBox.setPromptText("Make");
-  		makeBox.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(makeBox, 1, 3, 1, 1);
-		
-		EventHandler<ActionEvent> makeBoxEvent = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-               makeBox.setPromptText((String) makeBox.getValue());
-           }
-       };
-       
-       makeBox.setOnAction(makeBoxEvent);
-		
-		/*TextField makeField = new TextField();
-		makeField.setPromptText("Make");
-  		makeField.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(makeField, 1, 3, 1, 1);*/
-		
-		Label model = new Label("Vehicle Model: ");
-		model.setTextFill(Color.WHITE);
-		model.setFont(new Font("Times New Roman",15));
-		grid.add(model, 0, 4, 1, 1);
-		
-		ObservableList<String> modelOptions = FXCollections.observableArrayList("RAV4","Camry","Corolla","CR-V","Civic",
-				"Accord","Silverado","Equinox","Malibu","F-Series","Escape","Explorer","GLC","GLE","E-Class/CLS");
-		
-		ComboBox<String> modelBox = new ComboBox<String>(modelOptions);
-		modelBox.setPromptText("Model");
-  		modelBox.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(modelBox, 1, 4, 1, 1);
-		
-		EventHandler<ActionEvent> modelBoxEvent = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-               modelBox.setPromptText((String) modelBox.getValue());
-           }
-       };
-       
-       modelBox.setOnAction(modelBoxEvent);
-		
-		/*TextField modelField = new TextField();
-		modelField.setPromptText("Model");
-  		modelField.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(modelField, 1, 4, 1, 1);*/
-		
-		Label year = new Label("Model Year: ");
-		year.setTextFill(Color.WHITE);
-		year.setFont(new Font("Times New Roman",15));
-		grid.add(year, 0, 5, 1, 1);
-		TextField yearField = new TextField();
-		yearField.setPromptText("Year");
-  		yearField.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(yearField, 1, 5, 1, 1);
-		
-		Label color = new Label("Vehicle Color: ");
-		color.setTextFill(Color.WHITE);
-		color.setFont(new Font("Times New Roman",15));
-		grid.add(color, 0, 6, 1, 1);
-		ObservableList<String> colorOptions = FXCollections.observableArrayList("White","Black","Gray","Silver",
-				"Red","Blue","Brown","Green","Beige","Orange","Gold","Yellow","Purple","Other");
-		
-		ComboBox<String> colorBox = new ComboBox<String>(colorOptions);
-		colorBox.setPromptText("Color");
-  		colorBox.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(colorBox, 1, 6, 1, 1);
-		
-		EventHandler<ActionEvent> colorBoxEvent = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-               colorBox.setPromptText((String) colorBox.getValue());
-           }
-       };
-       
-       colorBox.setOnAction(colorBoxEvent);
-		
-		/*TextField colorField = new TextField();
-		colorField.setPromptText("Color");
-  		colorField.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(colorField, 1, 6, 1, 1);*/
-		
-		ObservableList<String> options = FXCollections.observableArrayList("AL","AK","AZ","AR","AS","CA","CO",
-				"CT","DE","DC","FL","GA","GU","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","ME","MN",
-				"MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","CM","OH","OK","OR","PA","PR","RI","SC","SD",
-				"TN","TX","TT","UT","VT","VA","VI","WA","WV","WI","WY","Other");
-		
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		ComboBox<String> stateBox = new ComboBox(options);
-		Label state = new Label("State: ");
-		state.setTextFill(Color.WHITE);
-		state.setFont(new Font("Times New Roman",15));
-		grid.add(state, 0, 7, 1, 1);
-		stateBox.setPromptText("State");
-		stateBox.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(stateBox, 1, 7, 1, 1);
-		
-		EventHandler<ActionEvent> stateBoxEvent = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-               stateBox.setPromptText((String) stateBox.getValue());
-           }
-       };
-       
-       stateBox.setOnAction(stateBoxEvent);
-		
-		/*TextField stateField = new TextField();
-		stateField.setPromptText("State");
-  		stateField.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
-		grid.add(stateField, 1, 7, 1, 1);*/
-		
-		
-		//create button 
-		Button button = new Button("Next");
-		GridPane.setConstraints(button, 0, 8, 1, 1);//under the textfields
-		button.setMinSize(70,20);
-  		button.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
-		button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
-		{
-			@Override
-			public void handle (ActionEvent event)
-			{
-				try {
-					Vehicle v = new Vehicle(vinField.getText(), plateNum.getText(), modelBox.getValue(), 
-							makeBox.getValue(), colorBox.getValue(), Integer.parseInt(yearField.getText()),
-							(String) stateBox.getValue());
-					cart.getCustomer().addVehicle(v);
-					cart.getCustomer().updateDBV();
-					primaryStage.setScene(selectVehicles(primaryStage, cart));   
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					System.out.println("IN VEHICLEINFO");//check if fail
-					e.printStackTrace();
-				}
+				GridPane grid = new GridPane();
+				//grid.setGridLinesVisible(true);
+				grid.getColumnConstraints().add(new ColumnConstraints(150));
+				grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+				grid.setVgap(8);//set vertical spacing to 10 pixels
+				grid.setHgap(10);//set horizontal spacing to 10 pixels
+				grid.setAlignment(Pos.CENTER);
 				
-			}
-		});//go here when pressed
-		
-		Button back = new Button("Back");
-		GridPane.setConstraints(back, 1, 8, 1, 1);//under the textfields
-		back.setMinSize(70,20);
-  		back.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
-		back.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
-		{
-			@Override
-			public void handle (ActionEvent event)
-			{
-				try {
-					primaryStage.setScene(selectVehicles(primaryStage, cart));   
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					System.out.println("IN BACK");//check if fail
-					e.printStackTrace();
-				}
+				Text text = new Text("Please Input your Vehicle Information");
+				text.setFont(Font.font("Times New Roman",20));
+				text.setFill(Color.WHITE);
+				GridPane.setConstraints(text, 0, 0, 1, 1);
 				
-			}
-		});//go here when pressed
-		
-		//set up grid
-		grid.getChildren().addAll(text, button, back);
-		
-		//set up scene
-		Scene scene = new Scene(grid, 400, 300);
-		
-		//background
-		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
-		Background bg = new Background(bf);
-		grid.setBackground(bg);
-		
-		//scene setting
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-		return scene;
+				Label vin = new Label("VIN: ");
+				vin.setTextFill(Color.WHITE);
+				vin.setFont(new Font("Times New Roman",15));
+				grid.add(vin, 0, 1, 1, 1);
+				TextField vinField = new TextField();
+				vinField.setPromptText("VIN");
+		  		vinField.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+				grid.add(vinField, 1, 1, 1, 1);
+				
+				Label license = new Label("License Number: ");
+				license.setTextFill(Color.WHITE);
+				license.setFont(new Font("Times New Roman",15));
+				grid.add(license, 0, 2, 1, 1);
+				TextField plateNum = new TextField();
+				plateNum.setPromptText("License Number");
+		  		plateNum.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+				grid.add(plateNum, 1, 2, 1, 1);
+				
+				Label make = new Label("Vehicle Make: ");
+				make.setTextFill(Color.WHITE);
+				make.setFont(new Font("Times New Roman",15));
+				grid.add(make, 0, 3, 1, 1);
+				
+				ObservableList<String> makeOptions = FXCollections.observableArrayList("Toyota","Honda","Chevrolet",
+						"Ford","Mercedes-Benz");
+				
+				ComboBox<String> makeBox = new ComboBox<String>(makeOptions);
+				makeBox.setPromptText("Make");
+		  		makeBox.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+				grid.add(makeBox, 1, 3, 1, 1);
+				
+				EventHandler<ActionEvent> makeBoxEvent = new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent e) {
+		               makeBox.setPromptText((String) makeBox.getValue());
+		           }
+		       };
+		       
+		       makeBox.setOnAction(makeBoxEvent);
+				
+				Label model = new Label("Vehicle Model: ");
+				model.setTextFill(Color.WHITE);
+				model.setFont(new Font("Times New Roman",15));
+				grid.add(model, 0, 4, 1, 1);
+				
+				ObservableList<String> modelOptions = FXCollections.observableArrayList("RAV4","Camry","Corolla","CR-V","Civic",
+						"Accord","Silverado","Equinox","Malibu","F-Series","Escape","Explorer","GLC","GLE","E-Class/CLS");
+				
+				ComboBox<String> modelBox = new ComboBox<String>(modelOptions);
+				modelBox.setPromptText("Model");
+		  		modelBox.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+				grid.add(modelBox, 1, 4, 1, 1);
+				
+				EventHandler<ActionEvent> modelBoxEvent = new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent e) {
+		               modelBox.setPromptText((String) modelBox.getValue());
+		           }
+		       };
+		       
+		       modelBox.setOnAction(modelBoxEvent);
+				
+				Label year = new Label("Model Year: ");
+				year.setTextFill(Color.WHITE);
+				year.setFont(new Font("Times New Roman",15));
+				grid.add(year, 0, 5, 1, 1);
+				TextField yearField = new TextField();
+				yearField.setPromptText("Year");
+		  		yearField.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+				grid.add(yearField, 1, 5, 1, 1);
+				
+				Label color = new Label("Vehicle Color: ");
+				color.setTextFill(Color.WHITE);
+				color.setFont(new Font("Times New Roman",15));
+				grid.add(color, 0, 6, 1, 1);
+				ObservableList<String> colorOptions = FXCollections.observableArrayList("White","Black","Gray","Silver",
+						"Red","Blue","Brown","Green","Beige","Orange","Gold","Yellow","Purple","Other");
+				
+				ComboBox<String> colorBox = new ComboBox<String>(colorOptions);
+				colorBox.setPromptText("Color");
+		  		colorBox.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+				grid.add(colorBox, 1, 6, 1, 1);
+				
+				EventHandler<ActionEvent> colorBoxEvent = new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent e) {
+		               colorBox.setPromptText((String) colorBox.getValue());
+		           }
+		       };
+		       
+		       colorBox.setOnAction(colorBoxEvent);
+				
+				ObservableList<String> options = FXCollections.observableArrayList("AL","AK","AZ","AR","AS","CA","CO",
+						"CT","DE","DC","FL","GA","GU","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","ME","MN",
+						"MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","CM","OH","OK","OR","PA","PR","RI","SC","SD",
+						"TN","TX","TT","UT","VT","VA","VI","WA","WV","WI","WY","Other");
+				
+				@SuppressWarnings({ "rawtypes", "unchecked" })
+				ComboBox<String> stateBox = new ComboBox(options);
+				Label state = new Label("State: ");
+				state.setTextFill(Color.WHITE);
+				state.setFont(new Font("Times New Roman",15));
+				grid.add(state, 0, 7, 1, 1);
+				stateBox.setPromptText("State");
+				stateBox.setStyle("-fx-border-color: GREEN; -fx-border-width: 2px;");
+				grid.add(stateBox, 1, 7, 1, 1);
+				
+				EventHandler<ActionEvent> stateBoxEvent = new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent e) {
+		               stateBox.setPromptText((String) stateBox.getValue());
+		           }
+		       };
+		       
+		       stateBox.setOnAction(stateBoxEvent);
+				
+				//create button 
+				Button button = new Button("Next");
+				GridPane.setConstraints(button, 0, 8, 1, 1);//under the textfields
+				button.setMinSize(70,20);
+		  		button.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
+		  		GridPane.setHalignment(button, HPos.CENTER);
+				button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+				{
+					@Override
+					public void handle (ActionEvent event)
+					{
+						try {
+							Vehicle v = new Vehicle(vinField.getText(), plateNum.getText(), modelBox.getValue(), 
+									makeBox.getValue(), colorBox.getValue(), Integer.parseInt(yearField.getText()),
+									(String) stateBox.getValue());
+							cart.getCustomer().addVehicle(v);
+							cart.getCustomer().updateDBV();
+							primaryStage.setScene(selectVehicles(primaryStage, cart));   
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("IN VEHICLEINFO");//check if fail
+							e.printStackTrace();
+						}
+						
+					}
+				});//go here when pressed
+				
+				Button back = new Button("Back");
+				GridPane.setConstraints(back, 1, 8, 1, 1);//under the textfields
+				back.setMinSize(70,20);
+		  		back.setStyle("-fx-border-color: WHITE; -fx-text-fill: BLACK;");
+		  		GridPane.setHalignment(back, HPos.CENTER);
+				back.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
+				{
+					@Override
+					public void handle (ActionEvent event)
+					{
+						try {
+							primaryStage.setScene(selectVehicles(primaryStage, cart));   
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("IN BACK");//check if fail
+							e.printStackTrace();
+						}
+						
+					}
+				});//go here when pressed
+				
+				//set up grid
+				grid.getChildren().addAll(text, button, back);
+				
+				//set up scene
+				Scene scene = new Scene(grid, 600,450);
+				
+				//background
+				BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+				Background bg = new Background(bf);
+				grid.setBackground(bg);
+				
+				//scene setting
+				primaryStage.setScene(scene);
+				primaryStage.show();
+				
+				return scene;
 	}
 	
 	
