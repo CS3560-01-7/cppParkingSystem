@@ -349,7 +349,7 @@ public class NewWindow
 		}
 			
 		//set up scene
-		Scene scene = new Scene (grid, 600, 450);
+		Scene scene = new Scene (grid, 400, 300);
 		
 		//background
 		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
