@@ -79,8 +79,23 @@ public class NewWindow
                 try {
                     cart.getCustomer().setBroncoID(Integer.parseInt(id.getText()));
                     cart.getCustomer().getInfoFromDBC();
-                    //System.out.println(customer.getFullName());
-                    primaryStage.setScene(selectPermit(primaryStage, cart));
+//                     System.out.println(cart.getCustomer().firstName);
+                    if (cart.getCustomer().firstName.isBlank()) {
+                        Label invalid = new Label("Invalid entry ");
+                        invalid.setTextFill(Color.RED);//set font color
+                        invalid.setFont(new Font("Times New Roman",15));//set font type and size
+                        grid.add(invalid, 0, 4,1,1);//set on grid
+                        button.setText("Try Again");
+                        button.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle (ActionEvent event) {
+                                BroncoID(primaryStage, cart);
+                            }
+                        });
+
+                    } else {
+                        primaryStage.setScene(selectPermit(primaryStage, cart));
+                    }
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     System.out.println("IN BRONCOID");//check if fail
