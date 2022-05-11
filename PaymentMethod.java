@@ -197,6 +197,4 @@ public class PaymentMethod {
 	  {
 		  return zip;
 	  }
-	
-	 
 }
