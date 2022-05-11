@@ -12,7 +12,7 @@ Check list:
 basics completed
 */
 
-package com.example.application;
+package application;
 
 public class Permit extends Rate {
 
