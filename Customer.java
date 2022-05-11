@@ -29,7 +29,7 @@ public class Customer {
 	protected String emailAddress;
 	protected String address;
 	protected int vehicleCount = 0;
-	//protected int maxVehicles = 4;
+	protected int maxVehicles = 4;
 	protected boolean student;
 	protected ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 	protected PaymentMethod payment;
@@ -142,28 +142,25 @@ public class Customer {
 	
 	public void addVehicle(Vehicle v) throws Exception
 	{
-		System.out.println("I'm in the add method");
-		//if (vehicleCount <= maxVehicles) {
+		if (vehicleCount <= maxVehicles) {
 			vehicles.add(v);
 			vehicleCount++;
-		//}
-		//else {
-			//throw new Exception("Maximum number of vehicles reached");
-		//}
+		}
+		else {
+			throw new Exception("Maximum number of vehicles reached");
+		}
 	}
 	
 	public void removeVehicle(String vin) throws Exception {
         Vehicle v = dbv.deleteVehicle(this, vin);
-        /*
         for (int i = 0; i < vehicleCount; i++) {
             if (vehicles.get(i).getVIN().equals(vin)) {
             	System.out.println("I am in the method");
-            	//vehicles.remove(vehicles.get(i));
-            	break;
+            	vehicles.remove(vehicles.get(i));
             }
-        }*/
+        }
 
-       // throw new Exception("Vehicle not found");
+        throw new Exception("Vehicle not found");
     }
 	
 	
@@ -206,12 +203,12 @@ public class Customer {
 	}
 	
 	@SuppressWarnings("static-access")
-	public void updateDBV() {
+	public void updateDBV() throws Exception {
 		vehicles = dbv.addVehicle(this);
 	}
 	
 	
-	public void deleteInfoFromDBPM()
+	public void deleteInfoFromDBPM() throws Exception
 	{
 		payment = dbpm.deletePaymentMethod(this);
 	}
