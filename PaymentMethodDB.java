@@ -9,14 +9,12 @@ package application;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PaymentMethodDB {
-	public PaymentMethod deletePaymentMethod(Customer customer) throws Exception {
-		Connection conn = getConnection();
-		try {
-           
+	public PaymentMethod deletePaymentMethod(Customer customer) {
+        try {
+            Connection conn = getConnection();
             Statement st = conn.createStatement();
             String query = "DELETE FROM PaymentMethod WHERE broncoID = " + customer.getBroncoID();
             st.executeUpdate(query);
@@ -28,19 +26,14 @@ public class PaymentMethodDB {
             System.out.println(e);
 
         }
-        finally {
-            if (conn != null)
-                conn.close();
-        }
         return null;
     }
     
     
     public void addPaymentMethod(Customer customer)  throws Exception{
 
-    	Connection conn = getConnection();
         try {
-            
+            Connection conn = getConnection();
             Statement st = conn.createStatement();
             String query = "INSERT INTO PaymentMethod  Values("+customer.getBroncoID()+","+customer.getPayment().getCardNumber()+","
                     +customer.getPayment().getSecurityCode()+","+customer.getPayment().getExpDateM()+","
@@ -55,17 +48,13 @@ public class PaymentMethodDB {
             System.out.println(e);
 
         }
-        finally {
-            if (conn != null)
-                conn.close();
-        }
 
     }
 	public PaymentMethod selectPaymentMethod(Customer customer) throws Exception
     {
         PaymentMethod paymentMethod = new PaymentMethod();
-        Connection conn = getConnection();
         try {
+            Connection conn = getConnection();
 
             Statement st = conn.createStatement();
             String query ="select * from PaymentMethod WHERE broncoID = " + customer.getBroncoID();
@@ -86,23 +75,24 @@ public class PaymentMethodDB {
             conn.close();
             return paymentMethod;
         }catch(Exception e) {System.out.println(e);}
-        finally {
-            if (conn != null)
-                conn.close();
-        }
         return null;
     }
 
-    public static Connection getConnection() throws Exception{
+    public static Connection getConnection() {
+        try {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/cpp_parking_system";
             String username = "root";
-            String password = "Lynn$anity11";//password
+            String password = "Eman9232";//password
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, username, password);
             //System.out.println("connection made in payment");
-            StackTraceElement[] st = Thread.currentThread().getStackTrace();
-            System.out.println(  "create connection called from " + st[2] );
             return conn;
+        } catch (Exception e) {
+            System.out.println(e);
         }
+
+        return null;
+
+    }
 }
