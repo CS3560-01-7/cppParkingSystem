@@ -72,7 +72,7 @@ public class NewWindow
                 try {
                     cart.getCustomer().setBroncoID(Integer.parseInt(id.getText()));
                     cart.getCustomer().getInfoFromDBC();
-                    System.out.println(cart.getCustomer().firstName);
+//                     System.out.println(cart.getCustomer().firstName);
                     if (cart.getCustomer().firstName.isBlank()) {
                         Label invalid = new Label("Invalid entry ");
                         invalid.setTextFill(Color.RED);//set font color
