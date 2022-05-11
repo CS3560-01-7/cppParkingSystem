@@ -4,7 +4,7 @@ Contributers: Lynn Takahashi, Ethan Vazquez, Ly Rivera, Amal Anu, Sergey Hambard
 Purpose: PaymentMethodDB used as a database accessor.
 */
 
-package application;
+package com.example.application;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class PaymentMethodDB {
-	public PaymentMethod deletePaymentMethod(Customer customer) {
+    public PaymentMethod deletePaymentMethod(Customer customer) {
         try {
             Connection conn = getConnection();
             Statement st = conn.createStatement();
@@ -28,8 +28,8 @@ public class PaymentMethodDB {
         }
         return null;
     }
-    
-    
+
+
     public void addPaymentMethod(Customer customer)  throws Exception{
 
         try {
@@ -50,7 +50,7 @@ public class PaymentMethodDB {
         }
 
     }
-	public PaymentMethod selectPaymentMethod(Customer customer) throws Exception
+    public PaymentMethod selectPaymentMethod(Customer customer) throws Exception
     {
         PaymentMethod paymentMethod = new PaymentMethod();
         try {
@@ -60,7 +60,7 @@ public class PaymentMethodDB {
             String query ="select * from PaymentMethod WHERE broncoID = " + customer.getBroncoID();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-            	rs.getInt("broncoID");
+                rs.getInt("broncoID");
                 paymentMethod.setCardNumber(rs.getLong("cardNumber"));
                 paymentMethod.setSecurityCode(rs.getInt("securityCode"));
                 paymentMethod.setExpDateM(rs.getInt("expirationDateMonth"));
@@ -83,7 +83,7 @@ public class PaymentMethodDB {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/cpp_parking_system";
             String username = "root";
-            String password = "Eman9232";//password
+            String password = "hambardzumyan";//password
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, username, password);
             //System.out.println("connection made in payment");
