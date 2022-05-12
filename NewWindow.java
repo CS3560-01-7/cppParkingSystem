@@ -126,339 +126,362 @@ public class NewWindow
 
     public Scene selectPermit(Stage primaryStage, Cart cart) throws Exception
     {
-
-
         primaryStage.setTitle("Permit Selection");
-
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
-        grid.setVgap(20);//set vertical spacing to 10 pixels
-        grid.setHgap(10);//set horizontal spacing to 10 pixels
-        grid.setAlignment(Pos.CENTER);
-
-        grid.setGridLinesVisible(false);
-
-        cart.getCustomer().getInfoFromDBC();
-
-        Text text = new Text("Select your permit type:");
-        text.setFont(Font.font("Times New Roman",25));
-        text.setFill(Color.WHITE);
-        grid.add(text, 0, 0, 4, 1);
-
-        Text select = new Text("Select: ");//user prompt
-        select.setFont(Font.font("Times New Roman",15));
-        select.setFill(Color.WHITE);
-        grid.add(select, 0, 1, 1, 1);//set on grid
-
-        Text fee = new Text("Permit Fee: ");//user prompt
-        fee.setFont(Font.font("Times New Roman",15));
-        fee.setFill(Color.WHITE);
-        grid.add(fee, 1, 1, 1, 1);//set on grid
-
-        Text description = new Text("Description: ");//user prompt
-        description.setFont(Font.font("Times New Roman",15));
-        description.setFill(Color.WHITE);
-        grid.add(description, 2, 1, 1, 1);//set on grid
-
-        Text valid = new Text("Permit Valid: ");//user prompt
-        valid.setFont(Font.font("Times New Roman",15));
-        valid.setFill(Color.WHITE);
-        grid.add(valid, 3, 1, 1, 1);//set on grid
-
-        Text expires = new Text("Permit Expires: ");//user prompt
-        expires.setFont(Font.font("Times New Roman",15));
-        expires.setFill(Color.WHITE);
-        grid.add(expires, 4, 1, 1, 1);//set on grid
-
-
-        //fill data
-        Rate student1 = new Rate();
-        Rate student2 = new Rate();
-        Rate student3 = new Rate();
-        Rate student4 = new Rate();
-        Rate faculty = new Rate();
-        student1.setRateID(1);// = DBR.selectRate(1);
-        student1.selectRate();
-        student2.setRateID(2);
-        student2.selectRate();
-        student3.setRateID(3);
-        student3.selectRate();
-        student4.setRateID(4);
-        student4.selectRate();
-        faculty.setRateID(5);
-        faculty.selectRate();
-        //get permit rate values and put into table
-
-        if (cart.getCustomer().student == true) {
-            //student rate 1
-            Text student1Fee = new Text(String.valueOf(student1.getRate()));//user prompt
-            student1Fee.setFont(Font.font("Times New Roman",15));
-            student1Fee.setFill(Color.WHITE);
-            grid.add(student1Fee, 1, 2, 1, 1);//set on grid
-
-            Text student1Desc = new Text(student1.getDescription());//user prompt
-            student1Desc.setFont(Font.font("Times New Roman",15));
-            student1Desc.setFill(Color.WHITE);
-            grid.add(student1Desc, 2, 2, 1, 1);//set on grid
-
-            Text student1Valid = new Text(student1.getValidDate());//user prompt
-            student1Valid.setFont(Font.font("Times New Roman",15));
-            student1Valid.setFill(Color.WHITE);
-            grid.add(student1Valid, 3, 2, 1, 1);//set on grid
-
-            Text student1Expires = new Text(student1.getExpirationDate());//user prompt
-            student1Expires.setFont(Font.font("Times New Roman",15));
-            student1Expires.setFill(Color.WHITE);
-            grid.add(student1Expires, 4, 2, 1, 1);//set on grid
-
-            //student rate 2
-            Text student2Fee = new Text(String.valueOf(student2.getRate()));//user prompt
-            student2Fee.setFont(Font.font("Times New Roman",15));
-            student2Fee.setFill(Color.WHITE);
-            grid.add(student2Fee, 1, 3, 1, 1);//set on grid
-
-            Text student2Desc = new Text(student2.getDescription());//user prompt
-            student2Desc.setFont(Font.font("Times New Roman",15));
-            student2Desc.setFill(Color.WHITE);
-            grid.add(student2Desc, 2, 3, 1, 1);//set on grid
-
-            Text student2Valid = new Text(student2.getValidDate());//user prompt
-            student2Valid.setFont(Font.font("Times New Roman",15));
-            student2Valid.setFill(Color.WHITE);
-            grid.add(student2Valid, 3, 3, 1, 1);//set on grid
-
-            Text student2Expires = new Text(student2.getExpirationDate());//user prompt
-            student2Expires.setFont(Font.font("Times New Roman",15));
-            student2Expires.setFill(Color.WHITE);
-            grid.add(student2Expires, 4, 3, 1, 1);//set on grid
-
-            //student rate 3
-            Text student3Fee = new Text(String.valueOf(student3.getRate()));//user prompt
-            student3Fee.setFont(Font.font("Times New Roman",15));
-            student3Fee.setFill(Color.WHITE);
-            grid.add(student3Fee, 1, 4, 1, 1);//set on grid
-
-            Text student3Desc = new Text(student3.getDescription());//user prompt
-            student3Desc.setFont(Font.font("Times New Roman",15));
-            student3Desc.setFill(Color.WHITE);
-            grid.add(student3Desc, 2, 4, 1, 1);//set on grid
-
-            Text student3Valid = new Text(student3.getValidDate());//user prompt
-            student3Valid.setFont(Font.font("Times New Roman",15));
-            student3Valid.setFill(Color.WHITE);
-            grid.add(student3Valid, 3, 4, 1, 1);//set on grid
-
-            Text student3Expires = new Text(student3.getExpirationDate());//user prompt
-            student3Expires.setFont(Font.font("Times New Roman",15));
-            student3Expires.setFill(Color.WHITE);
-            grid.add(student3Expires, 4, 4, 1, 1);//set on grid
-
-            //student rate 4
-            Text student4Fee = new Text(String.valueOf(student4.getRate()));//user prompt
-            student4Fee.setFont(Font.font("Times New Roman",15));
-            student4Fee.setFill(Color.WHITE);
-            grid.add(student4Fee, 1, 5, 1, 1);//set on grid
-
-            Text student4Desc = new Text(student4.getDescription());//user prompt
-            student4Desc.setFont(Font.font("Times New Roman",15));
-            student4Desc.setFill(Color.WHITE);
-            grid.add(student4Desc, 2, 5, 1, 1);//set on grid
-
-            Text student4Valid = new Text(student4.getValidDate());//user prompt
-            student4Valid.setFont(Font.font("Times New Roman",15));
-            student4Valid.setFill(Color.WHITE);
-            grid.add(student4Valid, 3, 5, 1, 1);//set on grid
-
-            Text student4Expires = new Text(student4.getExpirationDate());//user prompt
-            student4Expires.setFont(Font.font("Times New Roman",15));
-            student4Expires.setFill(Color.WHITE);
-            grid.add(student4Expires, 4, 5, 1, 1);//set on grid
-
-            final ToggleGroup options = new ToggleGroup();
-
-            RadioButton rate1 = new RadioButton("1");
-            RadioButton rate2 = new RadioButton("2");
-            RadioButton rate3 = new RadioButton("3");
-            RadioButton rate4 = new RadioButton("4");
-            rate1.setToggleGroup(options);
-            rate2.setToggleGroup(options);
-            rate3.setToggleGroup(options);
-            rate4.setToggleGroup(options);
-            rate1.setSelected(true);
-            grid.add(rate1, 0, 2, 1, 1);
-            grid.add(rate2, 0, 3, 1, 1);
-            grid.add(rate3, 0, 4, 1, 1);
-            grid.add(rate4, 0, 5, 1, 1);
-
-            Button button = new Button("Next");
-            //Button test = new Button("Test");
-            grid.add(button, 0, 6, 1, 1);
-            //GridPane.setConstraints(button, 1, 6);
-            //GridPane.setConstraints(test, 0,6);
-
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle (ActionEvent event) {
-                    try {
-                        if (rate1.isSelected()) {
-                            cart.getPermit().setRateID(student1.getRateID());
-                            cart.getPermit().selectRate();
-                        }
-                        else if (rate2.isSelected()) {
-                            cart.getPermit().setRateID(student2.getRateID());
-                            cart.getPermit().selectRate();
-                        }
-                        else if (rate3.isSelected()) {
-                            cart.getPermit().setRateID(student3.getRateID());
-                            cart.getPermit().selectRate();
-                        }
-                        else {
-                            cart.getPermit().setRateID(student4.getRateID());
-                            cart.getPermit().selectRate();
-                        }
-                        cart.getCustomer().getInfoFromDBV();
-                        ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
-
-                        int index = 0;
-                        int count = 0;
-
-                        while (index < vehicles.size() && count < 3) {
-                            if (vehicles.get(index).getAppears() == true) {
-
-                                count++;
-                            }
-
-                            index++;
-                        }
-
-
-                        if (count == 0) {
-                            primaryStage.setScene(vehicleInformation(primaryStage, cart));
-                        }
-
-
-                        else if (count == 1) {
-                            primaryStage.setScene(oneVehicle(primaryStage, cart));
-                        }
-
-
-                        else if (count == 2) {
-                            primaryStage.setScene(twoVehicles(primaryStage, cart));
-                        }
-
-                        else if (count == 3) {
-                            primaryStage.setScene(threeVehicles(primaryStage, cart));
-                        }
-
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-        else {
-            //faculty rate
-            Text facultyFee = new Text(String.valueOf(faculty.getRate()));//user prompt
-            facultyFee.setFont(Font.font("Times New Roman",15));
-            facultyFee.setFill(Color.WHITE);
-            grid.add(facultyFee, 1, 2, 1, 1);//set on grid
-
-            Text facultyDesc = new Text(faculty.getDescription());//user prompt
-            facultyDesc.setFont(Font.font("Times New Roman",15));
-            facultyDesc.setFill(Color.WHITE);
-            grid.add(facultyDesc, 2, 2, 1, 1);//set on grid
-
-            Text facultyValid = new Text(faculty.getValidDate());//user prompt
-            facultyValid.setFont(Font.font("Times New Roman",15));
-            facultyValid.setFill(Color.WHITE);
-            grid.add(facultyValid, 3, 2, 1, 1);//set on grid
-
-            Text facultyExpires = new Text(faculty.getExpirationDate());//user prompt
-            facultyExpires.setFont(Font.font("Times New Roman",15));
-            facultyExpires.setFill(Color.WHITE);
-            grid.add(facultyExpires, 4, 2, 1, 1);//set on grid
-
-            final ToggleGroup options = new ToggleGroup();
-
-            RadioButton rate1 = new RadioButton("1");
-            rate1.setToggleGroup(options);
-            rate1.setSelected(true);
-            grid.add(rate1, 0, 2, 1, 1);
-
-            Button button = new Button("Next");
-            //Button test = new Button("Test");
-            grid.add(button, 0, 3, 1, 1);
-            //GridPane.setConstraints(button, 1, 6);
-            //GridPane.setConstraints(test, 0,6);
-
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle (ActionEvent event) {
-                    try {
-                        if (rate1.isSelected()) {
-
-                            cart.getPermit().setRateID(faculty.getRateID());
-                            cart.getPermit().selectRate();
-                        }
-
-                        cart.getCustomer().getInfoFromDBV();
-                        ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
-
-                        int index = 0;
-                        int count = 0;
-
-                        while (index < vehicles.size() && count < 3) {
-                            if (vehicles.get(index).getAppears() == true) {
-
-                                count++;
-                            }
-
-                            index++;
-                        }
-
-
-                        if (count == 0) {
-                            primaryStage.setScene(vehicleInformation(primaryStage, cart));
-                        }
-
-
-                        else if (count == 1) {
-                            primaryStage.setScene(oneVehicle(primaryStage, cart));
-                        }
-
-
-                        else if (count == 2) {
-                            primaryStage.setScene(twoVehicles(primaryStage, cart));
-                        }
-
-                        else if (count == 3) {
-                            primaryStage.setScene(threeVehicles(primaryStage, cart));
-                        }
-
-
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-
-        //set up scene
-        Scene scene = new Scene (grid, 600, 350);
-
-        //background
-        BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
-        Background bg = new Background(bf);
-        grid.setBackground(bg);
-
-        //scene setting
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        return scene;
-    }
+		
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(20,20,20,20));//amount of padding around each edge
+		grid.setVgap(30);//set vertical spacing to 10 pixels
+		grid.setHgap(15);//set horizontal spacing to 10 pixels
+		grid.setAlignment(Pos.CENTER);
+		
+		grid.setGridLinesVisible(false);
+		
+		cart.getCustomer().getInfoFromDBC();
+		
+		Text text = new Text("Select your permit type:");
+		text.setFont(Font.font("Times New Roman",25));
+		text.setFill(Color.WHITE);
+		grid.add(text, 0, 0, 4, 1);
+		
+		Text select = new Text("Select: ");//user prompt
+		select.setFont(Font.font("Times New Roman",18));
+		select.setFill(Color.WHITE);
+		grid.add(select, 0, 1, 1, 1);//set on grid
+			
+		Text fee = new Text("Permit Fee: ");//user prompt
+		fee.setFont(Font.font("Times New Roman",18));
+		fee.setFill(Color.WHITE);
+		grid.add(fee, 1, 1, 1, 1);//set on grid
+			
+		Text description = new Text("Description: ");//user prompt
+		description.setFont(Font.font("Times New Roman",18));
+		description.setFill(Color.WHITE);
+		grid.add(description, 2, 1, 1, 1);//set on grid
+			
+		Text valid = new Text("Permit Valid: ");//user prompt
+		valid.setFont(Font.font("Times New Roman",18));
+		valid.setFill(Color.WHITE);
+		grid.add(valid, 3, 1, 1, 1);//set on grid
+			
+		Text expires = new Text("Permit Expires: ");//user prompt
+		expires.setFont(Font.font("Times New Roman",18));
+		expires.setFill(Color.WHITE);
+		grid.add(expires, 4, 1, 1, 1);//set on grid
+		
+			
+		//fill data
+		Rate student1 = new Rate();
+		Rate student2 = new Rate();
+		Rate student3 = new Rate();
+		Rate student4 = new Rate();
+		Rate faculty = new Rate();
+		student1.setRateID(1);// = DBR.selectRate(1);
+		student1.selectRate();
+		student2.setRateID(2);
+		student2.selectRate();
+		student3.setRateID(3);
+		student3.selectRate();
+		student4.setRateID(4);
+		student4.selectRate();
+		faculty.setRateID(5);
+		faculty.selectRate();
+		//get permit rate values and put into table
+			
+		if (cart.getCustomer().student == true) {
+			//student rate 1
+			Text student1Fee = new Text("$" + String.valueOf(student1.getRate()));//user prompt
+			student1Fee.setFont(Font.font("Times New Roman",15));
+			student1Fee.setFill(Color.WHITE);
+			//GridPane.setHalignment(student1Fee, HPos.CENTER);
+			grid.add(student1Fee, 1, 2, 1, 1);//set on grid
+			
+			Text student1Desc = new Text(student1.getDescription());//user prompt
+			student1Desc.setFont(Font.font("Times New Roman",15));
+			student1Desc.setFill(Color.WHITE);
+			//GridPane.setHalignment(student1Desc, HPos.CENTER);
+			grid.add(student1Desc, 2, 2, 1, 1);//set on grid
+			
+			Text student1Valid = new Text(student1.getValidDate());//user prompt
+			student1Valid.setFont(Font.font("Times New Roman",15));
+			student1Valid.setFill(Color.WHITE);
+			//GridPane.setHalignment(student1Valid, HPos.CENTER);
+			grid.add(student1Valid, 3, 2, 1, 1);//set on grid
+			
+			Text student1Expires = new Text(student1.getExpirationDate());//user prompt
+			student1Expires.setFont(Font.font("Times New Roman",15));
+			student1Expires.setFill(Color.WHITE);
+			//GridPane.setHalignment(student1Expires, HPos.CENTER);
+			grid.add(student1Expires, 4, 2, 1, 1);//set on grid
+			
+			//student rate 2
+			Text student2Fee = new Text("$" + String.valueOf(student2.getRate()));//user prompt
+			student2Fee.setFont(Font.font("Times New Roman",15));
+			student2Fee.setFill(Color.WHITE);
+			//GridPane.setHalignment(student2Fee, HPos.CENTER);
+			grid.add(student2Fee, 1, 3, 1, 1);//set on grid
+			
+			Text student2Desc = new Text(student2.getDescription());//user prompt
+			student2Desc.setFont(Font.font("Times New Roman",15));
+			student2Desc.setFill(Color.WHITE);
+			//GridPane.setHalignment(student2Desc, HPos.CENTER);
+			grid.add(student2Desc, 2, 3, 1, 1);//set on grid
+			
+			Text student2Valid = new Text(student2.getValidDate());//user prompt
+			student2Valid.setFont(Font.font("Times New Roman",15));
+			student2Valid.setFill(Color.WHITE);
+			//GridPane.setHalignment(student2Valid, HPos.CENTER);
+			grid.add(student2Valid, 3, 3, 1, 1);//set on grid
+			
+			Text student2Expires = new Text(student2.getExpirationDate());//user prompt
+			student2Expires.setFont(Font.font("Times New Roman",15));
+			student2Expires.setFill(Color.WHITE);
+			//GridPane.setHalignment(student2Expires, HPos.CENTER);
+			grid.add(student2Expires, 4, 3, 1, 1);//set on grid
+			
+			//student rate 3
+			Text student3Fee = new Text("$" + String.valueOf(student3.getRate()));//user prompt
+			student3Fee.setFont(Font.font("Times New Roman",15));
+			student3Fee.setFill(Color.WHITE);
+			//GridPane.setHalignment(student3Fee, HPos.CENTER);
+			grid.add(student3Fee, 1, 4, 1, 1);//set on grid
+			
+			Text student3Desc = new Text(student3.getDescription());//user prompt
+			student3Desc.setFont(Font.font("Times New Roman",15));
+			student3Desc.setFill(Color.WHITE);
+			//GridPane.setHalignment(student3Desc, HPos.CENTER);
+			grid.add(student3Desc, 2, 4, 1, 1);//set on grid
+			
+			Text student3Valid = new Text(student3.getValidDate());//user prompt
+			student3Valid.setFont(Font.font("Times New Roman",15));
+			student3Valid.setFill(Color.WHITE);
+			//GridPane.setHalignment(student3Valid, HPos.CENTER);
+			grid.add(student3Valid, 3, 4, 1, 1);//set on grid
+			
+			Text student3Expires = new Text(student3.getExpirationDate());//user prompt
+			student3Expires.setFont(Font.font("Times New Roman",15));
+			student3Expires.setFill(Color.WHITE);
+			//GridPane.setHalignment(student3Expires, HPos.CENTER);
+			grid.add(student3Expires, 4, 4, 1, 1);//set on grid
+			
+			//student rate 4
+			Text student4Fee = new Text("$" + String.valueOf(student4.getRate()));//user prompt
+			student4Fee.setFont(Font.font("Times New Roman",15));
+			student4Fee.setFill(Color.WHITE);
+			//GridPane.setHalignment(student4Fee, HPos.CENTER);
+			grid.add(student4Fee, 1, 5, 1, 1);//set on grid
+			
+			Text student4Desc = new Text(student4.getDescription());//user prompt
+			student4Desc.setFont(Font.font("Times New Roman",15));
+			student4Desc.setFill(Color.WHITE);
+			//GridPane.setHalignment(student4Desc, HPos.CENTER);
+			grid.add(student4Desc, 2, 5, 1, 1);//set on grid
+			
+			Text student4Valid = new Text(student4.getValidDate());//user prompt
+			student4Valid.setFont(Font.font("Times New Roman",15));
+			student4Valid.setFill(Color.WHITE);
+			//GridPane.setHalignment(student4Valid, HPos.CENTER);
+			grid.add(student4Valid, 3, 5, 1, 1);//set on grid
+				
+			Text student4Expires = new Text(student4.getExpirationDate());//user prompt
+			student4Expires.setFont(Font.font("Times New Roman",15));
+			student4Expires.setFill(Color.WHITE);
+			//GridPane.setHalignment(student4Expires, HPos.CENTER);
+			grid.add(student4Expires, 4, 5, 1, 1);//set on grid
+			
+			final ToggleGroup options = new ToggleGroup();
+			
+			RadioButton rate1 = new RadioButton();
+			RadioButton rate2 = new RadioButton();
+			RadioButton rate3 = new RadioButton();
+			RadioButton rate4 = new RadioButton();
+			rate1.setToggleGroup(options);
+			rate2.setToggleGroup(options);
+			rate3.setToggleGroup(options);
+			rate4.setToggleGroup(options);
+			rate1.setSelected(true);
+			grid.add(rate1, 0, 2, 1, 1);
+			grid.add(rate2, 0, 3, 1, 1);
+			grid.add(rate3, 0, 4, 1, 1);
+			grid.add(rate4, 0, 5, 1, 1);
+			GridPane.setHalignment(rate1, HPos.CENTER);
+			GridPane.setHalignment(rate2, HPos.CENTER);
+			GridPane.setHalignment(rate3, HPos.CENTER);
+			GridPane.setHalignment(rate4, HPos.CENTER);
+			
+			
+			Button button = new Button("Next");
+			grid.add(button, 2, 6, 2, 1);
+			GridPane.setHalignment(button, HPos.CENTER);
+			button.setMinSize(70,20);
+			
+			button.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle (ActionEvent event) { 
+					try {
+						if (rate1.isSelected()) {
+							cart.getPermit().setRateID(student1.getRateID());
+							cart.getPermit().selectRate();
+						}
+						else if (rate2.isSelected()) {
+							cart.getPermit().setRateID(student2.getRateID());
+							cart.getPermit().selectRate();
+						}
+						else if (rate3.isSelected()) {
+							cart.getPermit().setRateID(student3.getRateID());
+							cart.getPermit().selectRate();
+						}
+						else {
+							cart.getPermit().setRateID(student4.getRateID());
+							cart.getPermit().selectRate();
+						}
+						cart.getCustomer().getInfoFromDBV();
+						ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+						
+						int index = 0;
+						int count = 0;
+						
+						while (index < vehicles.size() && count < 3) {
+							if (vehicles.get(index).getAppears() == true) {
+								
+								count++;
+							}
+							
+							index++;
+						}
+							
+							
+						if (count == 0) {
+							primaryStage.setScene(vehicleInformation(primaryStage, cart));
+						}
+	
+						
+						else if (count == 1) {
+							primaryStage.setScene(oneVehicle(primaryStage, cart));
+						}
+
+						
+						else if (count == 2) {
+							primaryStage.setScene(twoVehicles(primaryStage, cart));
+						}
+							
+						else if (count == 3) {
+							primaryStage.setScene(threeVehicles(primaryStage, cart));
+						}				
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}		
+			});
+		}
+		else {
+			//faculty rate
+			Text facultyFee = new Text("$" + String.valueOf(faculty.getRate()));//user prompt
+			facultyFee.setFont(Font.font("Times New Roman",15));
+			facultyFee.setFill(Color.WHITE);
+			//GridPane.setHalignment(facultyFee, HPos.CENTER);
+			grid.add(facultyFee, 1, 2, 1, 1);//set on grid
+			
+			Text facultyDesc = new Text(faculty.getDescription());//user prompt
+			facultyDesc.setFont(Font.font("Times New Roman",15));
+			facultyDesc.setFill(Color.WHITE);
+			//GridPane.setHalignment(facultyDesc, HPos.CENTER);
+			grid.add(facultyDesc, 2, 2, 1, 1);//set on grid
+			
+			Text facultyValid = new Text(faculty.getValidDate());//user prompt
+			facultyValid.setFont(Font.font("Times New Roman",15));
+			facultyValid.setFill(Color.WHITE);
+			//GridPane.setHalignment(facultyValid, HPos.CENTER);
+			grid.add(facultyValid, 3, 2, 1, 1);//set on grid
+			
+			Text facultyExpires = new Text(faculty.getExpirationDate());//user prompt
+			facultyExpires.setFont(Font.font("Times New Roman",15));
+			facultyExpires.setFill(Color.WHITE);
+			//GridPane.setHalignment(facultyExpires, HPos.CENTER);
+			grid.add(facultyExpires, 4, 2, 1, 1);//set on grid
+			
+			final ToggleGroup options = new ToggleGroup();
+			
+			RadioButton rate1 = new RadioButton("1");
+			rate1.setToggleGroup(options);
+			rate1.setSelected(true);
+			grid.add(rate1, 0, 2, 1, 1);
+			GridPane.setHalignment(rate1, HPos.CENTER);
+			
+			Button button = new Button("Next");
+			grid.add(button, 0, 3, 3, 1);
+			GridPane.setHalignment(button, HPos.CENTER);
+
+			button.setMinSize(70,20);
+			
+			button.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle (ActionEvent event) { 
+					try {
+					if (rate1.isSelected()) {
+						
+						cart.getPermit().setRateID(faculty.getRateID());
+						cart.getPermit().selectRate();
+					}
+					
+					cart.getCustomer().getInfoFromDBV();
+					ArrayList<Vehicle> vehicles = cart.getCustomer().getArrayOfVehicles();
+					
+					int index = 0;
+					int count = 0;
+					
+					while (index < vehicles.size() && count < 3) {
+						if (vehicles.get(index).getAppears() == true) {
+							
+							count++;
+						}
+						
+						index++;
+					}
+						
+						
+					if (count == 0) {
+						primaryStage.setScene(vehicleInformation(primaryStage, cart));
+					}
+
+					
+					else if (count == 1) {
+						primaryStage.setScene(oneVehicle(primaryStage, cart));
+					}
+
+					
+					else if (count == 2) {
+						primaryStage.setScene(twoVehicles(primaryStage, cart));
+					}
+						
+					else if (count == 3) {
+						primaryStage.setScene(threeVehicles(primaryStage, cart));
+					}				
+					
+				
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}		
+			});
+		}
+			
+		//set up scene
+		Scene scene = new Scene (grid, 700, 400);
+		
+		//background
+		BackgroundFill bf = new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg = new Background(bf);
+		grid.setBackground(bg);
+		
+		//scene setting
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		return scene;
+	}
 
     public Scene oneVehicle(Stage primaryStage, Cart cart) throws Exception
     {
