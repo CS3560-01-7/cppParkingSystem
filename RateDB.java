@@ -45,7 +45,7 @@ public class RateDB {
         String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/cpp_parking_system";
         String username = "root";
-        String password = "hambardzumyan";//password
+        String password = "****";//password
         Class.forName(driver);
 
         Connection conn = DriverManager.getConnection(url, username, password);
