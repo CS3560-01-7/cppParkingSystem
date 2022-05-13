@@ -36,7 +36,7 @@ public class CustomerDB {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://127.0.0.1:3306/cpp_parking_system";//jdbc:mysql://portNumber/databseName
             String username = "root";
-            String password = "hambardzumyan";
+            String password = "****";
             Class.forName(driver);
 
             Connection conn = DriverManager.getConnection(url, username, password);
