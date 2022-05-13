@@ -503,28 +503,37 @@ public class NewWindow
         int entry1 = -1;
         int index = 0;
         int count = 0;
+        
 
         while (index < vehicles.size() && count < 2) {
             if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
                 entry1 = index;
                 System.out.println(entry1);
                 Vehicle vehicle = vehicles.get(entry1);
-                System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
-                Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
-                Car1.setFont(Font.font("Times New Roman",12));
+                System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + " " + vehicle.getVehicleType() + ", " + vehicle.getVehicleColor());
+                Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + " " + vehicle.getVehicleType() + ", "  + vehicle.getVehicleColor());
+                Car1.setFont(Font.font("Times New Roman",15));
                 Car1.setFill(Color.WHITE);
-                GridPane.setConstraints(Car1, 1, 0);
+                GridPane.setConstraints(Car1, 1, 1, 1, 1);
                 grid.getChildren().addAll(Car1);
                 count++;
 
             }
             index++;
         }
+        
+        final ToggleGroup options = new ToggleGroup();
+		
+		RadioButton v1 = new RadioButton();
+		v1.setToggleGroup(options);
+		v1.setSelected(true);
+		grid.add(v1, 0, 1, 1, 1);
+		//GridPane.setHalignment(vehicle1, HPos.CENTER);
 
-        Button remove1 = new Button ("Remove Car 1");
-        GridPane.setConstraints(remove1, 0, 3);
-        grid.getChildren().add(remove1);
-        remove1.setOnAction(new EventHandler<ActionEvent>() {
+        Button remove = new Button ("Remove");
+        GridPane.setConstraints(remove, 1, 2, 1, 1);
+        grid.getChildren().add(remove);
+        remove.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
                 try {
@@ -548,7 +557,7 @@ public class NewWindow
                     if (vehicles.get(entry1).getVIN().equals(vin)){
                         System.out.println("It matches");
                     } else {
-                        System.out.println("Nah fuck you");
+                        System.out.println("Nah");
                     }
 
                     cart.getCustomer().removeVehicle(vin);
@@ -563,7 +572,7 @@ public class NewWindow
 
 
         Button add = new Button("Add");
-        GridPane.setConstraints(add, 0,2);//under the textfields
+        GridPane.setConstraints(add, 0, 2, 1, 1);//under the textfields
         grid.getChildren().add(add);
         add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
         {
@@ -581,15 +590,11 @@ public class NewWindow
             }
         });//go here when pressed
 
-        ChoiceBox<Integer> chooseCar = new ChoiceBox<>();
-        chooseCar.getItems().addAll(1);
-        GridPane.setConstraints(chooseCar, 0, 5);
-        grid.getChildren().add(chooseCar);
 
         int value1 = entry1;
         //create button
         Button button = new Button("Next");
-        GridPane.setConstraints(button, 0, 1);//under the textfields
+        GridPane.setConstraints(button, 2, 2, 1, 1);//under the textfields
         button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
         {
             @Override
@@ -597,7 +602,7 @@ public class NewWindow
             {
 
                 try {
-                    if (chooseCar.getValue() == 1) {
+                    if (v1.isSelected()) {
                         cart.getPermit().setVIN(vehicles.get(value1).getVIN());
                         System.out.println(vehicles.get(value1).getVIN() + "This is in new window");
                     }
@@ -617,11 +622,11 @@ public class NewWindow
         Text text = new Text("Vehicles on your permit:");
         text.setFont(Font.font("Times New Roman",20));
         text.setFill(Color.WHITE);
-        GridPane.setConstraints(text, 0, 0);
+        grid.add(text, 0, 0, 1, 1);
 
 
         //set up grid
-        grid.getChildren().addAll(text, button);
+        grid.getChildren().addAll(button);
 
         //set up scene
         Scene scene = new Scene(grid, 600, 450);
@@ -665,17 +670,27 @@ public class NewWindow
         int entry2 = -1;
         int index = 0;
         int count = 0;
+        
+        final ToggleGroup options = new ToggleGroup();
+		
+		RadioButton v1 = new RadioButton();
+		RadioButton v2 = new RadioButton();
+		v1.setToggleGroup(options);
+		v2.setToggleGroup(options);
+		v1.setSelected(true);
+		grid.add(v1, 0, 1, 1, 1);
+		grid.add(v2, 0, 2, 1, 1);
 
         while (index < vehicles.size() && count < 2) {
             if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
                 entry1 = index;
                 System.out.println("Entry 1 is: " + entry1);
                 Vehicle vehicle = vehicles.get(entry1);
-                System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
-                Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
-                Car1.setFont(Font.font("Times New Roman",12));
+                System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() +  " " + vehicle.getVehicleType() + ", " + vehicle.getVehicleColor());
+                Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + " " + vehicle.getVehicleType()+ ", " + vehicle.getVehicleColor());
+                Car1.setFont(Font.font("Times New Roman",15));
                 Car1.setFill(Color.WHITE);
-                GridPane.setConstraints(Car1, 1, 0);
+                GridPane.setConstraints(Car1, 1, 1, 1, 1);
                 grid.getChildren().addAll(Car1);
                 count++;
 
@@ -685,11 +700,11 @@ public class NewWindow
                 entry2 = index;
                 System.out.println(entry2);
                 Vehicle vehicle2 = vehicles.get(entry2);
-                System.out.println("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
-                Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
-                Car2.setFont(Font.font("Times New Roman",12));
+                System.out.println("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + " " + vehicle2.getVehicleType()+ ", " + vehicle2.getVehicleColor());
+                Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + " " + vehicle2.getVehicleType()+ ", " + vehicle2.getVehicleColor());
+                Car2.setFont(Font.font("Times New Roman",15));
                 Car2.setFill(Color.WHITE);
-                GridPane.setConstraints(Car2, 1, 1);
+                GridPane.setConstraints(Car2, 1, 2, 1, 1);
                 grid.getChildren().addAll(Car2);
                 count++;
             }
@@ -700,7 +715,7 @@ public class NewWindow
         Button add = new Button("Add");
         //GridPane.setConstraints(add, 0,2);//under the textfields
         //grid.getChildren().add(add);
-        grid.add(add, 0, 2,1,1);
+        grid.add(add, 0, 3,1,1);
         add.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
         {
             @Override
@@ -718,53 +733,10 @@ public class NewWindow
         });//go here when pressed
 
 
-        Button remove1 = new Button ("Remove Car 1");
-        GridPane.setConstraints(remove1, 0, 3);
+        Button remove1 = new Button ("Remove");
+        GridPane.setConstraints(remove1, 1, 3, 1, 1);
         grid.getChildren().add(remove1);
         remove1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                try {
-                    int entry1 = -1;
-                    int index = 0;
-                    int count = 0;
-                    System.out.println(vehicles.size());
-                    System.out.println("Index is " + index);
-                    while(index < vehicles.size() && count < 1) {
-                        if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
-                            System.out.println(index);
-                            entry1 = index;
-                            count++;
-                        }
-                        index++;
-                    }
-                    System.out.println(entry1);
-
-                    String vin = vehicles.get(entry1).getVIN();
-                    System.out.println(vin);
-                    if (vehicles.get(entry1).getVIN().equals(vin)){
-                        System.out.println("It matches");
-                    } else {
-                        System.out.println("Nah fuck you");
-                    }
-
-                    cart.getCustomer().removeVehicle(vin);
-                    System.out.println(vehicles.size());
-                    primaryStage.setScene(oneVehicle(primaryStage, cart));
-
-
-                }catch (Exception e) {
-                    System.out.println("IN REMOVE1");
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-        Button remove2 = new Button ("Remove Car 2");
-        GridPane.setConstraints(remove2, 0, 4);
-        grid.getChildren().add(remove2);
-        remove2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
                 try {
@@ -772,46 +744,69 @@ public class NewWindow
                     int entry2 = -1;
                     int index = 0;
                     int count = 0;
-                    System.out.println("Index is " + index);
-                    while(index < vehicles.size() && count < 2) {
-                        if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
-                            entry1 = index;
-                            count++;
-                        }
-                        index++;
-
-                        if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
-                            entry2 = index;
-                            count++;
-                        }
-                        index++;
-                    }
-                    System.out.println(entry2);
-
-                    String vin = vehicles.get(entry2).getVIN();
-                    System.out.println(vin);
-                    if (vehicles.get(entry2).getVIN().equals(vin)){
-                        System.out.println("It matches");
-                    } else {
-                        System.out.println("Nah fuck you");
-                    }
-
-                    cart.getCustomer().removeVehicle(vin);
+                    
                     System.out.println(vehicles.size());
-                    primaryStage.setScene(oneVehicle(primaryStage, cart));
+                    System.out.println("Index is " + index);
+                    if (v1.isSelected()) {
+                    	while(index < vehicles.size() && count < 1) {
+                    		if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+                    			System.out.println(index);
+                    			entry1 = index;
+                    			count++;
+                    		}
+                    		index++;
+                    	}
+                    	System.out.println(entry1);
+
+                    	String vin = vehicles.get(entry1).getVIN();
+                    	System.out.println(vin);
+                    	if (vehicles.get(entry1).getVIN().equals(vin)){
+                    		System.out.println("It matches");
+                    	} else {
+                    		System.out.println("Nah");
+                    	}
+
+                    	cart.getCustomer().removeVehicle(vin);
+                    	System.out.println(vehicles.size());
+                    	primaryStage.setScene(oneVehicle(primaryStage, cart));
+                    }
+                    else {
+                    	while(index < vehicles.size() && count < 2) {
+                            if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+                                entry1 = index;
+                                count++;
+                            }
+                            index++;
+
+                            if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+                                entry2 = index;
+                                count++;
+                            }
+                            index++;
+                        }
+                        System.out.println(entry2);
+
+                        String vin = vehicles.get(entry2).getVIN();
+                        System.out.println(vin);
+                        if (vehicles.get(entry2).getVIN().equals(vin)){
+                            System.out.println("It matches");
+                        } else {
+                            System.out.println("Nah");
+                        }
+
+                        cart.getCustomer().removeVehicle(vin);
+                        System.out.println(vehicles.size());
+                        primaryStage.setScene(oneVehicle(primaryStage, cart));
+                    }
+
 
                 }catch (Exception e) {
-                    System.out.println("IN REMOVE2");
+                    System.out.println("IN REMOVE");
                     e.printStackTrace();
                 }
             }
         });
-
-        ChoiceBox<Integer> chooseCar = new ChoiceBox<>();
-        chooseCar.getItems().addAll(1, 2);
-        GridPane.setConstraints(chooseCar, 0, 5);
-        grid.getChildren().add(chooseCar);
-
+        
         int value1 = entry1;
         int value2 = entry2;
 
@@ -820,7 +815,7 @@ public class NewWindow
         //create button
         Button button = new Button("Next");
         //GridPane.setConstraints(button, 0, 1);//under the textfields
-        grid.add(button, 0, 1,1,1);
+        grid.add(button, 2, 3,1,1);
         button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
         {
             @Override
@@ -828,12 +823,12 @@ public class NewWindow
             {
                 try {
 
-                    if (chooseCar.getValue() == 1) {
+                    if (v1.isSelected()) {
                         cart.getPermit().setVIN(vehicles.get(value1).getVIN());
                         System.out.println(vehicles.get(value1).getVIN() + "This is in new window");
                     }
 
-                    else if (chooseCar.getValue() == 2) {
+                    else if (v2.isSelected()) {
                         cart.getPermit().setVIN(vehicles.get(value2).getVIN());
                         System.out.println(vehicles.get(value2).getVIN() + "This is in new window");
                     }
@@ -906,17 +901,30 @@ public class NewWindow
         int entry3 = -1;
         int index = 0;
         int count = 0;
+        
+        final ToggleGroup options = new ToggleGroup();
+		
+		RadioButton v1 = new RadioButton();
+		RadioButton v2 = new RadioButton();
+		RadioButton v3 = new RadioButton();
+		v1.setToggleGroup(options);
+		v2.setToggleGroup(options);
+		v3.setToggleGroup(options);
+		v1.setSelected(true);
+		grid.add(v1, 0, 1, 1, 1);
+		grid.add(v2, 0, 2, 1, 1);
+		grid.add(v3, 0, 3, 1, 1);
 
         while (index < vehicles.size() && count < 3) {
             if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
                 entry1 = index;
                 System.out.println(entry1);
                 Vehicle vehicle = vehicles.get(entry1);
-                System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
-                Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + ", " + vehicle.getVehicleColor());
-                Car1.setFont(Font.font("Times New Roman",12));
+                System.out.println("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + " " + vehicle.getVehicleType() + ", " + vehicle.getVehicleColor());
+                Text Car1 = new Text("Car 1: " + vehicle.getLicensePlate() + ", " + vehicle.getVehicleMake() + " " + vehicle.getVehicleType() + ", " + vehicle.getVehicleColor());
+                Car1.setFont(Font.font("Times New Roman",15));
                 Car1.setFill(Color.WHITE);
-                GridPane.setConstraints(Car1, 1, 0);
+                GridPane.setConstraints(Car1, 1, 1, 1, 1);
                 grid.getChildren().addAll(Car1);
                 count++;
 
@@ -927,11 +935,11 @@ public class NewWindow
                 entry2 = index;
                 System.out.println(entry2);
                 Vehicle vehicle2 = vehicles.get(entry2);
-                System.out.println("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
-                Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + ", " + vehicle2.getVehicleColor());
-                Car2.setFont(Font.font("Times New Roman",12));
+                System.out.println("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + " " + vehicle2.getVehicleType() + ", " + vehicle2.getVehicleColor());
+                Text Car2 = new Text("Car 2: " + vehicle2.getLicensePlate() + ", " + vehicle2.getVehicleMake() + " " + vehicle2.getVehicleType() + ", " + vehicle2.getVehicleColor());
+                Car2.setFont(Font.font("Times New Roman",15));
                 Car2.setFill(Color.WHITE);
-                GridPane.setConstraints(Car2, 1, 1);
+                GridPane.setConstraints(Car2, 1, 2, 1, 1);
                 grid.getChildren().addAll(Car2);
                 count++;
             }
@@ -941,11 +949,11 @@ public class NewWindow
                 entry3 = index;
                 System.out.println(entry3);
                 Vehicle vehicle3 = vehicles.get(entry3);
-                System.out.println("Car 3: " + vehicle3.getLicensePlate() + ", " + vehicle3.getVehicleMake() + ", " + vehicle3.getVehicleColor());
-                Text Car3 = new Text("Car 3: " + vehicle3.getLicensePlate() + ", " + vehicle3.getVehicleMake() + ", " + vehicle3.getVehicleColor());
-                Car3.setFont(Font.font("Times New Roman",12));
+                System.out.println("Car 3: " + vehicle3.getLicensePlate() + ", " + vehicle3.getVehicleMake() + " " + vehicle3.getVehicleType() + ", " + vehicle3.getVehicleColor());
+                Text Car3 = new Text("Car 3: " + vehicle3.getLicensePlate() + ", " + vehicle3.getVehicleMake() + " " + vehicle3.getVehicleType() + ", " + vehicle3.getVehicleColor());
+                Car3.setFont(Font.font("Times New Roman",15));
                 Car3.setFill(Color.WHITE);
-                GridPane.setConstraints(Car3, 1, 2);
+                GridPane.setConstraints(Car3, 1, 3, 1, 1);
                 grid.getChildren().addAll(Car3);
                 count++;
             }
@@ -953,163 +961,121 @@ public class NewWindow
         }
 
 
-        Button remove1 = new Button ("Remove Car 1");
-        GridPane.setConstraints(remove1, 0, 3);
-        grid.getChildren().add(remove1);
-        remove1.setOnAction(new EventHandler<ActionEvent>() {
+        Button remove = new Button ("Remove");
+        GridPane.setConstraints(remove, 0, 4, 1, 1);
+        grid.getChildren().add(remove);
+        remove.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
                 try {
-                    int entry1 = -1;
-                    int index = 0;
-                    int count = 0;
-                    System.out.println(vehicles.size());
-                    System.out.println("Index is " + index);
-                    while(index < vehicles.size() && count < 1) {
-                        if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
-                            System.out.println(index);
-                            entry1 = index;
-                            count++;
-                        }
-                        index++;
-                    }
-                    System.out.println(entry1);
-
-                    String vin = vehicles.get(entry1).getVIN();
-                    System.out.println(vin);
-                    if (vehicles.get(entry1).getVIN().equals(vin)){
-                        System.out.println("It matches");
-                    } else {
-                        System.out.println("Nah fuck you");
-                    }
-
-                    cart.getCustomer().removeVehicle(vin);
-                    System.out.println(vehicles.size());
-                    primaryStage.setScene(twoVehicles(primaryStage, cart));
-
-                }catch (Exception e) {
-                    System.out.println("IN REMOVE1");
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-        Button remove2 = new Button ("Remove Car 2");
-        GridPane.setConstraints(remove2, 0, 4);
-        grid.getChildren().add(remove2);
-        remove2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                try {
-                    int entry1 = -1;
+                	int entry1 = -1;
                     int entry2 = -1;
+                    int entry3 = -1;;
                     int index = 0;
                     int count = 0;
-                    System.out.println("Index is " + index);
-                    while(index < vehicles.size() && count < 2) {
-                        if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
-                            entry1 = index;
-                            count++;
-                        }
-                        index++;
-
-                        if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
-                            entry2 = index;
-                            count++;
-                        }
-                        index++;
-                    }
-                    System.out.println(entry2);
-
-                    String vin = vehicles.get(entry2).getVIN();
-                    System.out.println(vin);
-                    if (vehicles.get(entry2).getVIN().equals(vin)){
-                        System.out.println("It matches");
-                    } else {
-                        System.out.println("Nah fuck you");
-                    }
-
-                    cart.getCustomer().removeVehicle(vin);
                     System.out.println(vehicles.size());
-                    primaryStage.setScene(twoVehicles(primaryStage, cart));
+                    System.out.println("Index is " + index);
+                    if (v1.isSelected() ) {
+                    	while(index < vehicles.size() && count < 1) {
+                    		if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+                    			System.out.println(index);
+                    			entry1 = index;
+                    			count++;
+                    		}
+                    		index++;
+                    	}
+                    	System.out.println(entry1);
+
+                    	String vin = vehicles.get(entry1).getVIN();
+                    	System.out.println(vin);
+                    	if (vehicles.get(entry1).getVIN().equals(vin)){
+                    		System.out.println("It matches");
+                    	} else {
+                    		System.out.println("Nah");
+                    	}
+
+                    	cart.getCustomer().removeVehicle(vin);
+                    	System.out.println(vehicles.size());
+                    	primaryStage.setScene(twoVehicles(primaryStage, cart));
+                    }
+                    else if (v2.isSelected() ) {
+                    	while(index < vehicles.size() && count < 2) {
+                            if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+                                entry1 = index;
+                                count++;
+                            }
+                            index++;
+
+                            if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+                                entry2 = index;
+                                count++;
+                            }
+                            index++;
+                        }
+                        System.out.println(entry2);
+
+                        String vin = vehicles.get(entry2).getVIN();
+                        System.out.println(vin);
+                        if (vehicles.get(entry2).getVIN().equals(vin)){
+                            System.out.println("It matches");
+                        } else {
+                            System.out.println("Nah");
+                        }
+
+                        cart.getCustomer().removeVehicle(vin);
+                        System.out.println(vehicles.size());
+                        primaryStage.setScene(twoVehicles(primaryStage, cart));
+                    }
+                    else {
+                    	while(index < vehicles.size() && count < 3) {
+                            if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
+                                entry1 = index;
+                                count++;
+                            }
+
+                            index++;
+                            if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
+                                entry2 = index;
+                                count++;
+                            }
+
+                            index++;
+                            if(vehicles.get(index).getAppears() == true && count < 3 && entry3 < 0) {
+                                entry3 = index;
+                                count++;
+                            }
+
+                            index++;
+                        }
+                        System.out.println(entry3);
+
+                        String vin = vehicles.get(entry3).getVIN();
+                        System.out.println(vin);
+                        if (vehicles.get(entry3).getVIN().equals(vin)){
+                            System.out.println("It matches");
+                        } else {
+                            System.out.println("Nah");
+                        }
+
+                        cart.getCustomer().removeVehicle(vin);
+                        System.out.println(vehicles.size());
+                        primaryStage.setScene(twoVehicles(primaryStage, cart));
+
+                    }
 
                 }catch (Exception e) {
-                    System.out.println("IN REMOVE2");
+                    System.out.println("IN REMOVE");
                     e.printStackTrace();
                 }
             }
         });
-
-        Button remove3 = new Button ("Remove Car 3");
-        GridPane.setConstraints(remove3, 0, 5);
-        grid.getChildren().add(remove3);
-        remove3.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                try {
-                    int entry1 = -1;
-                    int entry2 = -1;
-                    int entry3 = -1;
-                    int index = 0;
-                    int count = 0;
-                    System.out.println("Index is " + index);
-                    while(index < vehicles.size() && count < 3) {
-                        if(vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
-                            entry1 = index;
-                            count++;
-                        }
-
-                        index++;
-                        if(vehicles.get(index).getAppears() == true && count < 2 && entry2 < 0) {
-                            entry2 = index;
-                            count++;
-                        }
-
-                        index++;
-                        if(vehicles.get(index).getAppears() == true && count < 3 && entry3 < 0) {
-                            entry3 = index;
-                            count++;
-                        }
-
-                        index++;
-                    }
-                    System.out.println(entry3);
-
-                    String vin = vehicles.get(entry3).getVIN();
-                    System.out.println(vin);
-                    if (vehicles.get(entry3).getVIN().equals(vin)){
-                        System.out.println("It matches");
-                    } else {
-                        System.out.println("Nah fuck you");
-                    }
-
-                    cart.getCustomer().removeVehicle(vin);
-                    System.out.println(vehicles.size());
-                    primaryStage.setScene(twoVehicles(primaryStage, cart));
-
-
-                }catch (Exception e) {
-                    System.out.println("IN REMOVE3");
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        ChoiceBox<Integer> chooseCar = new ChoiceBox<>();
-        chooseCar.getItems().addAll(1, 2, 3);
-        //button.setOnAction(e -> getChoice(Options));
-        GridPane.setConstraints(chooseCar, 0, 6);
-        grid.getChildren().add(chooseCar);
-
-        //int carChoice = chooseCar.getValue();
 
         int value1 = entry1;
         int value2 = entry2;
         int value3 = entry3;
         //create button
         Button button = new Button("Next");
-        GridPane.setConstraints(button, 0, 1);//under the textfields
+        GridPane.setConstraints(button, 1, 4, 1, 1);//under the textfields
         button.setOnAction(new EventHandler<ActionEvent>()//whenever button is clicked code to handle is in this class
         {
             @Override
@@ -1117,17 +1083,17 @@ public class NewWindow
             {
                 try {
 
-                    if (chooseCar.getValue() == 1) {
+                    if (v1.isSelected()) {
                         cart.getPermit().setVIN(vehicles.get(value1).getVIN());
                         System.out.println(vehicles.get(value1).getVIN() + "This is in new window");
                     }
 
-                    else if (chooseCar.getValue() == 2) {
+                    else if (v2.isSelected()) {
                         cart.getPermit().setVIN(vehicles.get(value2).getVIN());
                         System.out.println(vehicles.get(value2).getVIN() + "This is in new window");
                     }
 
-                    else if (chooseCar.getValue() == 3) {
+                    else if (v3.isSelected()) {
                         cart.getPermit().setVIN(vehicles.get(value3).getVIN());
                         System.out.println(vehicles.get(value3).getVIN() + "This is in new window");
 
@@ -1651,7 +1617,7 @@ public class NewWindow
                     int index = 0;
                     int count = 0;
 
-                    System.out.println(vehicles.size());
+                    //System.out.println(vehicles.size());
                     while (index < vehicles.size() && count < 3) {
                         if (vehicles.get(index).getAppears() == true && count < 1 && entry1 < 0) {
                             entry1 = index;
